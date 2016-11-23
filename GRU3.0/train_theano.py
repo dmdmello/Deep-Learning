@@ -75,5 +75,5 @@ nepoch_prev=0
 print "Last number of epochs was %d in the loaded parameters, which will be subtracted from the selected value NEPOCH = %d, which now equals %d - %d = %d" % (nepoch_prev, NEPOCH, NEPOCH , nepoch_prev, NEPOCH - nepoch_prev)
 nepoch_remain = NEPOCH - nepoch_prev
 
-train_with_sgd(model, x_train[], y_train[], learning_rate=LEARNING_RATE, nepoch=nepoch_remain, nepoch_prev=nepoch_prev, decay=0.9, callback_every=PRINT_EVERY, callback=sgd_callback)
+train_with_sgd(model, x_train, y_train, learning_rate=LEARNING_RATE, nepoch=nepoch_remain, nepoch_prev=nepoch_prev, decay=0.9, callback_every=PRINT_EVERY, callback=sgd_callback)
 

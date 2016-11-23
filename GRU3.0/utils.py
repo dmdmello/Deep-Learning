@@ -111,7 +111,7 @@ def print_sentence(s, index_to_word):
         print "UnicodeEncodeError!"
     except:
         print "Unhandled Exception!"
-    sys.stdout.flush(
+    sys.stdout.flush()
 
 def generate_sentence(model, index_to_word, word_to_index, min_length=5):
     # We start the sentence with the start token
