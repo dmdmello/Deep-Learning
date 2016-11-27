@@ -1,0 +1,5 @@
+Comandos úteis terminal
+
+
+nvidia-sci -> mostra driver e placa instalados
+ln -s -> cria link simbolico
