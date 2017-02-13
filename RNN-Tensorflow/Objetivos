@@ -1,0 +1,64 @@
+
+Objetivo Atual (treinar RNN em TF){
+
+	Necessário{
+		Adaptar_base_de_dados{
+
+			Descobrir como fazer o batchpadding na base de comentários do reddir. Dividir em batchs ou usar o conjunto todo? -> 
+			(Não precusa de batch. Irei utilizar cada exemplo individualmente tal como no GRU3.0. ) 
+			
+			Qual a frase de maior tamanho? Como utilizar dynamic shape para o tamanho das frases em um rnn tal como no exemplo do blog.metaflow.fr? ->
+			(O tamanho variável das frases pode ser tratado como o próprio batch variável. As palavras seriam os exemplos dentro do batch. Dessa forma
+			não é preciso realizar o batch padding, pois todos os exemplos (palavras) seriam unidimensionais denttro de um batch (frase))
+
+			Que erro é esse "Dimension must be 2 but is 3 for 'trans...'" que está dando quando eu faço o mesmo exemplo do lstm teste com 
+			shape=[None, 1]? Missão: Resolver este problema para simular o funcionamento da analogia Batch-Frase/Exemplo-Palavra. ->
+			(o problema era que tinha que declarar o shape com 3 dimensões...A analogia Batch-Frase/Exemplo-Palavra foi descartada. Acredito que agora
+			o melhor caminho é tentar trabalhar com valores dinâmicos de tempo máximo do exemplo e do batch. O valor da terceira coordenada, que representa a entrada isolada, será igual a 1 ou 8000 se for utilizada hot vectors como em um dicionario de 8000 palavras ) 
+
+			Próximo passo: prosseguir normalmente com o exemplo trabalhando com valores dinâmicos. Dúvida de percurso: como simular tf.variables com shapes dinâmicos? No caso,
+			a tf.variable b, representando o bias, não pode ser inicializada dinamicamente. Deverei usar tf.tensors para as variaveis W e b então? Não sei se tem diferença (checar);
+			Testar utilizando tf.constant_initializer. SIMULA ESSA PORRA COM tf.zeros() QUE A CONSTRUCTION DO GRAPH DEU CERTO!!!!!!!!->
+			(Deu tudo certo, porém, novos problemas surgiram...)
+
+			A soluçãao de utilizar tf.tensors para variaveis Weight e Bias não é viável, pois o método minimize() não irá afetá-las. Tenho que utilizar tf.Variable(), não tem jeito.Esse é o próximo passo. Outro ponto importante é a criação de uma matriz Embedding, tal como na GRU theano, que irá receber como entradas hot_vectors. Porém, devo fazer os hot_vectors multiplicarem diretamente a matriz Embedding, ou devo só utilizar indíces para indexar vetores coluna, tal como no theano?? Oh dúvida cruel...->
+			(Problema resolvido. Estou utilizando tf.Variable, com a dimensão do número de exemplos dinamica mesmo. Quanto ao Embedding, também está funcionando. Estou utilizando indices na entrada da mesma forma como no theano.)
+
+			Descobrir o problema que nao está permitindo a multiplicacao do target com o tf.log(tf.clip_by_value(prediction,1e-10,1.0)). Está dizendo que ambos estão em graphs diferentes. Como assim? Como a multiplicação de ambos era possível antes? ->
+			erro bobo. Só tinha que reinicia tudo em um novo grago.
+
+			Descobrir a forma certa de se realizar o softmax: devo realizar o softmax na saída flat ou na saída reshaped() com os batchs certos? Acho que tanto faz, mas é bom verificar. Também estou meio intrigado com as funções sparse_softmax_crossentropy_with_logits utilizadas no Wildml. Não sei se serão úteis, mas é bom dar uma olhada também. ->
+			Dúvidas desnecessárias. O softmax com ou sem batch o mesmo, porém é muito mais prático com o flat. Qanto ao sparse_softmax_crossentro... ele só faz o softmax e calcula a crossentropia para a saída pura da rede em modo flat utilizando como parametro os targets desejados como índices flat também. Cada valor do target flat é interpretado como o índice correto da linha da saída softmaxI(), ou seja, faz o que a crossentropia faz.
+
+			Proseguir normalmente após o cálculo do crossentropy. 
+
+			Ok...a rede treinou, finalmente! Porém, um exemplo não passou no teste. Trata-se do exemplo número 11320. É uma frase vazia, contendo apenas a palavra inicial que é o token de início e o target final que é o token final. Por que raios ele não passa? Não sei. O problema é no minimize. Consegue calcular até o losses, mas o minimize da pal. Talvez ele não funcione para losses unitários...Se não conseguir solucionar esse problema, a alternativa é simplesmente eliminar exemplos vazios da base de dados ou criar uma exception quando isso ocorrer. Uma boa idéia é testar esse exemplo na rede do theano pra ver o que acontece. -> 
+
+
+
+
+
+	
+
+			Mistério: Porque a multiplicação do weight ou a saída da rede da resultados uniformes no lstm_teste_Dynamic_Seq e resultados mais discrepantes com valores maiores no loss_masking? 10/fev -> (Mistério ainda não resolvido)
+
+		}
+		
+		Mascarar perdas
+		entendimento completo de como "printar" dados de tensor e variable no TF
+	}
+	
+	Concluído{
+		leitura da documentação da classe optimizer e minimizer
+		entendimento do conceito de lista de variáveis
+		Terminar o modelo do "monik"
+	}
+}
+
+Próximos Objetivos {
+
+	Modificar parâmetros do optimizer diretamente
+	Certificar que o modelo em Theano e Tensorflow realizam as mesmas operações
+
+}
+

@@ -1,0 +1,587 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"batch",
+				"batch_size"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"contents": "import tensorflow as tf\nimport numpy as np\nimport tempfile\n\n\n\nsequences = [[1, 2, 3], [4, 5, 1], [1, 2]]\nlabel_sequences = [[0, 1, 0], [1, 0, 0], [1, 1]]\n\ndef make_example(sequence, labels):\n    # The object we return\n    ex = tf.train.SequenceExample()\n    # A non-sequential feature of our example\n    sequence_length = len(sequence)\n    ex.context.feature[\"length\"].int64_list.value.append(sequence_length)\n    # Feature lists for the two sequential features of our example\n    fl_tokens = ex.feature_lists.feature_list[\"tokens\"]\n    fl_labels = ex.feature_lists.feature_list[\"labels\"]\n    for token, label in zip(sequence, labels):\n        fl_tokens.feature.add().int64_list.value.append(token)\n        fl_labels.feature.add().int64_list.value.append(label)\n    return ex\n\n# Write all examples into a TFRecords file\nwith tempfile.NamedTemporaryFile() as fp:\n    writer = tf.python_io.TFRecordWriter(fp.name)\n    for sequence, label_sequence in zip(sequences, label_sequences):\n        ex = make_example(sequence, label_sequence)\n        writer.write(ex.SerializeToString())\n    writer.close()\n    print(\"Wrote to {}\".format(fp.name))\n\n\ntf.reset_default_graph()\n\n# A single serialized example\n# (You can read this from a file using TFRecordReader)\nex = make_example([1, 2, 3], [0, 1, 0]).SerializeToString()\n\n# Define how to parse the example\ncontext_features = {\n    \"length\": tf.FixedLenFeature([], dtype=tf.int64)\n}\nsequence_features = {\n    \"tokens\": tf.FixedLenSequenceFeature([], dtype=tf.int64),\n    \"labels\": tf.FixedLenSequenceFeature([], dtype=tf.int64)\n}\n\n# Parse the example (returns a dictionary of tensors)\ncontext_parsed, sequence_parsed = tf.parse_single_sequence_example(\n    serialized=ex,\n    context_features=context_features,\n    sequence_features=sequence_features\n)\n\ncontext = tf.contrib.learn.run_n(context_parsed, n=1, feed_dict=None)\nprint(context[0])\nsequence = tf.contrib.learn.run_n(sequence_parsed, n=1, feed_dict=None)\nprint(sequence[0])",
+			"file": "sequence_example.py",
+			"file_size": 1971,
+			"file_write_time": 1481824035000000,
+			"settings":
+			{
+				"buffer_size": 1971,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"contents": "import tensorflow as tf\nimport numpy as np\n\n\n\nbatch_size = 5\n\ncell = tf.nn.rnn_cell.LSTMCell(num_units=64, state_is_tuple=True)\nstate = tf.zeros([batch_size, cell.output_size])\nprobabilities = []\nloss = 0.0\n\nfor current_batch_of_words in words_in_dataset:\n    # The value of state is updated after processing each batch of words.\n    output, state = cell(current_batch_of_words, state)\n\n    # The LSTM output can be used to make next word predictions\n    logits = tf.matmul(output, softmax_w) + softmax_b\n    probabilities.append(tf.nn.softmax(logits))\n    loss += loss_function(probabilities, target_words)\n\n\n\n#-----------------------TRUNCATED BACKPROP-----------------------------------------\n\n# Placeholder for the inputs in a given iteration.\nwords = tf.placeholder(tf.int32, [batch_size, num_steps])\n\nlstm = rnn_cell.BasicLSTMCell(lstm_size)\n# Initial state of the LSTM memory.\ninitial_state = state = tf.zeros([batch_size, lstm.state_size])\n\nfor i in range(num_steps):\n    # The value of state is updated after processing each batch of words.\n    output, state = lstm(words[:, i], state)\n\n    # The rest of the code.\n    # ...\n\nfinal_state = state\n\n\n\n# A numpy array holding the state of LSTM after each batch of words.\nnumpy_state = initial_state.eval()\ntotal_loss = 0.0\nfor current_batch_of_words in words_in_dataset:\n    numpy_state, current_loss = session.run([final_state, loss],\n        # Initialize the LSTM state from the previous iteration.\n        feed_dict={initial_state: numpy_state, words: current_batch_of_words})\n    total_loss += current_loss\n\n\n\n\n\nimport tensorflow as tf\nimport numpy as np\n\n\ntf.reset_default_graph()\n\n\nbatch_size = 5\n\ncell = tf.nn.rnn_cell.LSTMCell(num_units=64, state_is_tuple=True)\nstate = tf.zeros([batch_size, cell.output_size])\nprobabilities = []\nloss = 0.0\n\n\nwords = tf.placeholder(tf.float32, shape = (batch_size, None))\n\n\n#words = tf.Variable (tf.zeros([batch_size, 6]))\n\noutput, state = cell(words, state)\n\n\n\n\nwith tf.Session() as sess:\n    rand_array = np.random.rand(batch_size, 6) \n    print(sess.run(output, state, feed_dict={x : rand_array}))\n\n\n\n\n\n\n\n\n\nfor current_batch_of_words in words_in_dataset:\n    # The value of state is updated after processing each batch of words.\n    output, state = cell(current_batch_of_words, state)\n\n    # The LSTM output can be used to make next word predictions\n    logits = tf.matmul(output, softmax_w) + softmax_b\n    probabilities.append(tf.nn.softmax(logits))\n    loss += loss_function(probabilities, target_words)\n",
+			"file": "esboco_LSTM.py",
+			"file_size": 559,
+			"file_write_time": 1482430586000000,
+			"settings":
+			{
+				"buffer_size": 2507,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "rasc.py",
+			"settings":
+			{
+				"buffer_size": 822,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/home/daniel/Deep-Learning/Tensorflow/Conv_MNST.py",
+			"settings":
+			{
+				"buffer_size": 2660,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/home/daniel/Deep-Learning/Tensorflow/neural_net_mnst.py",
+			"settings":
+			{
+				"buffer_size": 929,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "dynamic_rnn.py",
+			"settings":
+			{
+				"buffer_size": 1007,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "loss_masking.py",
+			"settings":
+			{
+				"buffer_size": 1707,
+				"line_ending": "Unix",
+				"name": "import tensorflow as tf"
+			}
+		},
+		{
+			"file": "rnn_cell_wrappers.py",
+			"settings":
+			{
+				"buffer_size": 978,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "batching_padding.py",
+			"settings":
+			{
+				"buffer_size": 1952,
+				"line_ending": "Unix"
+			}
+		}
+	],
+	"build_system": "",
+	"command_palette":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"console":
+	{
+		"height": 0.0
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/home/daniel/Downloads/verify_freqz.c",
+		"/home/daniel/Downloads/magfxp.h",
+		"/home/daniel/Área de Trabalho/Benchmarks /mag_phase_poles_zeros_overflow/overflow/hp2_butterworth_overflow.c",
+		"/home/daniel/Área de Trabalho/Benchmarks /mag_phase_poles_zeros_overflow/Mag_fase/IIR Mag/hp12_verificationmagC.c",
+		"/home/daniel/dsverifier/dsverifier/bmc/core/fixed-point.h",
+		"/home/daniel/Downloads/filter_functions.h",
+		"/home/daniel/Área de Trabalho/Benchmarks /digital_filters_benchmarks/5_lp_fir.c",
+		"/home/daniel/Área de Trabalho/Benchmarks /digital_filters_benchmarks/9_bp_elliptic_iir.c",
+		"/home/daniel/Área de Trabalho/Benchmarks /mag_phase_poles_zeros_overflow/Polos_zeros/10.c",
+		"/home/daniel/Área de Trabalho/Benchmarks /mag_phase_poles_zeros_overflow/Polos_zeros/1.c",
+		"/home/daniel/Área de Trabalho/Benchmarks /mag_phase_poles_zeros_overflow/Mag_fase/Bibliotecas/fixedop_hp2.h",
+		"/home/daniel/Área de Trabalho/Benchmarks /mag_phase_poles_zeros_overflow/Mag_fase/IIR Mag/lp12_verificationmagEST.c",
+		"/home/daniel/Área de Trabalho/Benchmarks /mag_phase_poles_zeros_overflow/Mag_fase/IIR Mag/lp12_verificationmagE.c",
+		"/home/daniel/Área de Trabalho/Benchmarks /mag_phase_poles_zeros_overflow/Mag_fase/IIR Mag/lp4_verificationmagESTC.c",
+		"/home/daniel/dsverifier/dsverifier/bmc/engine/verify_magnitude_and_phase.h",
+		"/home/daniel/dsverifier/dsverifier/bmc/ver_6.c",
+		"/home/daniel/dsverifier/dsverifier/bmc/core/filter_functions.h",
+		"/home/daniel/dsverifier/dsverifier/bmc/ver_4.c",
+		"/home/daniel/dsverifier/dsverifier/bmc/mag_verification_test.c",
+		"/home/daniel/Deep-Learning/GRU3.0/utils.py",
+		"/home/daniel/Deep-Learning/GRU3.0/train_theano.py",
+		"/home/daniel/Deep-Learning/GRU3.0/gru_theano.py",
+		"/home/daniel/Área de Trabalho/Benchmarks /mag_phase_poles_zeros_overflow/Mag_fase/FIR Mag/fir_hp10verificationmagEqui.c",
+		"/home/daniel/Área de Trabalho/Benchmarks /mag_phase_poles_zeros_overflow/Mag_fase/FIR Mag/fir_hp10verificationmag.c",
+		"/home/daniel/dsverifier/dsverifier/bmc/Filters.h",
+		"/home/daniel/dsverifier/dsverifier/bmc/ver_11.c",
+		"/home/daniel/dsverifier/dsverifier/bmc/ver_13.c",
+		"/home/daniel/dsverifier/dsverifier/bmc/ver_17.c",
+		"/home/daniel/dsverifier/dsverifier/bmc/ver_9.c",
+		"/home/daniel/Área de Trabalho/filterselection.c",
+		"/home/daniel/Área de Trabalho/Benchmarks /mag_phase_poles_zeros_overflow/Mag_fase/IIR Mag/lp12_verificationmagESTE.c",
+		"/home/daniel/dsverifier/dsverifier/bmc/ver_8.c",
+		"/home/daniel/Área de Trabalho/Benchmarks /mag_phase_poles_zeros_overflow/Mag_fase/FIR Mag/fir_hp30verificationmagEqui.c",
+		"/home/daniel/Área de Trabalho/Benchmarks /mag_phase_poles_zeros_overflow/Mag_fase/IIR Mag/hp12_verificationmagE.c",
+		"/home/daniel/Área de Trabalho/Benchmarks /mag_phase_poles_zeros_overflow/Mag_fase/IIR Mag/lp4_verificationmagESTE.c",
+		"/home/daniel/Área de Trabalho/Benchmarks /mag_phase_poles_zeros_overflow/Mag_fase/IIR Mag/hp4_verificationmagE.c",
+		"/home/daniel/Área de Trabalho/Benchmarks /mag_phase_poles_zeros_overflow/Mag_fase/IIR Mag/lp4_verificationmagE.c",
+		"/home/daniel/dsverifier/dsverifier/bmc/dsverifier.h",
+		"/home/daniel/dsverifier/dsverifier/dsverifier.cpp",
+		"/home/daniel/dsverifier/dsverifier/regression/esbmc/boolector/white-box/check_oscillations_04/input.c",
+		"/home/daniel/dsverifier/dsverifier/regression/esbmc/boolector/white-box/delta_form_01/input.c",
+		"/home/daniel/dsverifier/dsverifier/regression/esbmc/boolector/white-box/check_fxp_limit_cycle_02/input.c",
+		"/home/daniel/dsverifier/dsverifier/regression/esbmc/boolector/white-box/delta_form_02/input.c",
+		"/home/daniel/dsverifier/dsverifier/regression/cbmc/white-box/check_floor_rounding_04/input.c",
+		"/home/daniel/Área de Trabalho/Benchmarks /mag_phase_poles_zeros_overflow/Mag_fase/IIR Mag/hp12_verificationmag.c",
+		"/home/daniel/Área de Trabalho/Benchmarks /mag_phase_poles_zeros_overflow/Mag_fase/IIR Mag/lp2_verificationmag.c",
+		"/home/daniel/Área de Trabalho/Benchmarks /mag_phase_poles_zeros_overflow/Mag_fase/IIR Mag/lp2_verificationmagEST.c",
+		"/home/daniel/Área de Trabalho/Benchmarks /mag_phase_poles_zeros_overflow/Mag_fase/IIR Mag/hp2_verificationmag.c",
+		"/home/daniel/Área de Trabalho/Benchmarks /mag_phase_poles_zeros_overflow/Mag_fase/Bibliotecas/fixedop_lp4.h",
+		"/home/daniel/Área de Trabalho/Benchmarks /digital_filters_benchmarks/10_hp_butterworth_iir.c",
+		"/home/daniel/Área de Trabalho/Benchmarks /digital_filters_benchmarks/7_bp_elliptic_iir.c",
+		"/home/daniel/Área de Trabalho/Benchmarks /mag_phase_poles_zeros_overflow/Mag_fase/IIR Mag/lp12_verificationmag.c",
+		"/home/daniel/Área de Trabalho/Benchmarks /mag_phase_poles_zeros_overflow/Mag_fase/IIR Mag/lp4_verificationmagC.c",
+		"/home/daniel/Área de Trabalho/Benchmarks /mag_phase_poles_zeros_overflow/Mag_fase/IIR Mag/lp12_verificationmagC.c",
+		"/home/daniel/Área de Trabalho/Benchmarks /mag_phase_poles_zeros_overflow/Mag_fase/IIR Mag/hp4_verificationmagC.c",
+		"/home/daniel/Área de Trabalho/Benchmarks /mag_phase_poles_zeros_overflow/Mag_fase/FIR Mag/fir_lp10verificationmagEST.c",
+		"/home/daniel/Área de Trabalho/Benchmarks /mag_phase_poles_zeros_overflow/Mag_fase/FIR Mag/fir_lp10verificationmagEqui.c",
+		"/home/daniel/Área de Trabalho/Benchmarks /mag_phase_poles_zeros_overflow/Mag_fase/FIR Mag/fir_lp10verificationmag.c",
+		"/home/daniel/Área de Trabalho/Benchmarks /mag_phase_poles_zeros_overflow/Mag_fase/FIR Mag/fir_hp30verificationmagHann.c",
+		"/home/daniel/Área de Trabalho/Benchmarks /mag_phase_poles_zeros_overflow/Mag_fase/FIR Mag/fir_lp10verificationmagESTEqui.c",
+		"/home/daniel/Área de Trabalho/Benchmarks /mag_phase_poles_zeros_overflow/Mag_fase/Bibliotecas/fixedop_lp12.h",
+		"/home/daniel/Área de Trabalho/Benchmarks /mag_phase_poles_zeros_overflow/Mag_fase/FIR Mag/fir_hp30verificationmag.c",
+		"/home/daniel/Área de Trabalho/Benchmarks /mag_phase_poles_zeros_overflow/Mag_fase/FIR Mag/fir_hp10verificationmagHann.c",
+		"/home/daniel/Área de Trabalho/Benchmarks /mag_phase_poles_zeros_overflow/Mag_fase/Bibliotecas/fixedop_hp4.h",
+		"/home/daniel/Área de Trabalho/Benchmarks /mag_phase_poles_zeros_overflow/Mag_fase/IIR Mag/lp12_verificationmagESTC.c",
+		"/home/daniel/Área de Trabalho/Benchmarks /mag_phase_poles_zeros_overflow/Mag_fase/IIR Phase/lp4_verificationPhaseE.c",
+		"/home/daniel/Área de Trabalho/Benchmarks /mag_phase_poles_zeros_overflow/Mag_fase/fixedop_lp2.h",
+		"/home/daniel/Área de Trabalho/Benchmarks /mag_phase_poles_zeros_overflow/Mag_fase/IIR Phase/hp2_verificationPhase.c",
+		"/home/daniel/Área de Trabalho/Benchmarks /mag_phase_poles_zeros_overflow/Mag_fase/fixedop_hp2.h",
+		"/home/daniel/Área de Trabalho/Benchmarks /mag_phase_poles_zeros_overflow/Mag_fase/fixedop_lp12.h",
+		"/home/daniel/Área de Trabalho/Benchmarks /mag_phase_poles_zeros_overflow/Mag_fase/Bibliotecas/fixedop_lp2.h",
+		"/home/daniel/sqrt.cpp",
+		"/home/daniel/sqrt.c"
+	],
+	"find":
+	{
+		"height": 35.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"nondet",
+			"nonde",
+			"nondet",
+			"nond",
+			"assert",
+			"nond",
+			"nondet",
+			"RecordRea",
+			"Blen",
+			"trunc",
+			"trun",
+			"trunc",
+			"assume",
+			"Assum",
+			"Ass",
+			"ESB",
+			"ESBM",
+			"ESBMC",
+			"UPDATE",
+			"prec",
+			"PREC",
+			"filter",
+			"updat",
+			"update",
+			"n ",
+			"n",
+			"4600",
+			"LN10",
+			"9600",
+			"lfrac",
+			"impl",
+			"type",
+			"TYPE",
+			"impl",
+			"*\n",
+			"impl",
+			"type",
+			"N_P",
+			"ln10",
+			"BL_EPS",
+			"M_LN10",
+			"update",
+			"prop",
+			"implementa",
+			"impl",
+			"b[i",
+			"filter",
+			"verifyMag",
+			"FIlterPro",
+			"FIlter",
+			"pow",
+			"verify_fr"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 2,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "sequence_example.py",
+					"settings":
+					{
+						"buffer_size": 1971,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1013,
+								1013
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "esboco_LSTM.py",
+					"settings":
+					{
+						"buffer_size": 2507,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1960,
+								1960
+							]
+						],
+						"settings":
+						{
+							"auto_name": "",
+							"syntax": "Packages/Python/Python.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 405.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "rasc.py",
+					"settings":
+					{
+						"buffer_size": 822,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								342,
+								342
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "/home/daniel/Deep-Learning/Tensorflow/Conv_MNST.py",
+					"settings":
+					{
+						"buffer_size": 2660,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								145,
+								145
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "/home/daniel/Deep-Learning/Tensorflow/neural_net_mnst.py",
+					"settings":
+					{
+						"buffer_size": 929,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								177,
+								177
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "dynamic_rnn.py",
+					"settings":
+					{
+						"buffer_size": 1007,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								478,
+								478
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "loss_masking.py",
+					"settings":
+					{
+						"buffer_size": 1707,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								939,
+								939
+							]
+						],
+						"settings":
+						{
+							"auto_name": "import tensorflow as tf",
+							"syntax": "Packages/Python/Python.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 7,
+					"file": "rnn_cell_wrappers.py",
+					"settings":
+					{
+						"buffer_size": 978,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								192,
+								192
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 8,
+					"file": "batching_padding.py",
+					"settings":
+					{
+						"buffer_size": 1952,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								913,
+								913
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 0.0
+	},
+	"input":
+	{
+		"height": 0.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"replace":
+	{
+		"height": 0.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 150.0,
+	"status_bar_visible": true
+}
