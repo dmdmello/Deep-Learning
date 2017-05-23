@@ -33,19 +33,28 @@ Objetivo Atual (treinar RNN em TF){
 			Proseguir normalmente após o cálculo do crossentropy. 
 
 			Ok...a rede treinou, finalmente! Porém, um exemplo não passou no teste. Trata-se do exemplo número 11320. É uma frase vazia, contendo apenas a palavra inicial que é o token de início e o target final que é o token final. Por que raios ele não passa? Não sei. O problema é no minimize. Consegue calcular até o losses, mas o minimize da pal. Talvez ele não funcione para losses unitários...Se não conseguir solucionar esse problema, a alternativa é simplesmente eliminar exemplos vazios da base de dados ou criar uma exception quando isso ocorrer. Uma boa idéia é testar esse exemplo na rede do theano pra ver o que acontece. -> 
-
-
-
-
-
 	
 
 			Mistério: Porque a multiplicação do weight ou a saída da rede da resultados uniformes no lstm_teste_Dynamic_Seq e resultados mais discrepantes com valores maiores no loss_masking? 10/fev -> (Mistério ainda não resolvido)
 
 		}
+		Adaptação para modelo de classe em python{
+
+			Realizar a "tradução" para do código gru_theano.py para tensorflow ->
+			A priori, terminei de adaptar para o modelo de classe. Não há muito mistério, pois a maior parte dos procedimentos em TF são feitos por funções de alta ordem. Deve-se ter atenção para o termo self, que referencia atributos instanciais, por isso self deve sempre ser passado como parametro dentro de uma classe, pois ele representa a própria instancia quando criada. Outra obsv importante é que as "functions() em theano funcionam de forma semelhante ao "sess.run()" do tensorflow, pois elas referenciam as variáveis de entrada e suas respectivas saídas dentro do contexto do Grafo de controle. Por isso foi fácil substituí-las no código. 
+
+			Relizar as mudanças necessárias nos scripts "utils.py" e "train_theano.py" para que rodem e realizem o treinamento em conunto com GRUTensorflow.py ->
+
+
+		}		
 		
+
+
+
+		certificar que theano e tensorflow estão otimizados{}
 		Mascarar perdas
 		entendimento completo de como "printar" dados de tensor e variable no TF
+
 	}
 	
 	Concluído{

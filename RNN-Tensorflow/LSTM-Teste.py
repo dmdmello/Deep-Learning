@@ -43,9 +43,9 @@ data = tf.placeholder(tf.int32, [None, None, 1])
 target = tf.placeholder(tf.int32, [None, None])
 
 
-num_hidden = 40
-cell = tf.nn.rnn_cell.LSTMCell(num_hidden,state_is_tuple=True)
-
+num_hidden = 50
+#cell = tf.nn.rnn_cell.LSTMCell(num_hidden,state_is_tuple=True)
+cell = tf.contrib.rnn.LSTMCell(num_hidden,state_is_tuple=True)
 #nesse ponto estamos definindo batch_size como um tensor de dimensão 0, pois este variará dinamicamente 
 #indicando o cumprimento do batch variável
 
@@ -58,6 +58,7 @@ init_state = cell.zero_state(batch_size, tf.float32)
 
 embedding = tf.Variable(tf.truncated_normal([num_words, num_hidden]))
 
+#indexamento de uma vetor de dim = num_hidden por uma das 8 mil palavras. 
 x_e = tf.gather_nd(embedding, data)
 
 output, state = tf.nn.dynamic_rnn(
@@ -81,7 +82,7 @@ flat_probs = tf.nn.softmax(logits_flat)
 
 # Calculate the losses 
 target_flat = tf.reshape(target, [-1])
-losses = tf.nn.sparse_softmax_cross_entropy_with_logits(logits_flat, target_flat)
+losses = tf.nn.sparse_softmax_cross_entropy_with_logits(logits = logits_flat, labels =target_flat)
 
 optimizer = tf.train.AdamOptimizer()
 minimize = optimizer.minimize(losses)
