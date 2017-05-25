@@ -21,21 +21,13 @@ class GRUTensorflow:
         self.E = tf.Variable(initial_value = E, name='E', dtype = tf.float32)
         self.V = tf.Variable(initial_value = V, name='V', dtype = tf.float32)
         self.c = tf.Variable(initial_value = c, name='c', dtype = tf.float32)
-        '''
-        # SGD / rmsprop: Initialize parameters
-        self.mE = theano.shared(name='mE', value=np.zeros(E.shape).astype(theano.config.floatX))
-        self.mU = theano.shared(name='mU', value=np.zeros(U.shape).astype(theano.config.floatX))
-        self.mV = theano.shared(name='mV', value=np.zeros(V.shape).astype(theano.config.floatX))
-        self.mW = theano.shared(name='mW', value=np.zeros(W.shape).astype(theano.config.floatX))
-        self.mb = theano.shared(name='mb', value=np.zeros(b.shape).astype(theano.config.floatX))
-        self.mc = theano.shared(name='mc', value=np.zeros(c.shape).astype(theano.config.floatX))
-        '''
+    
         # We store the Tensorflow graph here
         self.tf = {}
         self.__tf_build__()
     
     def __tf_build__(self):
-
+ 
         E, V, c = self.E, self.V, self.c
         
         x = tf.placeholder(dtype = tf.int32, shape = [None, None, 1], name='x')
@@ -78,14 +70,14 @@ class GRUTensorflow:
         init_op = tf.initialize_all_variables()
 
         self.predict = sess.run(output_flat, {data: inp, target: out})
-       # self.predict_class = sess.run(output_flat, {data: inp, target: out})
+        # self.predict_class = sess.run(output_flat, {data: inp, target: out})
         self.ce_error = sess.run(cost, {data: inp, target: out})
 
-        self.sgd_step = sess.run(minimize,{data: inp, target: out})
-        
-    "Definir se é possível utilizar try numa função 'self' e se é isso de fato é uma função (método) dentro da função tf_build"
-    'não é, mas não precisa'
+        def sgd_step(inp, out):
+            sess.run(minimize,{data: inp, target: out})
 
+        self.sgd_step = sgd_step
+        
     def calculate_total_loss(self, X, Y):
         return np.sum([self.ce_error(x,y) for x,y in zip(X,Y)])
     
