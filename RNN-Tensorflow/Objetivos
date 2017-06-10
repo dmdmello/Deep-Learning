@@ -39,12 +39,31 @@ Objetivo Atual (treinar RNN em TF){
 
 		}
 		Adaptação para modelo de classe em python{
-
 			Realizar a "tradução" para do código gru_theano.py para tensorflow ->
 			A priori, terminei de adaptar para o modelo de classe. Não há muito mistério, pois a maior parte dos procedimentos em TF são feitos por funções de alta ordem. Deve-se ter atenção para o termo self, que referencia atributos instanciais, por isso self deve sempre ser passado como parametro dentro de uma classe, pois ele representa a própria instancia quando criada. Outra obsv importante é que as "functions() em theano funcionam de forma semelhante ao "sess.run()" do tensorflow, pois elas referenciam as variáveis de entrada e suas respectivas saídas dentro do contexto do Grafo de controle. Por isso foi fácil substituí-las no código. 
 
 			Relizar as mudanças necessárias nos scripts "utils.py" e "train_theano.py" para que rodem e realizem o treinamento em conunto com GRUTensorflow.py ->
 
+			Descobrir porque tf.Session() aparentemente não está funcionando quando chamado dentro de 2 contextos diferentes no Python: o contexto código principoal train_tensorflow e do objeto model. 
+			problema trivial resolvido
+
+			Corrigir e adaptar a função generates_sentences. Tente fazer a frase candidata inicial que começa como token de início já começar no formato numpy com shape (1, x, 1) e o append de novas palavras se da ao longo da coord. x. ->
+			Feito
+
+
+			Corrigir bug estranho que ocorre ao tentar printar uma frase já pronta e gerada pela rede com a funç]ao print_sentence de "utils.py"
+			corrigido
+
+			Realizar uma encapsularização da função GRU-tensorflow, pois estou tendo que adaptar em todas as outras funçẽos do código a notação de lista para np.array(). O ideal é que a interface em python seja a mesma para ambas as redes, ou seja, mantenha a notação em lista e faça a conversão para np.array dentro da classe GRU-tensorflow, se possível
+			Maior parte realizada com sucesso. 
+
+			Consertar as funções save e load model parameters. Save não está coseguindo salvar alguns parametros, como V e da erro ao salvar a sess (será que é necessário salvar sess?). Além disso, temos que adicionar os parametros reais utilizados pela rede que serão salvos, ou seja, weights, bias e as variables internas criadas pela função dynamic_rnn (boa parte já foi feita através do indexamento pelo nome da variável no grafo tf em sess.graph.get_tensor_by_name("NOME") ) M 
+			Concluído, mas pode ser ncessário mudar (ver próximo problema)
+
+			Descobrir como carregar os valores de weight e bias da dynamic_rnn de um save previo. Não estou conseguindo pela função Variable().assign(), pois ela só assinala o novo valor a variavel que aponta para o valor dos pesos, não para os pesos em si. 
+			Resolvido utilizando função tf.Saver()
+
+			Descobrir se o saver está conseguindo subescrever arquivos existentes de saves antigos
 
 		}		
 		
