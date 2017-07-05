@@ -41,6 +41,9 @@ print(res[0]["y"])
 # Example with PaddingFIFOQueue
 # ==================================================
 
+import tensorflow as tf
+import numpy as np
+
 tf.reset_default_graph()
 
 # Create a tensor [0, 1, 2, 3, 4 ,...]

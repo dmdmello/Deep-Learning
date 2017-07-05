@@ -55,7 +55,8 @@ def load_data(filename="data/reddit-comments-2015-08.csv", vocabulary_size=2000,
 
     # Create the training data
     X_train = np.asarray([[word_to_index[w] for w in sent[:-1]] for sent in tokenized_sentences])
-    y_train = np.asarray([[word_to_index[w] for w in sent[1:]] for sent in tokenized_sentences])
+    y_train = np.asarray([[word_to_index[w] for w in sent[0:]] for sent in tokenized_sentences])
+
 
     return X_train, y_train, word_to_index, index_to_word
 

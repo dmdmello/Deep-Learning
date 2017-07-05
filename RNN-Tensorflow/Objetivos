@@ -50,29 +50,49 @@ Objetivo Atual (treinar RNN em TF){
 			Corrigir e adaptar a função generates_sentences. Tente fazer a frase candidata inicial que começa como token de início já começar no formato numpy com shape (1, x, 1) e o append de novas palavras se da ao longo da coord. x. ->
 			Feito
 
-
 			Corrigir bug estranho que ocorre ao tentar printar uma frase já pronta e gerada pela rede com a funç]ao print_sentence de "utils.py"
 			corrigido
 
 			Realizar uma encapsularização da função GRU-tensorflow, pois estou tendo que adaptar em todas as outras funçẽos do código a notação de lista para np.array(). O ideal é que a interface em python seja a mesma para ambas as redes, ou seja, mantenha a notação em lista e faça a conversão para np.array dentro da classe GRU-tensorflow, se possível
 			Maior parte realizada com sucesso. 
 
-			Consertar as funções save e load model parameters. Save não está coseguindo salvar alguns parametros, como V e da erro ao salvar a sess (será que é necessário salvar sess?). Além disso, temos que adicionar os parametros reais utilizados pela rede que serão salvos, ou seja, weights, bias e as variables internas criadas pela função dynamic_rnn (boa parte já foi feita através do indexamento pelo nome da variável no grafo tf em sess.graph.get_tensor_by_name("NOME") ) M 
+			Consertar as funções save e load model parameters. Save não está coseguindo salvar alguns parametros, como V e da erro ao salvar a sess (será que é necessário salvar sess?). Além disso, temos que adicionar os parametros reais utilizados pela rede que serão salvos, ou seja, weights, bias e as variables internas criadas pela função dynamic_rnn (boa parte já foi feita através do indexamento pelo nome da variável no grafo tf em sess.graph.get_tensor_by_name("NOME") )
 			Concluído, mas pode ser ncessário mudar (ver próximo problema)
 
 			Descobrir como carregar os valores de weight e bias da dynamic_rnn de um save previo. Não estou conseguindo pela função Variable().assign(), pois ela só assinala o novo valor a variavel que aponta para o valor dos pesos, não para os pesos em si. 
 			Resolvido utilizando função tf.Saver()
 
-			Descobrir se o saver está conseguindo subescrever arquivos existentes de saves antigos
+			Descobrir se o saver está conseguindo subescrever arquivos existentes de saves antigos. Ageitar o "PrintEvery" para que o modelo printe as frases e salve os parametros mais vezes
 
 		}		
 		
 
 
 
-		certificar que theano e tensorflow estão otimizados{}
-		Mascarar perdas
-		entendimento completo de como "printar" dados de tensor e variable no TF
+		certificar que theano e tensorflow estão otimizados{
+
+			
+			Batchpading Theano:
+				Realizar o batchpadding no theano e aprender sobre tensorvariables, sharedvariables, eval(), function() e o que mais for necessario 
+
+
+			
+
+			Batchpading Tensorflow: 
+				Não consigo "printar" o vvalor de um batch com elementos de extensão variavel. Por que? O tensorflow ficar rodando e nada...Resolver esse problema.
+				-> Problema devido ao mal uso de filas e threads
+
+				O principal já foi feito. Já estou dominando o esquema de filas como input de variaveis. Porém, de forma ineficiente. Demora muito pra colocar todos os exemplos em uma única fila. Tenho que tentar utilizar o formato do tensorflow com TFRecord. Eis meu próximo objetivo. 
+
+				-> Aleuluia! TFRecords já em funcionamento, porém só é possível armazenar dados da forma [[a,b,c], [d,f,g], [h,i]]. Deve-se fazer uma conversão para cada elemento desenfilerado para que fique no shape (None, 1). O que pode ser custoso. Porém, eis a solução de desenfileirar e encaminhar vários exemplos para uma fila FIFO com capacidade grande antes do treinamento, como forma de poupar tempo. 
+
+				Tentar resolver o problema de indexar o vetor 0 do embedding, que está como aleatório. Se for possível fazer com que esse vetor seja igual a [0,0,0...0], o problema está resolvido, creio eu. Também tem-se que resolver o problema do masked losses o mais rápido possível.
+
+
+
+			}
+			Mascarar perdas
+			entendimento completo de como "printar" dados de tensor e variable no TF
 
 	}
 	

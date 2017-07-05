@@ -1,0 +1,318 @@
+import tensorflow as tf
+import numpy as np
+import sys
+import os
+import time
+from utils import *
+from datetime import datetime
+from random import shuffle
+path_TFRecord = '/home/daniel/TFRec/TFRecordfile'
+tf.reset_default_graph()
+
+LEARNING_RATE = float(os.environ.get("LEARNING_RATE", "0.001"))
+VOCABULARY_SIZE = int(os.environ.get("VOCABULARY_SIZE", "8000"))
+EMBEDDING_DIM = int(os.environ.get("EMBEDDING_DIM", "100"))
+HIDDEN_DIM = int(os.environ.get("HIDDEN_DIM", "140"))
+NEPOCH = int(os.environ.get("NEPOCH", "20"))
+MODEL_OUTPUT_FILE = os.environ.get("MODEL_OUTPUT_FILE")
+INPUT_DATA_FILE = os.environ.get("INPUT_DATA_FILE", "reddit_comments.csv")
+PRINT_EVERY = int(os.environ.get("PRINT_EVERY", "25000"))
+LOADORNOT = os.environ.get("LOADORNOT", 'True')
+EXAMPLES_SIZE = int(os.environ.get("EXAMPLES_SIZE", "500000"))
+
+if not MODEL_OUTPUT_FILE:
+  ts = datetime.now().strftime("%Y-%m-%d-%H-%M")
+  MODEL_OUTPUT_FILE = "GRU-%s-%s-%s-%s.dat" % (ts, VOCABULARY_SIZE, EMBEDDING_DIM, HIDDEN_DIM)
+
+# Load data
+x_train, y_train, word_to_index, index_to_word = load_data(INPUT_DATA_FILE, VOCABULARY_SIZE)
+
+x_train_list = x_train.tolist()
+y_train_list = y_train.tolist()
+
+#ordenar frases por quantidade de palavras
+#x_train_list.sort(key=len)
+#y_train_list.sort(key=len)
+
+#conversão dados do reddit para o formato numpy
+x_train_numpy = [np.array([x_train_list[i]]).transpose() for i in range(len(x_train_list))]
+y_train_numpy = [np.array([y_train_list[i]]).transpose() for i in range(len(y_train_list))]
+
+
+#data = tf.placeholder(tf.int32, [None, None, 1])
+#target = tf.placeholder(tf.int32, [None, None])
+
+
+#---------------TFRecord-Format-----------------------
+sequences = [[1, 2, 3], [4, 5, 1], [1, 2]]
+label_sequences = [[0, 1, 0], [1, 0, 0], [1, 1]]
+
+#sequences = [[[1], [2], [3]], [[4], [5], [1]], [[1], [2]]]
+#label_sequences = [[0, 1, 0], [1, 0, 0], [1, 1]]
+
+sequences = y_train_numpy[0:20000]
+label_sequences = y_train_list[0:100]
+
+path_TFRecord = '/home/daniel/TFRec/TFRecordfile'
+
+def make_example(sequence, labels):
+    # The object we return
+    ex = tf.train.SequenceExample()
+    # A non-sequential feature of our example
+    sequence_length = len(sequence)
+    ex.context.feature["length"].int64_list.value.append(sequence_length)
+    # Feature lists for the two sequential features of our example
+    fl_tokens = ex.feature_lists.feature_list["tokens"]
+    fl_labels = ex.feature_lists.feature_list["labels"]
+    for token, label in zip(sequence, labels):
+        fl_tokens.feature.add().int64_list.value.append(token)
+        fl_labels.feature.add().int64_list.value.append(label)
+    return ex
+
+# Write all examples into a TFRecords file
+writer = tf.python_io.TFRecordWriter(path_TFRecord)
+for sequence, label_sequence in zip(sequences, label_sequences):
+    ex = make_example(sequence, label_sequence)
+    writer.write(ex.SerializeToString())
+writer.close()
+
+filename_queue = tf.train.string_input_producer([path_TFRecord]) 
+reader = tf.TFRecordReader()
+key, value = reader.read(filename_queue)
+
+context_features = {
+    "length": tf.FixedLenFeature([], dtype=tf.int64)
+}
+sequence_features = {
+    "tokens": tf.FixedLenSequenceFeature([], dtype=tf.int64),
+    "labels": tf.FixedLenSequenceFeature([], dtype=tf.int64)
+}
+
+context_parsed, sequence_parsed = tf.parse_single_sequence_example(
+        serialized=value,
+        context_features=context_features,
+        sequence_features=sequence_features
+    )
+'''
+data_tokens = tf.to_int32(sequence_parsed['tokens'])
+data_tokens = tf.transpose([data_tokens])
+
+data_labels = tf.to_int32(sequence_parsed['labels'])
+
+data = (data_tokens, data_labels)
+'''
+
+data_tokens = tf.to_int32(sequence_parsed['tokens'])
+data = tf.transpose([data_tokens])
+
+#-----------------Graph-----------------------------
+
+input_queue = tf.RandomShuffleQueue(
+	capacity = 20000,
+	min_after_dequeue = 1000,
+	dtypes=[tf.int32])
+
+input_enqueue_op = input_queue.enqueue(data)
+
+qr_input = tf.train.QueueRunner(input_queue, [input_enqueue_op] * 10)
+tf.train.add_queue_runner(qr_input)
+
+non_paddled_input = input_queue.dequeue()
+
+
+batch_size = 10
+padding_queue_cap = 50
+
+padding_queue = tf.PaddingFIFOQueue(
+    capacity=padding_queue_cap,
+    dtypes=[tf.int32],
+    shapes=[[None, 1]])
+
+padding_enqueue_op = padding_queue.enqueue(non_paddled_input)
+
+qr_padding = tf.train.QueueRunner(padding_queue, [padding_enqueue_op] * 10)
+tf.train.add_queue_runner(qr_padding)
+
+inputs = padding_queue.dequeue_many(batch_size)
+#x_t = tf.slice(inputs, [0,1,0], [batch_size, tf.shape(inputs)[1]-1, 1])
+#y_t = tf.slice(inputs, [0,0,0], [batch_size, tf.shape(inputs)[1]-1, 1])
+
+num_words = 8000
+num_hidden = 140
+#embedding = tf.Variable(tf.truncated_normal([num_words, num_hidden]))
+
+embedding_matrix = np.load('embedding_100D_Wikipedia.npy')
+embedding_matrix.astype(np.float32)
+
+embedding = tf.Variable(embedding_matrix)
+
+
+x_e = tf.gather_nd(embedding, inputs)
+
+
+#-------RNN DEFINITION--------#
+
+cell = tf.contrib.rnn.LSTMCell(num_hidden, state_is_tuple=True)
+
+init_state = cell.zero_state(batch_size, tf.float32)
+
+output, state = tf.nn.dynamic_rnn(
+   cell = cell, 
+   initial_state = init_state, 
+   dtype=tf.float32,
+   inputs = x_e)
+
+#[(t.get_shape(), t.name) for t in tf.trainable_variables()]
+#[t.name for t in tf.trainable_variables()]
+
+weight = tf.Variable(tf.truncated_normal([num_hidden, num_words]))
+bias = tf.Variable(tf.constant(0.1, shape=[num_words]))
+
+output = tf.slice(output, [0,0,0], [batch_size, tf.shape(output)[1]-1, num_hidden])
+y_t = tf.slice(inputs, [0,1,0], [batch_size, tf.shape(inputs)[1]-1, 1])
+
+output_flat = tf.reshape(output, [-1, num_hidden])
+
+logits_flat = tf.matmul(output_flat, weight) + bias
+flat_probs = tf.nn.softmax(logits_flat)
+
+
+# Calculate the losses 
+y_t_flat = tf.reshape(y_t, [-1])
+losses = tf.nn.sparse_softmax_cross_entropy_with_logits(logits = logits_flat, labels =y_t_flat)
+
+#Loss Masking
+mask = tf.sign(tf.to_float(y_t_flat))
+masked_losses = mask*losses
+
+# Bring back to [B, T] shape
+masked_losses = tf.reshape(masked_losses,  tf.shape(y_t))
+
+optimizer = tf.train.AdamOptimizer()
+minimize = optimizer.minimize(masked_losses)
+
+mistakes = tf.not_equal(y_t_flat, tf.to_int32(tf.argmax(flat_probs, 1)))
+error = tf.reduce_mean(tf.cast(mistakes, tf.float32))
+
+
+#-----------------Executuion-----------------------------
+
+sess = tf.Session()
+coord = tf.train.Coordinator()
+threads = tf.train.start_queue_runners(sess = sess)
+sess.run(input_queue.size())
+
+
+sess.run(tf.global_variables_initializer())
+
+sess.run((x_e, inputs))
+sess.run((tf.shape(x_e), tf.shape(inputs)))
+
+sess.run((tf.shape(x_e), tf.shape(output)))
+
+sess.run((tf.shape(output_flat), tf.shape(output)))
+
+sess.run((tf.shape(flat_probs), flat_probs))
+
+sess.run((tf.shape(output), tf.shape(losses), tf.shape(masked_losses), losses, masked_losses))
+
+saver = tf.train.Saver()
+
+def error_2k(sess):
+    losses_ac = 0.0
+    mean_error = 0.0
+    num_int = 20
+    for i in range(num_int):
+    	t1 = time.time()
+        try:
+            mean_error = mean_error + sess.run(error)
+            losses_ac = losses_ac + (sess.run(tf.reduce_sum(losses)) / sess.run(tf.reduce_sum(mask)))
+        except: 
+            print ("Erro inesperado")      
+        #print "Batch ", str(j)
+        t2 = time.time()
+        print "Epoch - ",str(i)
+        print "Time beetween epochs: %f milliseconds" % ((t2 - t1) * 1000.)
+
+    print"Erro acumulado para 2k iterações:"
+    print(mean_error/num_int)
+    print"Perdas acumuladas para 2k iterações: " 
+    print(losses_ac/num_int)
+	
+
+epoch = 3
+for i in range(epoch):
+    t1 = time.time()
+    for j in range(0, 20000):
+        try:
+        	sess.run(minimize)
+        except: 
+        	print ("Erro inesperado")      
+        #print "Batch ", str(j)
+    t2 = time.time()
+    sys.stdout.flush()
+    print "Time beetween epochs: %f milliseconds" % ((t2 - t1) * 1000.)    
+    print "Epoch - ",str(i)
+    error_2k(sess)
+    saver.save(sess, "/tmp/model-01-Jul-2")
+
+
+losses_ac = 0.0
+mean_error = 0.0
+t1 = time.time()
+losses_ac = losses_ac + (sess.run(tf.reduce_sum(losses)) / sess.run(tf.reduce_sum(mask)))
+t2 = time.time()
+print "Time beetween epochs: %f milliseconds" % ((t2 - t1) * 1000.)  
+
+
+sess.run(data, {data:x_train_numpy[4:4+1]})
+threads = tf.train.start_queue_runners(sess = sess)
+
+
+
+
+
+epoch = 1
+for i in range(epoch):
+    t1 = time.time()
+    for j in range(0, 100):
+        inp, out = x_train_numpy[j:j+1], y_train_list[j:j+1]
+        try:
+        	sess.run(data, {data: inp})
+        except: 
+        	print ("Erro inesperado")
+        print "Example ", str(j)
+        #print "Batch ", str(j)
+    t2 = time.time()
+    sys.stdout.flush()
+    print "Time beetween epochs: %f milliseconds" % ((t2 - t1) * 1000.)    
+    print "Epoch - ",str(i)
+
+
+t1 = time.time()
+sess.run(padding_queue.dequeue_many(50))
+t2 = time.time()
+sess.run(padding_queue.dequeue_many(50))
+t3 = time.time()
+
+
+const = tf.constant(45) 
+
+output = tf.add(inputs, const)
+
+
+
+
+many_inputs= queue.enqueue_many([[4],[6], [10], [8]])
+
+
+qr = tf.train.QueueRunner(queue, [enqueue_op])
+
+sess = tf.Session()
+
+
+enqueue_threads = qr.create_threads(sess, start=True)
+
+sess.run(enqueue_op, {data: [5]})
+
+sess.run(output)

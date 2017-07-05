@@ -6,7 +6,6 @@ import time
 from utils import *
 from datetime import datetime
 from random import shuffle
- 
 
 tf.reset_default_graph()
 
@@ -21,14 +20,12 @@ PRINT_EVERY = int(os.environ.get("PRINT_EVERY", "25000"))
 LOADORNOT = os.environ.get("LOADORNOT", 'True')
 EXAMPLES_SIZE = int(os.environ.get("EXAMPLES_SIZE", "500000"))
 
-
 if not MODEL_OUTPUT_FILE:
   ts = datetime.now().strftime("%Y-%m-%d-%H-%M")
   MODEL_OUTPUT_FILE = "GRU-%s-%s-%s-%s.dat" % (ts, VOCABULARY_SIZE, EMBEDDING_DIM, HIDDEN_DIM)
 
 # Load data
 x_train, y_train, word_to_index, index_to_word = load_data(INPUT_DATA_FILE, VOCABULARY_SIZE)
-
 
 '---------------------GRAPH Construction---------------------'
 
@@ -43,9 +40,9 @@ data = tf.placeholder(tf.int32, [None, None, 1])
 target = tf.placeholder(tf.int32, [None, None])
 
 
-num_hidden = 50
-#cell = tf.nn.rnn_cell.LSTMCell(num_hidden,state_is_tuple=True)
-cell = tf.contrib.rnn.LSTMCell(num_hidden,state_is_tuple=True)
+num_hidden =  60
+cell = tf.contrib.rnn.LSTMCell(num_hidden, state_is_tuple=True)
+#cell = tf.contrib.rnn.GRUCell(num_hidden)
 #nesse ponto estamos definindo batch_size como um tensor de dimensão 0, pois este variará dinamicamente 
 #indicando o cumprimento do batch variável
 
@@ -100,19 +97,26 @@ y_train_list = y_train.tolist()
 x_train_numpy = [np.array([x_train_list[i]]).transpose() for i in range(len(x_train_list))]
 y_train_numpy = [np.array([y_train_list[i]]).transpose() for i in range(len(y_train_list))]
 
-init_op = tf.initialize_all_variables()
+
+Wval = np.random.uniform(-4, 4, (num_words, num_hidden))
+
+init_op = tf.global_variables_initializer()
 
 sess = tf.Session()
+
+saver = tf.train.Saver()
+saver.restore(sess, "/tmp/model")
+
 sess.run(init_op)
 
-batch_size = 1
+batch = 1
 
-no_of_batches = int(len(x_train)/batch_size)
+no_of_batches = int(len(x_train)/batch)
 epoch = 1
 for i in range(epoch):
     t1 = time.time()
     for j in np.random.permutation(len(y_train[7:34])):
-        inp, out = x_train_numpy[j:j+batch_size], y_train_list[j:j+batch_size]
+        inp, out = x_train_numpy[j:j+batch], y_train_list[j:j+batch]
         try:
         	sess.run(minimize,{data: inp, target: out})
         except: 
@@ -152,9 +156,6 @@ print('Epoch {:2d} error {:3.1f}%'.format(i + 1, 100 * incorrect))
 
 
 
-
-
-
 sess.run(output, {data: x_train_numpy[0:1]})
 
 sess.run()
@@ -164,7 +165,6 @@ inp, out = x_train_numpy[0:1], y_train_list[0:1]
 
 aux = 11320
 sess.run(minimize,{data: x_train_numpy[aux:aux+1], target: y_train_list[aux:aux+1]})
-
 
 
 inp, out = x_train_numpy[3:4], y_train_list[3:4]

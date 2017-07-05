@@ -78,11 +78,6 @@ def sgd_callback(model, num_examples_seen, epoch):
 #for epoch in range(NEPOCH):
 #  print "Epoch = %d" %epoch
 
-#print "LOADORNOT = %s" % (LOADORNOT) 
-#if (LOADORNOT == 'True'):
-#  nepoch_prev=np.load(path_load)["epoch"]
-#else: 
-#  nepoch_prev=0
 NEPOCH = 40
 nepoch_prev=0
 
