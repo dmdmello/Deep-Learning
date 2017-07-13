@@ -19,6 +19,7 @@ PRINT_EVERY = int(os.environ.get("PRINT_EVERY", "15000"))
 LOADORNOT = os.environ.get("LOADORNOT", 'False')
 EXAMPLES_SIZE = int(os.environ.get("EXAMPLES_SIZE", "500000"))
 
+embeeding_path = 'embedding_matrix_WIKI_100D.npy'
 path_load = 'pretrained.npz'
 '''
 path_load = 'GRU-2017-06-08-00-38-8000-35-128.dat'
@@ -78,13 +79,15 @@ def sgd_callback(model, num_examples_seen, epoch):
 #for epoch in range(NEPOCH):
 #  print "Epoch = %d" %epoch
 
-NEPOCH = 40
+NEPOCH = 20
 nepoch_prev=0
 
 print "Last number of epochs was %d in the loaded parameters, which will be subtracted from the selected value NEPOCH = %d, which now equals %d - %d = %d" % (nepoch_prev, NEPOCH, NEPOCH , nepoch_prev, NEPOCH - nepoch_prev)
 nepoch_remain = NEPOCH - nepoch_prev
 
-train_with_sgd(model, x_train[0:15001], y_train[0:15001], learning_rate=LEARNING_RATE, nepoch=nepoch_remain, nepoch_prev=nepoch_prev, decay=0.9, callback_every=PRINT_EVERY, callback=sgd_callback)
+train_with_sgd(model, x_train[0:15001], y_train[0:15001], embeeding_path, learning_rate=LEARNING_RATE, 
+  nepoch=nepoch_remain, nepoch_prev=nepoch_prev, decay=0.9, callback_every=PRINT_EVERY, 
+  callback=sgd_callback)
 
 
 '''

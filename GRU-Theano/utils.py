@@ -8,7 +8,7 @@ import operator
 import io
 import array
 from datetime import datetime
-from gru_theano import GRUTheano
+from GRUTheano import GRUTheano
 
 SENTENCE_START_TOKEN = "SENTENCE_START"
 SENTENCE_END_TOKEN = "SENTENCE_END"
@@ -21,8 +21,11 @@ def load_data(filename="data/reddit-comments-2015-08.csv", vocabulary_size=2000,
 
     # Read the data and append SENTENCE_START and SENTENCE_END tokens
     print("Reading CSV file...")
-    with open(filename, 'rt') as f:
+    with open(filename, 'rb') as f:
+        #txt = f.read()
+        #f.write(txt.encode('utf-8'))
         reader = csv.reader(f, skipinitialspace=True)
+        #reader = csv.reader((x.replace('\0', '') for x in f), skipinitialspace=True, dialect=csv.excel_tab)
         reader.next()
         # Split full comments into sentences
         sentences = itertools.chain(*[nltk.sent_tokenize(x[0].decode("utf-8").lower()) for x in reader])

@@ -1,2 +1,2 @@
-model_checkpoint_path: "GRU-2017-06-09-23-38-8000-35-128.dat"
-all_model_checkpoint_paths: "GRU-2017-06-09-23-38-8000-35-128.dat"
+model_checkpoint_path: "GRU-hd128-b25-200k"
+all_model_checkpoint_paths: "GRU-hd128-b25-200k"

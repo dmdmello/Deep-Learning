@@ -60,8 +60,9 @@ def load_data(filename="data/reddit-comments-2015-08.csv", vocabulary_size=2000,
     return X_train, y_train, word_to_index, index_to_word
 
 
-def train_with_sgd(model, X_train, y_train, learning_rate=0.001, nepoch=20, nepoch_prev=0, decay=0.9,
+def train_with_sgd(model, X_train, y_train, embedding_path, learning_rate=0.001, nepoch=20, nepoch_prev=0, decay=0.9,
     callback_every=10000, callback=None):
+    model.embedding_init(embedding_path)
     num_examples_seen = 0
     for epoch in range(nepoch):
         num_examples_seen = 0

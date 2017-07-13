@@ -1,2 +1,2 @@
-model_checkpoint_path: "model-teste"
-all_model_checkpoint_paths: "model-teste"
+model_checkpoint_path: "GRU-hd128-b15-200k"
+all_model_checkpoint_paths: "GRU-hd128-b15-200k"

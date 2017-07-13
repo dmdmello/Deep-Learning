@@ -13,7 +13,7 @@ INPUT_DATA_FILE = os.environ.get("INPUT_DATA_FILE", "reddit_comments.csv")
 EMBEDDING_DIM = int(os.environ.get("EMBEDDING_DIM", "100"))
 
 embeddings_index = {}
-f = open(os.path.join('/home/daniel/Downloads/', 'glove.6B.100d.txt'))
+f = open(os.path.join('../', 'glove.6B.100d.txt'))
 for line in f:
     values = line.split()
     word = values[0]

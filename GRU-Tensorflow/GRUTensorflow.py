@@ -7,10 +7,11 @@ import operator
 
 class GRUTensorflow:
     
-    def __init__(self, word_dim, hidden_dim=128, bptt_truncate=-1):
+    def __init__(self, word_dim, hidden_dim=128, embedding_dim = 100, bptt_truncate=-1):
         # Assign instance variables
         self.word_dim = word_dim
         self.hidden_dim = hidden_dim
+        self.embedding_dim = embedding_dim
         self.bptt_truncate = bptt_truncate
         self.sess = tf.Session()
         # Initialize the network parameters
@@ -37,14 +38,17 @@ class GRUTensorflow:
         # This is how we calculated the hidden state in a simple RNN. No longer!
         # s_t = T.tanh(U[:,x_t] + W.dot(s_t1_prev))
             
-        cell = tf.contrib.rnn.LSTMCell(num_units = self.hidden_dim, state_is_tuple=True)
+        cell = tf.contrib.rnn.GRUCell(num_units = self.hidden_dim)
         batch_size = tf.shape(x_t)[0]
         init_state = cell.zero_state(batch_size, tf.float32)
 
         # Word embedding layer 
 
-        self.E = tf.Variable(tf.truncated_normal([self.word_dim, self.hidden_dim]), name = 'embedding')
+        self.E = tf.Variable(tf.constant(0.0, shape=[self.word_dim, self.embedding_dim+1]), trainable=False, name = 'embedding')
         E = self.E
+
+        embedding_placeholder = tf.placeholder(tf.float32, [self.word_dim, self.embedding_dim+1])
+        #embedding_init = E.assign(embedding_placeholder)
 
         #indexamento de uma vetor de dim = num_hidden por uma das 8 mil palavras. 
         x_e = tf.gather_nd(E, x_t)
@@ -55,9 +59,9 @@ class GRUTensorflow:
             dtype=tf.float32,
             inputs = x_e)
 
-        W = sess.graph.get_tensor_by_name('rnn/lstm_cell/weights:0')
+        W = sess.graph.get_tensor_by_name('rnn/gru_cell/gates/kernel:0')
         self.W = W
-        b = sess.graph.get_tensor_by_name('rnn/lstm_cell/biases:0')
+        b = sess.graph.get_tensor_by_name('rnn/gru_cell/gates/bias:0')
         self.b = b
 
         V = tf.Variable(tf.truncated_normal([self.hidden_dim, self.word_dim]), name = 'weights_V')
@@ -104,7 +108,12 @@ class GRUTensorflow:
             sess.run(minimize,{x_t: inp, y_t: out})
 
         self.sgd_step = sgd_step
-        
+
+        def embedding_init(embedding_path):
+            sess.run(E.assign(embedding_placeholder), feed_dict={embedding_placeholder: np.load(embedding_path)}) 
+        self.embedding_init = embedding_init
+
+
     def calculate_total_loss(self, X, Y):
         #eturn np.sum([self.ce_error(x,y) for x,y in zip(X,Y)])
 
@@ -137,4 +146,4 @@ class GRUTensorflow:
         sess = self.sess 
         saver = tf.train.Saver()
         saver.restore(sess, outfile)
-     
+    
