@@ -11,16 +11,17 @@ import tensorflow as tf
 LEARNING_RATE = float(os.environ.get("LEARNING_RATE", "0.001"))
 VOCABULARY_SIZE = int(os.environ.get("VOCABULARY_SIZE", "8000"))
 EMBEDDING_DIM = int(os.environ.get("EMBEDDING_DIM", "35"))
-HIDDEN_DIM = int(os.environ.get("HIDDEN_DIM", "128"))
+HIDDEN_DIM = int(os.environ.get("HIDDEN_DIM", "200"))
 NEPOCH = int(os.environ.get("NEPOCH", "20"))
 MODEL_OUTPUT_FILE = os.environ.get("MODEL_OUTPUT_FILE")
 INPUT_DATA_FILE = os.environ.get("INPUT_DATA_FILE", "reddit_comments.csv")
 PRINT_EVERY = int(os.environ.get("PRINT_EVERY", "15000"))
 LOADORNOT = os.environ.get("LOADORNOT", 'False')
 EXAMPLES_SIZE = int(os.environ.get("EXAMPLES_SIZE", "500000"))
+PATH_LOAD = os.environ.get("PATH_LOAD", 'path_load')
 
 embeeding_path = 'embedding_matrix_WIKI_100D.npy'
-path_load = 'pretrained.npz'
+path_load = PATH_LOAD
 '''
 path_load = 'GRU-2017-06-08-00-38-8000-35-128.dat'
 path_load = 'treinamento'
@@ -85,7 +86,7 @@ nepoch_prev=0
 print "Last number of epochs was %d in the loaded parameters, which will be subtracted from the selected value NEPOCH = %d, which now equals %d - %d = %d" % (nepoch_prev, NEPOCH, NEPOCH , nepoch_prev, NEPOCH - nepoch_prev)
 nepoch_remain = NEPOCH - nepoch_prev
 
-train_with_sgd(model, x_train[0:15001], y_train[0:15001], embeeding_path, learning_rate=LEARNING_RATE, 
+train_with_sgd(model, x_train[0:30001], y_train[0:30001], embeeding_path, learning_rate=LEARNING_RATE, 
   nepoch=nepoch_remain, nepoch_prev=nepoch_prev, decay=0.9, callback_every=PRINT_EVERY, 
   callback=sgd_callback)
 

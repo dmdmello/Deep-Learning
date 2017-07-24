@@ -68,9 +68,10 @@ def train_with_sgd(model, X_train, y_train, embedding_path, learning_rate=0.001,
         num_examples_seen = 0
         print "Epoch = %d" % (epoch + nepoch_prev)
         # For each training example...
-        for i in np.random.permutation(len(y_train)):
+        for i in range(len(y_train)):
             # One SGD stepx_train_numpy[10:11], y_train_list[10:11]
-            model.sgd_step(X_train[i], y_train[i])
+            rand_example = np.random.randint(0, len(y_train))
+            model.sgd_step(X_train[rand_example], y_train[rand_example])
             num_examples_seen += 1
             # Optionally do callback
             if (callback and callback_every and num_examples_seen % callback_every == 0):
@@ -93,7 +94,7 @@ def save_model_parameters_tensorflow(model, epoch, outfile):
     print "Saved model parameters to %s." % outfile
 
 def load_model_parameters_tensorflow(path, hidden_dim, word_dim, modelClass=GRUTensorflow):
-    npzfile = np.load(path + '.npz')
+    #npzfile = np.load(path + '.npz')
     #E, W, V, b, c = npzfile["E"], npzfile["W"], npzfile["V"], npzfile["b"], npzfile["c"]
     #hidden_dim, word_dim = E.shape[1], E.shape[0]
     print "Building model model from %s with hidden_dim=%d word_dim=%d" % (path, hidden_dim, word_dim)
