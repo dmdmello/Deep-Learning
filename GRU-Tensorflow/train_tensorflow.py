@@ -19,6 +19,9 @@ PRINT_EVERY = int(os.environ.get("PRINT_EVERY", "15000"))
 LOADORNOT = os.environ.get("LOADORNOT", 'False')
 EXAMPLES_SIZE = int(os.environ.get("EXAMPLES_SIZE", "500000"))
 
+
+
+
 embeeding_path = 'embedding_matrix_WIKI_100D.npy'
 path_load = 'pretrained.npz'
 '''

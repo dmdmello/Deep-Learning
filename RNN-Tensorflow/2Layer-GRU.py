@@ -155,7 +155,8 @@ inputs = padding_queue.dequeue_many(batch_size)
 #y_t = tf.slice(inputs, [0,0,0], [batch_size, tf.shape(inputs)[1]-1, 1])
 
 num_words = 8000
-num_hidden =  32
+num_hidden1 = 140
+num_hidden2 = 140
 
 #embedding = tf.Variable(tf.truncated_normal([num_words, EMBEDDING_DIM]), trainable=False)
 
@@ -175,15 +176,26 @@ x_e = tf.gather_nd(embedding, inputs)
 #-------RNN DEFINITION--------#
 
 #cell = tf.contrib.rnn.LSTMCell(num_hidden, state_is_tuple = True)
-cell = tf.contrib.rnn.GRUCell(num_hidden)
+cell1 = tf.contrib.rnn.GRUCell(num_hidden1)
+cell2 = tf.contrib.rnn.GRUCell(num_hidden2)
 
-init_state = cell.zero_state(batch_size, tf.float32)
+init_state = cell1.zero_state(batch_size, tf.float32)
+init_state = cell2.zero_state(batch_size, tf.float32)
 
-output, state = tf.nn.dynamic_rnn(
+output1, state1 = tf.nn.dynamic_rnn(
    cell = cell, 
    initial_state = init_state, 
    dtype=tf.float32,
    inputs = x_e)
+
+
+output2, state2 = tf.nn.dynamic_rnn(
+   cell = cell, 
+   initial_state = init_state, 
+   dtype=tf.float32,
+   inputs = output1)
+
+
 
 
 weight = tf.Variable(tf.truncated_normal([num_hidden, num_words]))
