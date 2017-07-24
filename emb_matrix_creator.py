@@ -40,8 +40,8 @@ embedding_matrix[7999][-1] = 100
 
 
 #Unknown Token becomes the mean value of the rarest words available on the embedding
-for i in range(13,40):
+for i in range(3,40):
 	embedding_matrix[1] = embedding_matrix[1]+ embedding_matrix[i]
 embedding_matrix[1] = embedding_matrix[1]/(len(range(13,40)))
 
-np.savez(embedding_matrix, 'embedding_matrix_WIKI_100D')
+np.savez('embedding_matrix_WIKI_100D', embedding_matrix)

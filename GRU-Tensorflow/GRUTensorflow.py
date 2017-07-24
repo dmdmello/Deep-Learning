@@ -59,10 +59,16 @@ class GRUTensorflow:
             dtype=tf.float32,
             inputs = x_e)
 
-        W = sess.graph.get_tensor_by_name('rnn/gru_cell/gates/kernel:0')
-        self.W = W
-        b = sess.graph.get_tensor_by_name('rnn/gru_cell/gates/bias:0')
-        self.b = b
+        W_gates = sess.graph.get_tensor_by_name('rnn/gru_cell/gates/kernel:0')
+        self.W_gates = W_gates
+        b_gates = sess.graph.get_tensor_by_name('rnn/gru_cell/gates/bias:0')
+        self.b_gates = b_gates
+
+        W_candidate = sess.graph.get_tensor_by_name('rnn/gru_cell/candidate/kernel:0')
+        self.W_candidate = W_candidate
+        b_gate = sess.graph.get_tensor_by_name('rnn/gru_cell/candidate/bias:0')
+        self.b_gate = b_gate
+
 
         V = tf.Variable(tf.truncated_normal([self.hidden_dim, self.word_dim]), name = 'weights_V')
         self.V = V

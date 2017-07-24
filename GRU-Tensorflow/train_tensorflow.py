@@ -20,6 +20,9 @@ LOADORNOT = os.environ.get("LOADORNOT", 'False')
 EXAMPLES_SIZE = int(os.environ.get("EXAMPLES_SIZE", "500000"))
 PATH_LOAD = os.environ.get("PATH_LOAD", 'path_load')
 
+
+
+
 embeeding_path = 'embedding_matrix_WIKI_100D.npy'
 path_load = PATH_LOAD
 '''
