@@ -155,8 +155,8 @@ inputs = padding_queue.dequeue_many(batch_size)
 #y_t = tf.slice(inputs, [0,0,0], [batch_size, tf.shape(inputs)[1]-1, 1])
 
 num_words = 8000
-num_hidden1 = 140
-num_hidden2 = 140
+num_hidden1 = 132
+num_hidden2 = 132
 
 #embedding = tf.Variable(tf.truncated_normal([num_words, EMBEDDING_DIM]), trainable=False)
 
@@ -179,32 +179,24 @@ x_e = tf.gather_nd(embedding, inputs)
 cell1 = tf.contrib.rnn.GRUCell(num_hidden1)
 cell2 = tf.contrib.rnn.GRUCell(num_hidden2)
 
-init_state = cell1.zero_state(batch_size, tf.float32)
-init_state = cell2.zero_state(batch_size, tf.float32)
+multi_cell =  tf.contrib.rnn.MultiRNNCell([cell1, cell2])
 
-output1, state1 = tf.nn.dynamic_rnn(
-   cell = cell, 
+init_state = multi_cell.zero_state(batch_size, tf.float32)
+
+output, state = tf.nn.dynamic_rnn(
+   cell = multi_cell, 
    initial_state = init_state, 
    dtype=tf.float32,
    inputs = x_e)
 
 
-output2, state2 = tf.nn.dynamic_rnn(
-   cell = cell, 
-   initial_state = init_state, 
-   dtype=tf.float32,
-   inputs = output1)
-
-
-
-
-weight = tf.Variable(tf.truncated_normal([num_hidden, num_words]))
+weight = tf.Variable(tf.truncated_normal([num_hidden2, num_words]))
 bias = tf.Variable(tf.constant(0.1, shape=[num_words]))
 
-output = tf.slice(output, [0,0,0], [batch_size, tf.shape(output)[1]-1, num_hidden])
+output = tf.slice(output, [0,0,0], [batch_size, tf.shape(output)[1]-1, num_hidden2])
 y_t = tf.slice(inputs, [0,1,0], [batch_size, tf.shape(inputs)[1]-1, 1])
 
-output_flat = tf.reshape(output, [-1, num_hidden])
+output_flat = tf.reshape(output, [-1, num_hidden2])
 
 logits_flat = tf.matmul(output_flat, weight) + bias
 flat_probs = tf.nn.softmax(logits_flat)
@@ -223,6 +215,7 @@ masked_losses = tf.reshape(masked_losses,  tf.shape(y_t))
 mean_masked_losses = tf.divide(tf.reduce_sum(masked_losses), tf.reduce_sum(mask))
 
 optimizer = tf.train.AdamOptimizer(0.001)
+
 
 grads = optimizer.compute_gradients(masked_losses)
 capped_grads = [(tf.clip_by_value(grad, -1e16, 1e16), var) for grad, var in grads]
@@ -294,7 +287,7 @@ def error_k(sess, k):
 last_grads = deque([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0])
 last_v = deque([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0])
 flag_break = False
-epoch = 20
+epoch = 10
 for i in range(epoch):
     if flag_break:
         break
@@ -348,7 +341,7 @@ for i in range(epoch):
     sys.stdout.flush()
     epoch_counter = epoch_counter + 1
 
-    saver.save(sess, "tmp/GRU-hd%d-b%d-200k" % (num_hidden, batch_size))
+    saver.save(sess, "tmp/GRU2ly-1hd%d-2hd%d-b%d-200k" % (num_hidden1, num_hidden2, batch_size))
 
 saver.save(sess, "tmp/GRU-hd%d-b%d-200k-%dEp-4.13Loss" % (num_hidden, batch_size , epoch_counter))
 
