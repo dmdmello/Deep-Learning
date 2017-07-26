@@ -14,7 +14,7 @@ tf.reset_default_graph()
 
 LEARNING_RATE = float(os.environ.get("LEARNING_RATE", "0.001"))
 VOCABULARY_SIZE = int(os.environ.get("VOCABULARY_SIZE", "8000"))
-EMBEDDING_DIM = int(os.environ.get("EMBEDDING_DIM", "50"))
+EMBEDDING_DIM = int(os.environ.get("EMBEDDING_DIM", "100"))
 HIDDEN_DIM = int(os.environ.get("HIDDEN_DIM", "140"))
 NEPOCH = int(os.environ.get("NEPOCH", "20"))
 MODEL_OUTPUT_FILE = os.environ.get("MODEL_OUTPUT_FILE")
@@ -241,7 +241,7 @@ coord = tf.train.Coordinator()
 threads = tf.train.start_queue_runners(sess = sess)
 saver = tf.train.Saver()
 sess.run(tf.global_variables_initializer())
-sess.run(embedding_init, feed_dict={embedding_placeholder: np.load('embedding_matrix_gensim_50D.npy')})
+sess.run(embedding_init, feed_dict={embedding_placeholder: np.load('embedding_matrix_gensim_100D.npy')})
 epoch_counter = 0
 
 '''
@@ -290,7 +290,7 @@ def error_k(sess, k):
 last_grads = deque([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0])
 last_v = deque([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0])
 flag_break = False
-epoch = 10
+epoch = 1
 for i in range(epoch):
     if flag_break:
         break
@@ -303,7 +303,7 @@ for i in range(epoch):
     for j in range(0, 25000):
         
         if (j % 5000 == 0):
-            error_k(sess, 50)
+            error_k(sess, 40)
 
         try:
             '''
@@ -359,7 +359,7 @@ for i in range(0, 100):
 ac = ac/ac2
 
 t1 = time.time()
-error_k(sess, 1000)
+error_k(sess, 2500)
 t2 = time.time()
 print "Time beetween epochs: %f milliseconds" % ((t2 - t1) * 1000.)   
 
