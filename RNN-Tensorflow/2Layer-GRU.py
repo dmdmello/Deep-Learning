@@ -3,13 +3,13 @@ import numpy as np
 import sys
 import os
 import time
-from utils import *
+from load_text import *
 from datetime import datetime
 from random import shuffle
 from collections import deque
-path_TFRecord = '../TFRec/TFRecordfile15k'
-path_TFRecord = '../TFRec/TFRecordfile500k'
-path_TFRecord_test = '../TFRec/TFRecordfile500k_test'
+path_TFRecord = 'TFRec/TFRecordfile15k'
+path_TFRecord = 'TFRec/TFRecordfile500k'
+path_TFRecord_test = 'TFRec/TFRecordfile500k_test'
 tf.reset_default_graph()
 
 LEARNING_RATE = float(os.environ.get("LEARNING_RATE", "0.001"))
@@ -18,7 +18,7 @@ EMBEDDING_DIM = int(os.environ.get("EMBEDDING_DIM", "50"))
 HIDDEN_DIM = int(os.environ.get("HIDDEN_DIM", "140"))
 NEPOCH = int(os.environ.get("NEPOCH", "20"))
 MODEL_OUTPUT_FILE = os.environ.get("MODEL_OUTPUT_FILE")
-INPUT_DATA_FILE = os.environ.get("INPUT_DATA_FILE", "reddit_comments.csv")
+INPUT_DATA_FILE = os.environ.get("INPUT_DATA_FILE", "reddit_comments500.csv")
 PRINT_EVERY = int(os.environ.get("PRINT_EVERY", "25000"))
 LOADORNOT = os.environ.get("LOADORNOT", 'True')
 EXAMPLES_SIZE = int(os.environ.get("EXAMPLES_SIZE", "500000"))
@@ -164,10 +164,10 @@ num_hidden2 = 132
 #embedding_matrix.astype(np.float32)
 
 
-embedding = tf.Variable(tf.constant(0.0, shape=[num_words, EMBEDDING_DIM+1]),
+embedding = tf.Variable(tf.constant(0.0, shape=[num_words, EMBEDDING_DIM]),
 trainable=False, name="embedding")
 
-embedding_placeholder = tf.placeholder(tf.float32, [num_words, EMBEDDING_DIM+1])
+embedding_placeholder = tf.placeholder(tf.float32, [num_words, EMBEDDING_DIM])
 embedding_init = embedding.assign(embedding_placeholder)
 
 x_e = tf.gather_nd(embedding, inputs)
@@ -241,7 +241,7 @@ coord = tf.train.Coordinator()
 threads = tf.train.start_queue_runners(sess = sess)
 saver = tf.train.Saver()
 sess.run(tf.global_variables_initializer())
-sess.run(embedding_init, feed_dict={embedding_placeholder: np.load('embedding_matrix_WIKI_50D.npy')})
+sess.run(embedding_init, feed_dict={embedding_placeholder: np.load('embedding_matrix_gensim_50D.npy')})
 epoch_counter = 0
 
 '''
@@ -262,13 +262,16 @@ sess.run((tf.shape(output), tf.shape(losses), tf.shape(masked_losses), losses, m
 
 def error_k(sess, k):
     losses_ac = 0.0
-    mean_error = 0.0
+    classification_error_ac = 0.0
     num_int = k
     for i in range(num_int):
-    	t1 = time.time()
+        t1 = time.time()
         try:
-            mean_error = mean_error + sess.run(error_real)
-            losses_ac = losses_ac + sess.run(mean_masked_losses) 
+
+            (classification_error, losses) = sess.run((error_real, mean_masked_losses))
+            classification_error_ac = classification_error_ac + classification_error
+            losses_ac = losses_ac + losses
+
         except: 
             print ("Erro inesperado")      
         #print "Batch ", str(j)
@@ -278,7 +281,7 @@ def error_k(sess, k):
 
     print"---------------------RESULTS----------------------"
     print"Mean accuracy for %d iterations:" % (k)
-    print(1-(mean_error/num_int))
+    print(1-(classification_error_ac/num_int))
     print"Mean losses for %d iterations: " % (k) 
     print(losses_ac/num_int)
 
@@ -356,7 +359,7 @@ for i in range(0, 100):
 ac = ac/ac2
 
 t1 = time.time()
-sess.run(minimize)
+error_k(sess, 1000)
 t2 = time.time()
 print "Time beetween epochs: %f milliseconds" % ((t2 - t1) * 1000.)   
 

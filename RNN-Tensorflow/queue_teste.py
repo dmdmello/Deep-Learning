@@ -3,7 +3,7 @@ import numpy as np
 import sys
 import os
 import time
-from utils import *
+from load_text import *
 from datetime import datetime
 from random import shuffle
 from collections import deque
@@ -155,7 +155,7 @@ inputs = padding_queue.dequeue_many(batch_size)
 #y_t = tf.slice(inputs, [0,0,0], [batch_size, tf.shape(inputs)[1]-1, 1])
 
 num_words = 8000
-num_hidden =  32
+num_hidden =  420
 
 #embedding = tf.Variable(tf.truncated_normal([num_words, EMBEDDING_DIM]), trainable=False)
 
@@ -210,7 +210,9 @@ masked_losses = mask*losses
 masked_losses = tf.reshape(masked_losses,  tf.shape(y_t))
 mean_masked_losses = tf.divide(tf.reduce_sum(masked_losses), tf.reduce_sum(mask))
 
-optimizer = tf.train.AdamOptimizer(0.001)
+#optimizer = tf.train.AdamOptimizer(0.001)
+optimizer = tf.train.
+
 
 grads = optimizer.compute_gradients(masked_losses)
 capped_grads = [(tf.clip_by_value(grad, -1e16, 1e16), var) for grad, var in grads]
