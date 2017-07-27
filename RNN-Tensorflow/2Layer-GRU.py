@@ -23,7 +23,7 @@ LOADORNOT = os.environ.get("LOADORNOT", 'True')
 EXAMPLES_SIZE = int(os.environ.get("EXAMPLES_SIZE", "500000"))
 
 # Load data to numpy format (optional)
-x_train, word_to_index, index_to_word = load_data(INPUT_DATA_FILE, VOCABULARY_SIZE)
+#x_train, word_to_index, index_to_word = load_data(INPUT_DATA_FILE, VOCABULARY_SIZE)
 
 
 #------------------------------TRAINING SET READER-----------------------------
@@ -196,7 +196,7 @@ sess.run((tf.shape(output), tf.shape(losses), tf.shape(masked_losses), losses, m
 '''
 
 
-def error_k(sess, k, feed_inp = False, inp = None):
+def performance_k(sess, k, feed_inp = False, inp = None):
     losses_ac = 0.0
     classification_error_ac = 0.0
     num_int = k
@@ -206,37 +206,37 @@ def error_k(sess, k, feed_inp = False, inp = None):
             if( not feed_inp):
                 (classification_error, losses) = sess.run((error_real, mean_masked_losses))
             else:
-                (classification_error, losses) = sess.run((error_real, mean_masked_losses), feed_dict={inputs: test_q})
+                (classification_error, losses) = sess.run((error_real, mean_masked_losses), feed_dict={inputs: sess.run(inp)})
             
             classification_error_ac = classification_error_ac + classification_error
             losses_ac = losses_ac + losses    
 
+        except KeyboardInterrupt : 
+            print ("KeyboardInterrupt")
+            break 
+
         except: 
-            print ("Erro inesperado")      
+            print ("Erro inesperado")
+
         #print "Batch ", str(j)
         t2 = time.time()
         #print "Epoch - ",str(i)
         #print "Time beetween epochs: %f milliseconds" % ((t2 - t1) * 1000.)
 
-    print"---------------------RESULTS----------------------"
-    print"Mean accuracy for %d iterations:" % (k)
-    print(1-(classification_error_ac/num_int))
-    print"Mean losses for %d iterations: " % (k) 
-    print(losses_ac/num_int)
-
+    return(1-(classification_error_ac/num_int), losses_ac/num_int)
 
 #last_grads = deque([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0])
 #last_v = deque([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0])
 
 
-losses_list =[]
-acc_list = []
+performance_test_hist =[]
+performance_train_hist = []
 train_set_size = 200000
 test_set_size = 60000
 num_iterations_train = train_set_size/batch_size
 num_iterations_test = test_set_size/batch_size
-flag_break = False
 
+flag_break = False
 epoch = 1
 for i in range(epoch):
     if flag_break:
@@ -250,8 +250,17 @@ for i in range(epoch):
     for j in range(0, int(num_iterations_train)):
         
         if (j % int(num_iterations_train/3) == 0):
-            error_k(sess, int(0.1*num_iterations_train))
-            error_k(sess, int(0.4*num_iterations_test), True, test_q.dequeue_batch)
+            (acc_train, loss_train) = performance_k(sess, int(0.1*num_iterations_train))
+            (acc_test, loss_test) = performance_k(sess, int(0.4*num_iterations_test), True, test_q.dequeue_batch)
+
+            performance_train_hist.append((acc_train, loss_train))
+            performance_test_hist.append((acc_test, loss_test))
+
+            print"---------------------RESULTS----------------------"
+            print"Train accuracy and losses for %d iterations:" % (int(0.1*num_iterations_train))
+            print(acc_train, loss_train)
+            print"Test accuracy and losses for %d iterations:" % (int(0.4*num_iterations_test))
+            print(acc_test, loss_test)
 
         try:
             '''
@@ -259,6 +268,7 @@ for i in range(epoch):
             grad_vals = sess.run(grads)            
             last_grads.popleft()
             last_grads.append(grad_vals)
+
 
             #print(grad_vals)
             feed_dict={}
@@ -292,6 +302,7 @@ for i in range(epoch):
     sys.stdout.flush()
     epoch_counter = epoch_counter + 1
 
+    np.save(performance_train_hist, performance_test_hist, "perf_rec_GRU2ly-1hd%d-2hd%d-b%d-200k" % (num_hidden1, num_hidden2, batch_size))
     saver.save(sess, "tmp/GRU2ly-1hd%d-2hd%d-b%d-200k" % (num_hidden1, num_hidden2, batch_size))
 
 saver.save(sess, "tmp/GRU-hd%d-b%d-200k-%dEp-4.13Loss" % (num_hidden, batch_size , epoch_counter))
@@ -313,11 +324,18 @@ sess.run((tf.shape(tf.argmax(flat_probs, 1)), tf.argmax(flat_probs, 1), tf.shape
 sess.run((tf.shape(tf.argmax(flat_probs, 1)), tf.to_int32(mask*tf.to_float(tf.argmax(flat_probs, 1))), tf.shape(y_t_flat), y_t_flat))
 
 t1 = time.time()
-error_k(sess, 1000)
+(acc_train, loss_train) = performance_k(sess, int(0.1*num_iterations_train))
 t2 = time.time()
 print "Time beetween epochs: %f milliseconds" % ((t2 - t1) * 1000.)   
 
 
+t1 = time.time()
+(acc_test, loss_test) = performance_k(sess, int(0.4*num_iterations_test), True, test_q.dequeue_batch)
+t2 = time.time()
+print "Time beetween epochs: %f milliseconds" % ((t2 - t1) * 1000.)   
+
+(acc_train, loss_train) = performance_k(sess, int(0.1*num_iterations_train))
+(acc_test, loss_test) = performance_k(sess, int(0.4*num_iterations_test), True, test_q.dequeue_batch)
 '''
 
 #---------------------------Print Sentence-----------------------------------
