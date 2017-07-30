@@ -249,8 +249,10 @@ for i in range(epoch):
     t1 = time.time()
     for j in range(0, int(num_iterations_train)):
         
-        if (j % int(num_iterations_train/3) == 0):
-            (acc_train, loss_train) = performance_k(sess, int(0.1*num_iterations_train))
+        if (j % int(num_iterations_train/2) == 0):
+            
+            print(j)
+            '''(acc_train, loss_train) = performance_k(sess, int(0.1*num_iterations_train))
             (acc_test, loss_test) = performance_k(sess, int(0.4*num_iterations_test), True, test_q.dequeue_batch)
 
             performance_train_hist.append((acc_train, loss_train))
@@ -261,7 +263,7 @@ for i in range(epoch):
             print(acc_train, loss_train)
             print"Test accuracy and losses for %d iterations:" % (int(0.4*num_iterations_test))
             print(acc_test, loss_test)
-
+            '''
         try:
             '''
             #grad_vals = sess.run([grad[0] for grad in grads])
