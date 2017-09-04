@@ -1,0 +1,2 @@
+model_checkpoint_path: "modW1W2"
+all_model_checkpoint_paths: "modW1W2"
