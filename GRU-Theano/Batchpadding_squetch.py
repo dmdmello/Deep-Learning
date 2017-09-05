@@ -11,50 +11,31 @@ from datetime import datetime
 from load_text import *
 from collections import deque
 
-
 INPUT_DATA_FILE = os.environ.get("INPUT_DATA_FILE", "reddit_comments30.csv")
 VOCABULARY_SIZE = int(os.environ.get("VOCABULARY_SIZE", "8000"))
+HIDDEN_DIM = int(os.environ.get("HIDDEN_DIM", "140"))
 
 batch_size = 5
-hidden_dim = 40
+hidden_dim = HIDDEN_DIM
 word_dim = VOCABULARY_SIZE
-
 
 x_train, word_to_index, index_to_word = load_data(INPUT_DATA_FILE, VOCABULARY_SIZE)
 
 #iterator counter
 t = theano.shared(name = 't', value = 0)
-
-#batch_counter = theano.shared(name = 'batch_counter', value = 0)
-
-#x = T.ivector('x')
-#max_x  = T.iscalar('max_x')
 x = tlist.TypedListType(T.ivector)()
 
 #wl = T.ivector('wl')
 l = tlist.length(x)
-'''
-def batch_padding(index, x_t, max_x):
 
-	#f = func([wl_t], word_length, updates = {(num_zeros, 10-word_length[0])})
-	#f(wl_t)
+def get_shapes(index, x):
 
-	shape_ex = T.shape(x_t[index])
-	zero_vec = T.arange(max_x-shape_ex[0], dtype = 'int64')
-
-
-	y_t = T.concatenate([x_t[index], T.zeros_like(zero_vec)], axis = 0)
-	return y_t
-'''
-
-def get_shapes(index, x, t):
-
-	shape_ex = T.shape(x[index + t*batch_size])
+	shape_ex = T.shape(x[index])
 	return shape_ex[0]
 
 x_shapes, last_output = theano.scan(fn=get_shapes, 
 							outputs_info=None, 
-							non_sequences = [x, t],
+							non_sequences = [x],
 							sequences = [T.arange(batch_size, dtype = 'int64')]
 						    )
 
@@ -63,7 +44,7 @@ x_shapes, last_output = theano.scan(fn=get_shapes,
 max_x_idx = T.argmax(x_shapes)
 max_x = x_shapes[max_x_idx]
 
-def batch_padding(index, x, max_x, x_shapes, t):
+def batch_padding(index, x, max_x, x_shapes):
 
 	#f = func([wl_t], word_length, updates = {(num_zeros, 10-word_length[0])})
 	#f(wl_t)
@@ -72,18 +53,15 @@ def batch_padding(index, x, max_x, x_shapes, t):
 	diff = max_x-shape_ex
 	zero_vec = T.arange(diff, dtype = 'int64')
 
-	y_t = T.concatenate([x[index + t*batch_size], T.zeros_like(zero_vec)], axis = 0)
+	y_t = T.concatenate([x[index], T.zeros_like(zero_vec)], axis = 0)
 	return y_t
 
 
 x_padded, updates = theano.scan(fn=batch_padding, 
 							outputs_info=None, 
-							non_sequences = [x, max_x, x_shapes, t],
+							non_sequences = [x, max_x, x_shapes],
 							sequences = [T.arange(batch_size, dtype = 'int64')]
 						    )
-
-f1 = theano.function([x], x_padded)
-f1([[4,3], [3,7,1,5], [4,6],  [3,7,1,5],  [3,7,1,5], [6, 6, 1, 2, 4, 6, 7], [4,3], [4,3], [4,3], [1,7]])
 
 f_t = theano.function([],[],updates=[(t, t+1)])
 
@@ -93,8 +71,8 @@ W = np.random.uniform(-np.sqrt(1./hidden_dim), np.sqrt(1./hidden_dim), (6, hidde
 V = np.random.uniform(-np.sqrt(1./hidden_dim), np.sqrt(1./hidden_dim), (hidden_dim, word_dim))
 b = np.zeros((6, hidden_dim))
 c = np.zeros((1, word_dim))
-# Theano: Created shared variables
 
+# Theano: Created shared variables
 mE = theano.shared(name='mE', value=np.zeros(E.shape).astype(theano.config.floatX))
 mU = theano.shared(name='mU', value=np.zeros(U.shape).astype(theano.config.floatX))
 mV = theano.shared(name='mV', value=np.zeros(V.shape).astype(theano.config.floatX))
@@ -137,11 +115,11 @@ def forward_prop_step(x_t_padded, s_t1_prev, s_t2_prev):
 
     # Final output calculation
     # Theano's softmax returns a matrix with one row, we only need the row
-    logits_t = T.nnet.softmax(s_t2.dot(V) + c[[0]])
+    probs_t = T.nnet.softmax(s_t2.dot(V) + c[[0]])
 
-    return [logits_t, s_t1, s_t2]
+    return [probs_t, s_t1, s_t2]
 
-[logits, s, s2], updates = theano.scan(
+[probs, s, s2], updates = theano.scan(
     forward_prop_step,
     sequences=x_padded[:,0:-1].transpose(),
     truncate_gradient=-1,
@@ -150,36 +128,34 @@ def forward_prop_step(x_t_padded, s_t1_prev, s_t2_prev):
                   dict(initial=T.zeros([batch_size, hidden_dim]))])
 
 #Swaps batches and words axes
-logits_swaped = logits.swapaxes(0,1)
+probs_swaped = probs.swapaxes(0,1)
 
-prediction = T.argmax(logits_swaped, axis=2)
+prediction = T.argmax(probs_swaped, axis=2)
 
-logits_flat = logits_swaped.reshape([-1, word_dim])
+flat_probs = probs_swaped.reshape([-1, word_dim])
 y_flat = y.reshape([-1])
 
-losses = T.nnet.categorical_crossentropy(logits_flat + 1e-16, y_flat)
+
+losses = T.nnet.categorical_crossentropy(flat_probs + 1e-16, y_flat)
 
 mask = T.sgn(y_flat)
-masked_losses = mask * losses
-mean_masked_losses = T.sum(masked_losses)/T.sum(mask)
-
-cost = mean_masked_losses
-
-dE = T.grad(cost, E)
-dU = T.grad(cost, U)
-dW = T.grad(cost, W)
-db = T.grad(cost, b)
-dV = T.grad(cost, V)
-dc = T.grad(cost, c)
+masked_losses = T.sum(mask * losses)
+mean_masked_losses = theano.function([x], masked_losses/T.sum(mask))
 
 
-predict = theano.function([x], logits)
+
+dE = T.grad(masked_losses, E)
+dU = T.grad(masked_losses, U)
+dW = T.grad(masked_losses, W)
+db = T.grad(masked_losses, b)
+dV = T.grad(masked_losses, V)
+dc = T.grad(masked_losses, c)
+
+predict = theano.function([x], probs)
 predict_class = theano.function([x], prediction)
-ce_error = theano.function([x], cost)
 bptt = theano.function([x], [dE, dU, dW, db, dV, dc])
-
-bptt([[4,3], [1], [3, 1, 1, 2], [3, 2, 2], [3, 4, 1, 1, 1, 2, 2]])
-
+mistakes = T.neq(y_flat, mask*T.argmax(flat_probs, axis = 1))
+error = theano.function([x],T.sum(T.cast(mistakes, 'float32'))/T.sum(mask))
 
 learning_rate = T.scalar('learning_rate')
 beta1 = T.scalar('beta1')
@@ -187,7 +163,6 @@ beta2 = T.scalar('beta2')
 epsilon = T.scalar('epsilon')
 
 #Adam
-
 t_upd = t + 1
 
 mE_upd = beta1 * mE + (1 - beta1) * dE
@@ -231,45 +206,64 @@ apply_grads = theano.function(
              (t, t_upd)
             ])
 
+'''
+def calculate_total_loss(X):
+    return np.sum([ce_error(x) for x in X])
+    
+def calculate_loss(X):
+    # Divide calculate_loss by the number of words
+    num_words = np.sum([len(x) for x in X])
+    return calculate_total_loss(X)/float(num_words)
 
-apply_grads([[4,3], [1], [3, 1, 1, 2], [3, 2, 2], [3, 4, 1, 1, 1, 2, 2]], 0.001)
+indx = [random_indexes.popleft() for i in range(batch_size)]
 
-E.eval()
-U.eval()
-W.eval()
-V.eval()
+    apply_grads(x_train[indx], 0.001)
 
-def train_with_sgd(model, X_train, y_train, learning_rate=0.001, nepoch=20, nepoch_prev=0, decay=0.9,
-    callback_every=10000, callback=None):
-    num_examples_seen = 0
-    for epoch in range(nepoch):
-        num_examples_seen = 0
-        print "Epoch = %d" % (epoch + nepoch_prev)
-        # For each training example...
-        for i in np.random.permutation(len(y_train)):
-            # One SGD step
-            model.sgd_step(X_train[i], y_train[i], learning_rate, decay)
-            num_examples_seen += 1
-            # Optionally do callback
-            if (callback and callback_every and num_examples_seen % callback_every == 0):
-                callback(model, num_examples_seen, epoch)            
-    return model
+ce_error(x_train[indx])
 
-
+'''
+flag_break = False
+epoch = 20
 
 performance_test_hist = []
 performance_train_hist = []
-train_set_size = 300000
+train_set_size = len(x_train)
 test_set_size = 100000
 num_iterations_train = train_set_size/batch_size
 num_iterations_test = test_set_size/batch_size
 
-flag_break = False
-epoch = 20
+random_indexes =  deque([np.random.randint(train_set_size) 
+    for i in range((train_set_size)*epoch)])
 
-random_indexes =  deque([np.random.randint(test_set_size+train_set_size) 
-	for i in range((test_set_size+train_set_size)*epoch)])
 
+def performance_k(k):
+    losses_ac = 0.0
+    classification_error_ac = 0.0
+    num_int = k
+    for i in range(num_int):
+        t1 = time.time()
+        indx = [random_indexes.popleft() for i in range(batch_size)]
+        inp = x_train[indx]
+        try:
+            classification_error = error(inp)
+            losses = mean_masked_losses(inp)
+
+            classification_error_ac = classification_error_ac + classification_error
+            losses_ac = losses_ac + losses    
+
+        except KeyboardInterrupt : 
+            print ("KeyboardInterrupt")
+            break 
+
+        except: 
+            print ("Erro inesperado")
+
+        #print "Batch ", str(j)
+        t2 = time.time()
+        #print "Epoch - ",str(i)
+        #print "Time beetween epochs: %f milliseconds" % ((t2 - t1) * 1000.)
+
+    return(1-(classification_error_ac/num_int), losses_ac/num_int)
 
 
 for i in range(epoch):
@@ -284,7 +278,7 @@ for i in range(epoch):
     for j in range(0, int(num_iterations_train)):
         
         if (j % int(num_iterations_train/3) == 0):
-            #(acc_train, loss_train) = performance_k(sess, int(0.1*num_iterations_train))
+            (acc_train, loss_train) = performance_k(int(0.1*num_iterations_train))
             #(acc_test, loss_test) = performance_k(sess, int(0.4*num_iterations_test), True, test_q.dequeue_batch)
 
             #performance_train_hist.append((acc_train, loss_train))
@@ -292,7 +286,7 @@ for i in range(epoch):
 
             print"---------------------RESULTS----------------------"
             print"Train accuracy and losses for %d iterations:" % (int(0.1*num_iterations_train))
-           # print(acc_train, loss_train)
+            print(acc_train, loss_train)
             print"Test accuracy and losses for %d iterations:" % (int(0.4*num_iterations_test))
             #print(acc_test, loss_test)
 
@@ -315,12 +309,13 @@ for i in range(epoch):
             last_v.popleft()
             last_v.append(v_values)
             '''
-            apply_grads(x)
 
+            indx = [random_indexes.popleft() for i in range(batch_size)]
+            apply_grads(x_train[indx], 0.001)
 
-            if np.isnan(sess.run(mean_masked_losses)):
-                flag_break = True
-                break   
+            #if np.isnan(mean_masked_losses(x_train[indx]))):
+            #    flag_break = True
+            #    break   
 
         except KeyboardInterrupt : 
             flag_break = True
@@ -338,11 +333,17 @@ for i in range(epoch):
 
 
 
+
+
+
 logits.eval({x:[[4,3], [1], [3, 1, 1, 2], [3, 2, 2], [3, 4, 1, 1, 1, 2, 2]]})
 error_function([[4,3], [1], [3, 1, 1, 2], [3, 2, 2], [3, 4, 1, 1, 1, 2, 2]],7)
 
-
-
+t1 = time.time()
+for i in range(10):
+    random_indexes.popleft()
+t2 = time.time()
+print "Time beetween epochs: %f milliseconds" % ((t2 - t1) * 1000.)   
 
 x_e = E[:,[3, 1, 4, 4]
 o, updates = theano.scan(
@@ -362,12 +363,6 @@ f2([[4,3], [1, 3, 3, 2], [1, 2, 2]], 4)
 x = T.imatrix('x')
 x_vec = T.ivector('x_vec')
 fe = theano.function([x_vec], E[:,x_vec])
-
-
-
-
-
-
 
 
 
