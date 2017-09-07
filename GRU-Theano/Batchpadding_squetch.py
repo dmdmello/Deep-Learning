@@ -22,7 +22,7 @@ word_dim = VOCABULARY_SIZE
 x_train, word_to_index, index_to_word = load_data(INPUT_DATA_FILE, VOCABULARY_SIZE)
 
 #iterator counter
-t = theano.shared(name = 't', value = 0)
+t = theano.shared(name = 't', value = np.array(0).astype('int32'))
 x = tlist.TypedListType(T.ivector)()
 
 #wl = T.ivector('wl')
@@ -179,7 +179,7 @@ vV_upd = beta2 * vV + (1 - beta2) * dV ** 2
 vb_upd = beta2 * vb + (1 - beta2) * db ** 2
 vc_upd = beta2 * vc + (1 - beta2) * dc ** 2
 
-learning_rate_upd = learning_rate * T.sqrt((1 - beta2 ** t_upd) / (1 - beta1 ** t_upd))
+learning_rate_upd = learning_rate * T.cast(T.sqrt((1 - beta2 ** t_upd) / (1 - beta1 ** t_upd)), dtype='float32')
 
 apply_grads = theano.function(
     [x, learning_rate, theano.In(beta1, value= 0.9), theano.In(beta2, value= 0.99), 
