@@ -11,15 +11,18 @@ from datetime import datetime
 from load_text import *
 from collections import deque
 
-INPUT_DATA_FILE = os.environ.get("INPUT_DATA_FILE", "reddit_comments30.csv")
+INPUT_DATA_FILE = os.environ.get("INPUT_DATA_FILE", "reddit_comments500.csv")
 VOCABULARY_SIZE = int(os.environ.get("VOCABULARY_SIZE", "8000"))
-HIDDEN_DIM = int(os.environ.get("HIDDEN_DIM", "140"))
+HIDDEN_DIM = int(os.environ.get("HIDDEN_DIM", "700"))
 
-batch_size = 5
+batch_size = 40
 hidden_dim = HIDDEN_DIM
 word_dim = VOCABULARY_SIZE
+emb_dim = 100
 
 x_train, word_to_index, index_to_word = load_data(INPUT_DATA_FILE, VOCABULARY_SIZE)
+
+x_train = x_train[0:199999]
 
 #iterator counter
 t = theano.shared(name = 't', value = np.array(0).astype('int32'))
@@ -65,35 +68,45 @@ x_padded, updates = theano.scan(fn=batch_padding,
 
 f_t = theano.function([],[],updates=[(t, t+1)])
 
-E = np.random.uniform(-np.sqrt(1./word_dim), np.sqrt(1./word_dim), (word_dim, hidden_dim))
-U = np.random.uniform(-np.sqrt(1./hidden_dim), np.sqrt(1./hidden_dim), (6, hidden_dim, hidden_dim))
-W = np.random.uniform(-np.sqrt(1./hidden_dim), np.sqrt(1./hidden_dim), (6, hidden_dim, hidden_dim))
+#E = np.random.uniform(-np.sqrt(1./word_dim), np.sqrt(1./word_dim), (word_dim, hidden_dim))
+U1 = np.random.uniform(-np.sqrt(1./hidden_dim), np.sqrt(1./hidden_dim), (3, hidden_dim, emb_dim))
+U2 = np.random.uniform(-np.sqrt(1./hidden_dim), np.sqrt(1./hidden_dim), (3, hidden_dim, emb_dim))
+W1 = np.random.uniform(-np.sqrt(1./hidden_dim), np.sqrt(1./hidden_dim), (3, hidden_dim, hidden_dim))
+W2 = np.random.uniform(-np.sqrt(1./hidden_dim), np.sqrt(1./hidden_dim), (3, hidden_dim, hidden_dim))
+b1 = np.zeros((3, hidden_dim))
+b2 = np.zeros((3, hidden_dim))
 V = np.random.uniform(-np.sqrt(1./hidden_dim), np.sqrt(1./hidden_dim), (hidden_dim, word_dim))
-b = np.zeros((6, hidden_dim))
 c = np.zeros((1, word_dim))
 
 # Theano: Created shared variables
-mE = theano.shared(name='mE', value=np.zeros(E.shape).astype(theano.config.floatX))
-mU = theano.shared(name='mU', value=np.zeros(U.shape).astype(theano.config.floatX))
+mU1 = theano.shared(name='mU1', value=np.zeros(U1.shape).astype(theano.config.floatX))
+mU2 = theano.shared(name='mU2', value=np.zeros(U2.shape).astype(theano.config.floatX))
+mW1 = theano.shared(name='mW1', value=np.zeros(W1.shape).astype(theano.config.floatX))
+mW1 = theano.shared(name='mW2', value=np.zeros(W1.shape).astype(theano.config.floatX))
+mb1 = theano.shared(name='mb1', value=np.zeros(b1.shape).astype(theano.config.floatX))
+mb2 = theano.shared(name='mb2', value=np.zeros(b2.shape).astype(theano.config.floatX))
 mV = theano.shared(name='mV', value=np.zeros(V.shape).astype(theano.config.floatX))
-mW = theano.shared(name='mW', value=np.zeros(W.shape).astype(theano.config.floatX))
-mb = theano.shared(name='mb', value=np.zeros(b.shape).astype(theano.config.floatX))
 mc = theano.shared(name='mc', value=np.zeros(c.shape).astype(theano.config.floatX))
 
-vE = theano.shared(name='vE', value=np.zeros(E.shape).astype(theano.config.floatX))
-vU = theano.shared(name='vU', value=np.zeros(U.shape).astype(theano.config.floatX))
+vU1 = theano.shared(name='vU1', value=np.zeros(U1.shape).astype(theano.config.floatX))
+vU2 = theano.shared(name='vU2', value=np.zeros(U2.shape).astype(theano.config.floatX))
+vW1 = theano.shared(name='vW1', value=np.zeros(W1.shape).astype(theano.config.floatX))
+vW1 = theano.shared(name='vW2', value=np.zeros(W1.shape).astype(theano.config.floatX))
+vb1 = theano.shared(name='vb1', value=np.zeros(b1.shape).astype(theano.config.floatX))
+vb2 = theano.shared(name='vb2', value=np.zeros(b2.shape).astype(theano.config.floatX))
 vV = theano.shared(name='vV', value=np.zeros(V.shape).astype(theano.config.floatX))
-vW = theano.shared(name='vW', value=np.zeros(W.shape).astype(theano.config.floatX))
-vb = theano.shared(name='vb', value=np.zeros(b.shape).astype(theano.config.floatX))
 vc = theano.shared(name='vc', value=np.zeros(c.shape).astype(theano.config.floatX))
 
-E = theano.shared(name='E', value=E.astype(theano.config.floatX))
-U = theano.shared(name='U', value=U.astype(theano.config.floatX))
-W = theano.shared(name='W', value=W.astype(theano.config.floatX))
+#E = theano.shared(name='E', value=E.astype(theano.config.floatX))
+E = theano.shared(name='E', value = np.load('embedding_matrix_gensim_100D.npy').astype(theano.config.floatX))
+U1 = theano.shared(name='U1', value=U1.astype(theano.config.floatX))
+U2 = theano.shared(name='U2', value=U2.astype(theano.config.floatX))
+W1 = theano.shared(name='W1', value=W1.astype(theano.config.floatX))
+W2 = theano.shared(name='W2', value=W2.astype(theano.config.floatX))
+b1 = theano.shared(name='b1', value=b1.astype(theano.config.floatX))
+b2 = theano.shared(name='b2', value=b2.astype(theano.config.floatX))
 V = theano.shared(name='V', value=V.astype(theano.config.floatX))
-b = theano.shared(name='b', value=b.astype(theano.config.floatX))
 c = theano.shared(name='c', value=c.astype(theano.config.floatX))
-
 
 y = x_padded[:,1:]
 
@@ -102,15 +115,15 @@ def forward_prop_step(x_t_padded, s_t1_prev, s_t2_prev):
     x_e = E[x_t_padded]
     
     # GRU Layer 1
-    z_t1 = T.nnet.hard_sigmoid(x_e.dot(U[0]) + s_t1_prev.dot(W[0]) + b[[0]])
-    r_t1 = T.nnet.hard_sigmoid(x_e.dot(U[1]) + s_t1_prev.dot(W[1]) + b[[1]])
-    c_t1 = T.tanh(x_e.dot(U[2]) + (s_t1_prev * r_t1).dot(W[2]) + b[[2]])
+    z_t1 = T.nnet.hard_sigmoid(x_e.dot(U1[0]) + s_t1_prev.dot(W1[0]) + b1[[0]])
+    r_t1 = T.nnet.hard_sigmoid(x_e.dot(U1[1]) + s_t1_prev.dot(W1[1]) + b1[[1]])
+    c_t1 = T.tanh(x_e.dot(U1[2]) + (s_t1_prev * r_t1).dot(W1[2]) + b1[[2]])
     s_t1 = (T.ones_like(z_t1) - z_t1) * c_t1 + z_t1 * s_t1_prev
     
     # GRU Layer 2
-    z_t2 = T.nnet.hard_sigmoid(s_t1.dot(U[3]) + s_t2_prev.dot(W[3]) + b[[3]])
-    r_t2 = T.nnet.hard_sigmoid(s_t1.dot(U[4]) + s_t2_prev.dot(W[4]) + b[[4]])
-    c_t2 = T.tanh(s_t1.dot(U[5]) + (s_t2_prev * r_t2).dot(W[5]) + b[[5]])
+    z_t2 = T.nnet.hard_sigmoid(s_t1.dot(U2[0]) + s_t2_prev.dot(W2[0]) + b2[[0]])
+    r_t2 = T.nnet.hard_sigmoid(s_t1.dot(U2[1]) + s_t2_prev.dot(W2[1]) + b2[[1]])
+    c_t2 = T.tanh(s_t1.dot(U2[2]) + (s_t2_prev * r_t2).dot(W2[2]) + b2[[2]])
     s_t2 = (T.ones_like(z_t2) - z_t2) * c_t2 + z_t2 * s_t2_prev
 
     # Final output calculation
@@ -143,17 +156,18 @@ masked_losses = T.sum(mask * losses)
 mean_masked_losses = theano.function([x], masked_losses/T.sum(mask))
 
 
-
-dE = T.grad(masked_losses, E)
-dU = T.grad(masked_losses, U)
-dW = T.grad(masked_losses, W)
-db = T.grad(masked_losses, b)
+dU1 = T.grad(masked_losses, U1)
+dU2 = T.grad(masked_losses, U2)
+dW1 = T.grad(masked_losses, W1)
+dW2 = T.grad(masked_losses, W2)
+db1 = T.grad(masked_losses, b1)
+db2 = T.grad(masked_losses, b2)
 dV = T.grad(masked_losses, V)
 dc = T.grad(masked_losses, c)
 
 predict = theano.function([x], probs)
 predict_class = theano.function([x], prediction)
-bptt = theano.function([x], [dE, dU, dW, db, dV, dc])
+bptt = theano.function([x], [dU1, dU1, dW2, dW2, db1, db1, dV, dc])
 mistakes = T.neq(y_flat, mask*T.argmax(flat_probs, axis = 1))
 error = theano.function([x],T.sum(T.cast(mistakes, 'float32'))/T.sum(mask))
 
@@ -165,14 +179,12 @@ epsilon = T.scalar('epsilon')
 #Adam
 t_upd = t + 1
 
-mE_upd = beta1 * mE + (1 - beta1) * dE
 mU_upd = beta1 * mU + (1 - beta1) * dU
 mW_upd = beta1 * mW + (1 - beta1) * dW
 mV_upd = beta1 * mV + (1 - beta1) * dV
 mb_upd = beta1 * mb + (1 - beta1) * db
 mc_upd = beta1 * mc + (1 - beta1) * dc
 
-vE_upd = beta2 * vE + (1 - beta2) * dE ** 2
 vU_upd = beta2 * vU + (1 - beta2) * dU ** 2
 vW_upd = beta2 * vW + (1 - beta2) * dW ** 2
 vV_upd = beta2 * vV + (1 - beta2) * dV ** 2
@@ -185,19 +197,16 @@ apply_grads = theano.function(
     [x, learning_rate, theano.In(beta1, value= 0.9), theano.In(beta2, value= 0.99), 
     theano.In(epsilon, value= 1e-16)],
     [], 
-    updates=[(E, E - learning_rate_upd * mE_upd / (T.sqrt(vE_upd) + epsilon)),
-             (U, U - learning_rate_upd * mU_upd / (T.sqrt(vU_upd) + epsilon)),
+    updates=[(U, U - learning_rate_upd * mU_upd / (T.sqrt(vU_upd) + epsilon)),
              (W, W - learning_rate_upd * mW_upd / (T.sqrt(vW_upd) + epsilon)),
              (V, V - learning_rate_upd * mV_upd / (T.sqrt(vV_upd) + epsilon)),
              (b, b - learning_rate_upd * mb_upd / (T.sqrt(vb_upd) + epsilon)),
-             (c, c - learning_rate_upd * mc_upd / (T.sqrt(vc_upd) + epsilon)),
-             (mE, mE_upd),
+             (c, c - learning_rate_upd * mc_upd / (T.sqrt(vc_upd) + epsilon)),            
              (mU, mU_upd),
              (mW, mW_upd),
              (mV, mV_upd),
              (mb, mb_upd),
              (mc, mc_upd),
-             (vE, vE_upd),
              (vU, vU_upd),
              (vW, vW_upd),
              (vV, vV_upd),
@@ -222,9 +231,10 @@ indx = [random_indexes.popleft() for i in range(batch_size)]
 ce_error(x_train[indx])
 
 '''
-flag_break = False
-epoch = 20
 
+flag_break = False
+epoch = 30
+epoch_counter = 0
 performance_test_hist = []
 performance_train_hist = []
 train_set_size = len(x_train)
@@ -311,7 +321,7 @@ for i in range(epoch):
             '''
 
             indx = [random_indexes.popleft() for i in range(batch_size)]
-            apply_grads(x_train[indx], 0.001)
+            apply_grads(x_train[indx], 0.0004)
 
             #if np.isnan(mean_masked_losses(x_train[indx]))):
             #    flag_break = True
