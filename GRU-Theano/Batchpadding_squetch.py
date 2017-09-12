@@ -16,13 +16,15 @@ VOCABULARY_SIZE = int(os.environ.get("VOCABULARY_SIZE", "8000"))
 HIDDEN_DIM = int(os.environ.get("HIDDEN_DIM", "700"))
 
 batch_size = 40
-hidden_dim = HIDDEN_DIM
+hidden_dim1 = 300
+hidden_dim2 = 700
 word_dim = VOCABULARY_SIZE
 emb_dim = 100
 
 x_train, word_to_index, index_to_word = load_data(INPUT_DATA_FILE, VOCABULARY_SIZE)
 
-x_train = x_train[0:199999]
+x_test = x_train[200000:260000]
+x_train = x_train[0:200000]
 
 #iterator counter
 t = theano.shared(name = 't', value = np.array(0).astype('int32'))
@@ -69,20 +71,20 @@ x_padded, updates = theano.scan(fn=batch_padding,
 f_t = theano.function([],[],updates=[(t, t+1)])
 
 #E = np.random.uniform(-np.sqrt(1./word_dim), np.sqrt(1./word_dim), (word_dim, hidden_dim))
-U1 = np.random.uniform(-np.sqrt(1./hidden_dim), np.sqrt(1./hidden_dim), (3, hidden_dim, emb_dim))
-U2 = np.random.uniform(-np.sqrt(1./hidden_dim), np.sqrt(1./hidden_dim), (3, hidden_dim, emb_dim))
-W1 = np.random.uniform(-np.sqrt(1./hidden_dim), np.sqrt(1./hidden_dim), (3, hidden_dim, hidden_dim))
-W2 = np.random.uniform(-np.sqrt(1./hidden_dim), np.sqrt(1./hidden_dim), (3, hidden_dim, hidden_dim))
-b1 = np.zeros((3, hidden_dim))
-b2 = np.zeros((3, hidden_dim))
-V = np.random.uniform(-np.sqrt(1./hidden_dim), np.sqrt(1./hidden_dim), (hidden_dim, word_dim))
+U1 = np.random.uniform(-np.sqrt(1./hidden_dim1), np.sqrt(1./hidden_dim1), (3, emb_dim, hidden_dim1))
+U2 = np.random.uniform(-np.sqrt(1./hidden_dim2), np.sqrt(1./hidden_dim2), (3, hidden_dim1, hidden_dim2))
+W1 = np.random.uniform(-np.sqrt(1./hidden_dim1), np.sqrt(1./hidden_dim1), (3, hidden_dim1, hidden_dim1))
+W2 = np.random.uniform(-np.sqrt(1./hidden_dim2), np.sqrt(1./hidden_dim2), (3, hidden_dim2, hidden_dim2))
+b1 = np.zeros((3, hidden_dim1))
+b2 = np.zeros((3, hidden_dim2))
+V = np.random.uniform(-np.sqrt(1./hidden_dim2), np.sqrt(1./hidden_dim2), (hidden_dim2, word_dim))
 c = np.zeros((1, word_dim))
 
 # Theano: Created shared variables
 mU1 = theano.shared(name='mU1', value=np.zeros(U1.shape).astype(theano.config.floatX))
 mU2 = theano.shared(name='mU2', value=np.zeros(U2.shape).astype(theano.config.floatX))
 mW1 = theano.shared(name='mW1', value=np.zeros(W1.shape).astype(theano.config.floatX))
-mW1 = theano.shared(name='mW2', value=np.zeros(W1.shape).astype(theano.config.floatX))
+mW2 = theano.shared(name='mW2', value=np.zeros(W2.shape).astype(theano.config.floatX))
 mb1 = theano.shared(name='mb1', value=np.zeros(b1.shape).astype(theano.config.floatX))
 mb2 = theano.shared(name='mb2', value=np.zeros(b2.shape).astype(theano.config.floatX))
 mV = theano.shared(name='mV', value=np.zeros(V.shape).astype(theano.config.floatX))
@@ -91,7 +93,7 @@ mc = theano.shared(name='mc', value=np.zeros(c.shape).astype(theano.config.float
 vU1 = theano.shared(name='vU1', value=np.zeros(U1.shape).astype(theano.config.floatX))
 vU2 = theano.shared(name='vU2', value=np.zeros(U2.shape).astype(theano.config.floatX))
 vW1 = theano.shared(name='vW1', value=np.zeros(W1.shape).astype(theano.config.floatX))
-vW1 = theano.shared(name='vW2', value=np.zeros(W1.shape).astype(theano.config.floatX))
+vW2 = theano.shared(name='vW2', value=np.zeros(W2.shape).astype(theano.config.floatX))
 vb1 = theano.shared(name='vb1', value=np.zeros(b1.shape).astype(theano.config.floatX))
 vb2 = theano.shared(name='vb2', value=np.zeros(b2.shape).astype(theano.config.floatX))
 vV = theano.shared(name='vV', value=np.zeros(V.shape).astype(theano.config.floatX))
@@ -137,8 +139,8 @@ def forward_prop_step(x_t_padded, s_t1_prev, s_t2_prev):
     sequences=x_padded[:,0:-1].transpose(),
     truncate_gradient=-1,
     outputs_info=[None, 
-                  dict(initial=T.zeros([batch_size, hidden_dim])),
-                  dict(initial=T.zeros([batch_size, hidden_dim]))])
+                  dict(initial=T.zeros([batch_size, hidden_dim1])),
+                  dict(initial=T.zeros([batch_size, hidden_dim2]))])
 
 #Swaps batches and words axes
 probs_swaped = probs.swapaxes(0,1)
@@ -179,16 +181,22 @@ epsilon = T.scalar('epsilon')
 #Adam
 t_upd = t + 1
 
-mU_upd = beta1 * mU + (1 - beta1) * dU
-mW_upd = beta1 * mW + (1 - beta1) * dW
+mU1_upd = beta1 * mU1 + (1 - beta1) * dU1
+mU2_upd = beta1 * mU2 + (1 - beta1) * dU2
+mW1_upd = beta1 * mW1 + (1 - beta1) * dW1
+mW2_upd = beta1 * mW2 + (1 - beta1) * dW2
+mb1_upd = beta1 * mb1 + (1 - beta1) * db1
+mb2_upd = beta1 * mb2 + (1 - beta1) * db2
 mV_upd = beta1 * mV + (1 - beta1) * dV
-mb_upd = beta1 * mb + (1 - beta1) * db
 mc_upd = beta1 * mc + (1 - beta1) * dc
 
-vU_upd = beta2 * vU + (1 - beta2) * dU ** 2
-vW_upd = beta2 * vW + (1 - beta2) * dW ** 2
+vU1_upd = beta2 * vU1 + (1 - beta2) * dU1 ** 2
+vU2_upd = beta2 * vU2 + (1 - beta2) * dU2 ** 2
+vW1_upd = beta2 * vW1 + (1 - beta2) * dW1 ** 2
+vW2_upd = beta2 * vW2 + (1 - beta2) * dW2 ** 2
+vb1_upd = beta2 * vb1 + (1 - beta2) * db1 ** 2
+vb2_upd = beta2 * vb2 + (1 - beta2) * db2 ** 2
 vV_upd = beta2 * vV + (1 - beta2) * dV ** 2
-vb_upd = beta2 * vb + (1 - beta2) * db ** 2
 vc_upd = beta2 * vc + (1 - beta2) * dc ** 2
 
 learning_rate_upd = learning_rate * T.cast(T.sqrt((1 - beta2 ** t_upd) / (1 - beta1 ** t_upd)), dtype='float32')
@@ -197,20 +205,29 @@ apply_grads = theano.function(
     [x, learning_rate, theano.In(beta1, value= 0.9), theano.In(beta2, value= 0.99), 
     theano.In(epsilon, value= 1e-16)],
     [], 
-    updates=[(U, U - learning_rate_upd * mU_upd / (T.sqrt(vU_upd) + epsilon)),
-             (W, W - learning_rate_upd * mW_upd / (T.sqrt(vW_upd) + epsilon)),
+    updates=[(U1, U1 - learning_rate_upd * mU1_upd / (T.sqrt(vU1_upd) + epsilon)),
+             (U2, U2 - learning_rate_upd * mU2_upd / (T.sqrt(vU2_upd) + epsilon)),
+             (W1, W1 - learning_rate_upd * mW1_upd / (T.sqrt(vW1_upd) + epsilon)),
+             (W2, W2 - learning_rate_upd * mW2_upd / (T.sqrt(vW2_upd) + epsilon)),
+             (b1, b1 - learning_rate_upd * mb1_upd / (T.sqrt(vb1_upd) + epsilon)),
+             (b2, b2 - learning_rate_upd * mb2_upd / (T.sqrt(vb2_upd) + epsilon)),
              (V, V - learning_rate_upd * mV_upd / (T.sqrt(vV_upd) + epsilon)),
-             (b, b - learning_rate_upd * mb_upd / (T.sqrt(vb_upd) + epsilon)),
              (c, c - learning_rate_upd * mc_upd / (T.sqrt(vc_upd) + epsilon)),            
-             (mU, mU_upd),
-             (mW, mW_upd),
+             (mU1, mU1_upd),
+             (mU2, mU2_upd),
+             (mW1, mW1_upd),
+             (mW2, mW2_upd),
+             (mb1, mb1_upd),
+             (mb2, mb2_upd),
              (mV, mV_upd),
-             (mb, mb_upd),
              (mc, mc_upd),
-             (vU, vU_upd),
-             (vW, vW_upd),
+             (vU1, vU1_upd),
+             (vU2, vU2_upd),
+             (vW1, vW1_upd),
+             (vW2, vW2_upd),
+             (vb1, vb1_upd),
+             (vb2, vb2_upd),
              (vV, vV_upd),
-             (vb, vb_upd),
              (vc, vc_upd),
              (t, t_upd)
             ])
@@ -238,22 +255,29 @@ epoch_counter = 0
 performance_test_hist = []
 performance_train_hist = []
 train_set_size = len(x_train)
-test_set_size = 100000
+test_set_size = len(x_test)
 num_iterations_train = train_set_size/batch_size
 num_iterations_test = test_set_size/batch_size
 
 random_indexes =  deque([np.random.randint(train_set_size) 
     for i in range((train_set_size)*epoch)])
 
+random_indexes_test =  deque([np.random.randint(test_set_size) 
+    for i in range((test_set_size)*epoch)])
 
-def performance_k(k):
+
+def performance_k(k, train_set = True):
     losses_ac = 0.0
     classification_error_ac = 0.0
     num_int = k
     for i in range(num_int):
         t1 = time.time()
-        indx = [random_indexes.popleft() for i in range(batch_size)]
-        inp = x_train[indx]
+        if (train_set):
+            indx = [random_indexes.popleft() for i in range(batch_size)]
+            inp = x_train[indx]
+        else:
+            indx = [random_indexes_test.popleft() for i in range(batch_size)]
+            inp = x_test[indx]
         try:
             classification_error = error(inp)
             losses = mean_masked_losses(inp)
@@ -289,7 +313,7 @@ for i in range(epoch):
         
         if (j % int(num_iterations_train/3) == 0):
             (acc_train, loss_train) = performance_k(int(0.1*num_iterations_train))
-            #(acc_test, loss_test) = performance_k(sess, int(0.4*num_iterations_test), True, test_q.dequeue_batch)
+            (acc_test, loss_test) = performance_k(int(0.4*num_iterations_test), False)
 
             #performance_train_hist.append((acc_train, loss_train))
             #performance_test_hist.append((acc_test, loss_test))
@@ -298,27 +322,10 @@ for i in range(epoch):
             print"Train accuracy and losses for %d iterations:" % (int(0.1*num_iterations_train))
             print(acc_train, loss_train)
             print"Test accuracy and losses for %d iterations:" % (int(0.4*num_iterations_test))
-            #print(acc_test, loss_test)
+            print(acc_test, loss_test)
 
         try:
-            '''
-            #grad_vals = sess.run([grad[0] for grad in grads])
-            grad_vals = sess.run(grads)            
-            last_grads.popleft()
-            last_grads.append(grad_vals)
-
-
-            #print(grad_vals)
-            feed_dict={}
-            for i in xrange(len(grad_placeholder)):
-                feed_dict[grad_placeholder[i][0]] = grad_vals[i][0]
-            sess.run(apply_grads, feed_dict=feed_dict)
             
-
-            v_values = [sess.run(optimizer.get_slot(var, 'v')) for var in tf.trainable_variables()]
-            last_v.popleft()
-            last_v.append(v_values)
-            '''
 
             indx = [random_indexes.popleft() for i in range(batch_size)]
             apply_grads(x_train[indx], 0.0004)
