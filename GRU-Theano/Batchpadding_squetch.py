@@ -12,19 +12,23 @@ from load_text import *
 from collections import deque
 
 INPUT_DATA_FILE = os.environ.get("INPUT_DATA_FILE", "reddit_comments500.csv")
-VOCABULARY_SIZE = int(os.environ.get("VOCABULARY_SIZE", "8000"))
-HIDDEN_DIM = int(os.environ.get("HIDDEN_DIM", "700"))
 
 batch_size = 40
 hidden_dim1 = 300
 hidden_dim2 = 700
-word_dim = VOCABULARY_SIZE
-emb_dim = 100
+word_dim = 20000
+emb_dim = 300
 
-x_train, word_to_index, index_to_word = load_data(INPUT_DATA_FILE, VOCABULARY_SIZE)
 
-x_test = x_train[200000:260000]
-x_train = x_train[0:200000]
+emb_matrix_path = 'embedding_matrix_gensim_300D.npy'
+
+Vocabulary_size = word_dim
+x_train, word_to_index, index_to_word = load_data(INPUT_DATA_FILE, Vocabulary_size)
+
+
+
+x_test = x_train[400000:500000]
+x_train = x_train[0:400000]
 
 #iterator counter
 t = theano.shared(name = 't', value = np.array(0).astype('int32'))
@@ -100,7 +104,7 @@ vV = theano.shared(name='vV', value=np.zeros(V.shape).astype(theano.config.float
 vc = theano.shared(name='vc', value=np.zeros(c.shape).astype(theano.config.floatX))
 
 #E = theano.shared(name='E', value=E.astype(theano.config.floatX))
-E = theano.shared(name='E', value = np.load('embedding_matrix_gensim_100D.npy').astype(theano.config.floatX))
+E = theano.shared(name='E', value = np.load(emb_matrix_path).astype(theano.config.floatX))
 U1 = theano.shared(name='U1', value=U1.astype(theano.config.floatX))
 U2 = theano.shared(name='U2', value=U2.astype(theano.config.floatX))
 W1 = theano.shared(name='W1', value=W1.astype(theano.config.floatX))
