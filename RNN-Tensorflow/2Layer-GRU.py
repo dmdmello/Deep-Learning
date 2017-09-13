@@ -7,23 +7,18 @@ from load_text import *
 from datetime import datetime
 from random import shuffle
 from collections import deque
-path_TFRecord_train = 'TFRec2/TFRecordfile200k'
-path_TFRecord_test = 'TFRec2/TFRecordfile200k_test'
+path_TFRecord_train = 'TFRec2/TFRecordfile500k_20kDim'
+path_TFRecord_test = 'TFRec2/TFRecordfile500k_20kDim_test'
 tf.reset_default_graph()
 
-LEARNING_RATE = float(os.environ.get("LEARNING_RATE", "0.001"))
-VOCABULARY_SIZE = int(os.environ.get("VOCABULARY_SIZE", "8000"))
-EMBEDDING_DIM = int(os.environ.get("EMBEDDING_DIM", "100"))
-HIDDEN_DIM = int(os.environ.get("HIDDEN_DIM", "140"))
-NEPOCH = int(os.environ.get("NEPOCH", "20"))
-MODEL_OUTPUT_FILE = os.environ.get("MODEL_OUTPUT_FILE")
-INPUT_DATA_FILE = os.environ.get("INPUT_DATA_FILE", "reddit_comments500.csv")
-PRINT_EVERY = int(os.environ.get("PRINT_EVERY", "25000"))
-LOADORNOT = os.environ.get("LOADORNOT", 'True')
-EXAMPLES_SIZE = int(os.environ.get("EXAMPLES_SIZE", "500000"))
+LEARNING_RATE = float(os.environ.get("LEARNING_RATE", "0.0006"))
+VOCABULARY_SIZE = int(os.environ.get("VOCABULARY_SIZE", "20000"))
+EMBEDDING_DIM = int(os.environ.get("EMBEDDING_DIM", "300"))
+HIDDEN_DIM = int(os.environ.get("HIDDEN_DIM", "(300, 130)"))
+BATCH_SIZE = int(os.environ.get("BATCH_SIZE", "8"))
 
 # Load data to numpy format (optional)
-#x_train, word_to_index, index_to_word = load_data(INPUT_DATA_FILE, VOCABULARY_SIZE)
+#x_train, word_to_index, index_to_word = load_data("reddit_comments500.csv", VOCABULARY_SIZE)
 
 
 #------------------------------TRAINING SET READER-----------------------------
@@ -94,7 +89,7 @@ class RandomPaddingFIFOQueue():
         tf.train.add_queue_runner(qr_padding)
         self.dequeue_batch = padding_queue.dequeue_many(batch_size)
 
-batch_size =  8
+batch_size =  BATCH_SIZE
 padding_queue_cap = 1000
 
 train_q = RandomPaddingFIFOQueue(data_train, batch_size, padding_queue_cap)
@@ -103,9 +98,9 @@ test_q = RandomPaddingFIFOQueue(data_test, batch_size, padding_queue_cap)
 inputs = train_q.dequeue_batch
 #------------------------------Embedding-----------------------------------
 
-num_words = 8000
-num_hidden1 = 132
-num_hidden2 = 132
+num_words = VOCABULARY_SIZE
+num_hidden1 = HIDDEN_DIM[0] 
+num_hidden2 = HIDDEN_DIM[1] 
 
 #embedding = tf.Variable(tf.truncated_normal([num_words, EMBEDDING_DIM]), trainable=False)
 
@@ -154,7 +149,7 @@ masked_losses = mask*losses
 masked_losses = tf.reshape(masked_losses,  tf.shape(y_t))
 mean_masked_losses = tf.divide(tf.reduce_sum(masked_losses), tf.reduce_sum(mask))
 
-optimizer = tf.train.AdamOptimizer(0.0006)
+optimizer = tf.train.AdamOptimizer(LEARNING_RATE)
 
 grads = optimizer.compute_gradients(masked_losses)
 capped_grads = [(tf.clip_by_value(grad, -1e16, 1e16), var) for grad, var in grads]
@@ -176,7 +171,7 @@ coord = tf.train.Coordinator()
 threads = tf.train.start_queue_runners(sess = sess)
 saver = tf.train.Saver()
 sess.run(tf.global_variables_initializer())
-sess.run(embedding_init, feed_dict={embedding_placeholder: np.load('embedding_matrix_gensim_100D.npy')})
+sess.run(embedding_init, feed_dict={embedding_placeholder: np.load('embedding_matrix_gensim_300D.npy')})
 epoch_counter = 0
 
 '''
@@ -237,7 +232,7 @@ num_iterations_train = train_set_size/batch_size
 num_iterations_test = test_set_size/batch_size
 
 flag_break = False
-epoch = 1
+epoch = 20
 for i in range(epoch):
     if flag_break:
         break
@@ -251,9 +246,8 @@ for i in range(epoch):
         
         if (j % int(num_iterations_train/2) == 0):
             
-            print(j)
-            '''(acc_train, loss_train) = performance_k(sess, int(0.1*num_iterations_train))
-            (acc_test, loss_test) = performance_k(sess, int(0.4*num_iterations_test), True, test_q.dequeue_batch)
+            (acc_train, loss_train) = performance_k(sess, int(0.05*num_iterations_train))
+            (acc_test, loss_test) = performance_k(sess, int(0.3*num_iterations_test), True, test_q.dequeue_batch)
 
             performance_train_hist.append((acc_train, loss_train))
             performance_test_hist.append((acc_test, loss_test))
@@ -263,7 +257,7 @@ for i in range(epoch):
             print(acc_train, loss_train)
             print"Test accuracy and losses for %d iterations:" % (int(0.4*num_iterations_test))
             print(acc_test, loss_test)
-            '''
+            
         try:
             '''
             #grad_vals = sess.run([grad[0] for grad in grads])
@@ -304,10 +298,38 @@ for i in range(epoch):
     sys.stdout.flush()
     epoch_counter = epoch_counter + 1
 
-    np.save(performance_train_hist, performance_test_hist, "perf_rec_GRU2ly-1hd%d-2hd%d-b%d-200k" % (num_hidden1, num_hidden2, batch_size))
+    np.savez("perf_rec_GRU2ly-1hd%d-2hd%d-b%d-200k" % (num_hidden1, num_hidden2, batch_size), performance_train_hist, performance_test_hist)
     saver.save(sess, "tmp/GRU2ly-1hd%d-2hd%d-b%d-200k" % (num_hidden1, num_hidden2, batch_size))
 
 saver.save(sess, "tmp/GRU-hd%d-b%d-200k-%dEp-4.13Loss" % (num_hidden, batch_size , epoch_counter))
+
+
+#----------------GRAD BENCHMARK---------------------#
+
+t1 = time.time()
+for i in range(1000):
+    try:
+        sess.run(apply_grads)
+
+    except KeyboardInterrupt : 
+        flag_break = True
+        print ("KeyboardInterrupt")
+        break
+
+t2 = time.time()
+print "Time beetween epochs: %f milliseconds" % ((t2 - t1) * 1000.)   
+
+
+
+#----------------ClASSIFICATION BENCHMARK---------------------#
+
+t1 = time.time()
+(acc_train, loss_train) = performance_k(sess,1000)
+t2 = time.time()
+print "Time beetween epochs: %f milliseconds" % ((t2 - t1) * 1000.)   
+
+
+
 '''
 ac = 0
 ac2 = 0
@@ -342,6 +364,10 @@ print "Time beetween epochs: %f milliseconds" % ((t2 - t1) * 1000.)
 
 #---------------------------Print Sentence-----------------------------------
 
+# Load data to numpy format (optional)
+#x_train, word_to_index, index_to_word = load_data(INPUT_DATA_FILE, VOCABULARY_SIZE)
+
+
 '''
 new_sentence = [[[7998], [7994], [7941], [7878], [7985], [7996], [7447], [5767]]]
 new_sentence = [[[7998], [7929], [7994], [0]]]
@@ -359,7 +385,7 @@ def generate_sent(new_sentence):
        # print_sentence(np.transpose(new_sentence[0])[0], index_to_word)  
     return new_sentence
 
-sess.run(flat_probs, feed_dict={inputs: new_sentence*30})
+sess.run(flat_probs, feed_dict={inputs: new_sentence*batch_size})
 
 def print_sentence(s, index_to_word):
     sentence_str = [index_to_word[x] for x in s[1:-1]]
@@ -371,6 +397,7 @@ def print_sentence(s, index_to_word):
         print 'Unhandled Exception!'
     sys.stdout.flush()
 
+new_sentence = [[[7998], [0]]]
 new_sentence = generate_sent(new_sentence)
 print_sentence(np.transpose(new_sentence[0])[0], index_to_word)  
 

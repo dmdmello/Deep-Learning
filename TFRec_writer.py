@@ -7,35 +7,34 @@ from load_text import *
 from datetime import datetime
 from random import shuffle
 from collections import deque
-path_TFRecord_train = 'TFRec2/TFRecordfile200k'
-path_TFRecord_test = 'TFRec2/TFRecordfile200k_test'
 tf.reset_default_graph()
 
-LEARNING_RATE = float(os.environ.get("LEARNING_RATE", "0.001"))
-VOCABULARY_SIZE = int(os.environ.get("VOCABULARY_SIZE", "8000"))
-EMBEDDING_DIM = int(os.environ.get("EMBEDDING_DIM", "100"))
-HIDDEN_DIM = int(os.environ.get("HIDDEN_DIM", "140"))
-NEPOCH = int(os.environ.get("NEPOCH", "20"))
+
+PATH_TF_REC_TRAIN = os.environ.get("PATH_TF_REC_TRAIN", "TFRec2/TFRecordfile500k_20kDim")
+PATH_TF_REC_TEST = os.environ.get("PATH_TF_REC_TEST", "TFRec2/TFRecordfile500k_20kDim_test")
+VOCABULARY_SIZE = int(os.environ.get("VOCABULARY_SIZE", "20000"))
 MODEL_OUTPUT_FILE = os.environ.get("MODEL_OUTPUT_FILE")
 INPUT_DATA_FILE = os.environ.get("INPUT_DATA_FILE", "reddit_comments500.csv")
-PRINT_EVERY = int(os.environ.get("PRINT_EVERY", "25000"))
-LOADORNOT = os.environ.get("LOADORNOT", 'True')
-EXAMPLES_SIZE = int(os.environ.get("EXAMPLES_SIZE", "500000"))
+
+
+path_TFRecord_train = PATH_TF_REC_TRAIN
+path_TFRecord_test = PATH_TF_REC_TEST
 
 # Load data
 x_train, word_to_index, index_to_word = load_data(INPUT_DATA_FILE, VOCABULARY_SIZE)
-
 x_train_list = x_train.tolist()
 
 #conversão dados do reddit para o formato numpy
 x_train_numpy = [np.array([x_train_list[i]]).transpose() for i in range(len(x_train_list))]
 
-#---------------TFRecord-Format-----------------------
-sequences_train = x_train_numpy[0:199999]
-#label_sequences = x_train_list[0:199999]
+train_size = int(len(x_train_numpy)*0.80)
 
-sequences_test = x_train_numpy[200000:260000]
-#label_sequences_test = x_train_list[200000:225000]
+#---------------TFRecord-Format-----------------------
+sequences_train = x_train_numpy[0:train_size]
+sequences_test = x_train_numpy[train_size:len(x_train_numpy)]
+
+#label_sequences = x_train_list[0:]
+#label_sequences_test = x_train_list[:]
 
 def make_example(sequence):
     # The object we return

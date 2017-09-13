@@ -13,11 +13,21 @@ from collections import deque
 
 INPUT_DATA_FILE = os.environ.get("INPUT_DATA_FILE", "reddit_comments500.csv")
 
-batch_size = 40
-hidden_dim1 = 300
-hidden_dim2 = 700
-word_dim = 20000
-emb_dim = 300
+
+LEARNING_RATE = float(os.environ.get("LEARNING_RATE", "0.0006"))
+VOCABULARY_SIZE = int(os.environ.get("VOCABULARY_SIZE", "20000"))
+EMBEDDING_DIM = int(os.environ.get("EMBEDDING_DIM", "300"))
+HIDDEN_DIM1 = int(os.environ.get("HIDDEN_DIM1", "300"))
+HIDDEN_DIM2 = int(os.environ.get("HIDDEN_DIM2", "130"))
+BATCH_SIZE = int(os.environ.get("BATCH_SIZE", "8"))
+
+
+
+batch_size = BATCH_SIZE
+hidden_dim1 = HIDDEN_DIM1
+hidden_dim2 = HIDDEN_DIM2
+word_dim = VOCABULARY_SIZE
+emb_dim = EMBEDDING_DIM
 
 
 emb_matrix_path = 'embedding_matrix_gensim_300D.npy'
@@ -332,7 +342,8 @@ for i in range(epoch):
             
 
             indx = [random_indexes.popleft() for i in range(batch_size)]
-            apply_grads(x_train[indx], 0.0004)
+            inp = x_train[indx]
+            apply_grads(inp, LEARNING_RATE)
 
             #if np.isnan(mean_masked_losses(x_train[indx]))):
             #    flag_break = True
@@ -360,10 +371,42 @@ for i in range(epoch):
 logits.eval({x:[[4,3], [1], [3, 1, 1, 2], [3, 2, 2], [3, 4, 1, 1, 1, 2, 2]]})
 error_function([[4,3], [1], [3, 1, 1, 2], [3, 2, 2], [3, 4, 1, 1, 1, 2, 2]],7)
 
+
+#----------------GRAD BENCHMARK---------------------#
+except_acc = 0
 t1 = time.time()
-for i in range(10):
-    random_indexes.popleft()
+for i in range(1000):
+    indx = [random_indexes.popleft() for i in range(batch_size)]
+    try:
+
+        inp = x_train[indx]
+        apply_grads(inp, LEARNING_RATE)
+
+    except KeyboardInterrupt : 
+        flag_break = True
+        print ("KeyboardInterrupt")
+        break
+
+    except: 
+        except_acc = except_acc + 1 
+
+
 t2 = time.time()
+print "Time beetween epochs: %f milliseconds" % ((t2 - t1) * 1000.)   
+
+
+
+
+#----------------ClASSIFICATION BENCHMARK---------------------#
+
+(acc_train, loss_train) = performance_k(1000)
+
+
+
+
+
+
+time_acc = 
 print "Time beetween epochs: %f milliseconds" % ((t2 - t1) * 1000.)   
 
 x_e = E[:,[3, 1, 4, 4]
