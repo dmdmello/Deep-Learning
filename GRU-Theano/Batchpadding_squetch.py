@@ -264,18 +264,18 @@ num_iterations_train = train_set_size/batch_size
 num_iterations_test = test_set_size/batch_size
 
 random_indexes =  deque([np.random.randint(train_set_size) 
-    for i in range((train_set_size)*epoch)])
+    for i in range(int(1.3 * train_set_size)*epoch)])
 
 random_indexes_test =  deque([np.random.randint(test_set_size) 
-    for i in range((test_set_size)*epoch)])
+    for i in range(int(2.2 *test_set_size)*epoch)])
 
 
 def performance_k(k, train_set = True):
     losses_ac = 0.0
     classification_error_ac = 0.0
     num_int = k
+    t1 = time.time()
     for i in range(num_int):
-        t1 = time.time()
         if (train_set):
             indx = [random_indexes.popleft() for i in range(batch_size)]
             inp = x_train[indx]
@@ -297,9 +297,9 @@ def performance_k(k, train_set = True):
             print ("Erro inesperado")
 
         #print "Batch ", str(j)
-        t2 = time.time()
-        #print "Epoch - ",str(i)
-        #print "Time beetween epochs: %f milliseconds" % ((t2 - t1) * 1000.)
+    t2 = time.time()
+    #print "Epoch - ",str(i)
+    print "Time beetween epochs: %f milliseconds" % ((t2 - t1) * 1000.)
 
     return(1-(classification_error_ac/num_int), losses_ac/num_int)
 
