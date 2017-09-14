@@ -11,11 +11,12 @@ path_TFRecord_train = 'TFRec2/TFRecordfile500k_20kDim'
 path_TFRecord_test = 'TFRec2/TFRecordfile500k_20kDim_test'
 tf.reset_default_graph()
 
-LEARNING_RATE = float(os.environ.get("LEARNING_RATE", "0.0006"))
+LEARNING_RATE = float(os.environ.get("LEARNING_RATE", "0.0004"))
 VOCABULARY_SIZE = int(os.environ.get("VOCABULARY_SIZE", "20000"))
 EMBEDDING_DIM = int(os.environ.get("EMBEDDING_DIM", "300"))
-HIDDEN_DIM = int(os.environ.get("HIDDEN_DIM", "(300, 130)"))
-BATCH_SIZE = int(os.environ.get("BATCH_SIZE", "8"))
+HIDDEN_DIM1 = int(os.environ.get("HIDDEN_DIM1", "1000"))
+HIDDEN_DIM2 = int(os.environ.get("HIDDEN_DIM2", "1600"))
+BATCH_SIZE = int(os.environ.get("BATCH_SIZE", "25"))
 
 # Load data to numpy format (optional)
 #x_train, word_to_index, index_to_word = load_data("reddit_comments500.csv", VOCABULARY_SIZE)
@@ -99,8 +100,8 @@ inputs = train_q.dequeue_batch
 #------------------------------Embedding-----------------------------------
 
 num_words = VOCABULARY_SIZE
-num_hidden1 = HIDDEN_DIM[0] 
-num_hidden2 = HIDDEN_DIM[1] 
+num_hidden1 = HIDDEN_DIM1 
+num_hidden2 = HIDDEN_DIM2
 
 #embedding = tf.Variable(tf.truncated_normal([num_words, EMBEDDING_DIM]), trainable=False)
 
@@ -226,8 +227,8 @@ def performance_k(sess, k, feed_inp = False, inp = None):
 
 performance_test_hist =[]
 performance_train_hist = []
-train_set_size = 200000
-test_set_size = 60000
+train_set_size = 400000
+test_set_size = 100000
 num_iterations_train = train_set_size/batch_size
 num_iterations_test = test_set_size/batch_size
 
