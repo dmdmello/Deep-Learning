@@ -13,7 +13,7 @@ SENTENCE_START_TOKEN = "SENTENCE_START"
 SENTENCE_END_TOKEN = "SENTENCE_END"
 UNKNOWN_TOKEN = "UNKNOWN_TOKEN"
 
-def load_data(filename="data/reddit-comments-2015-08.csv", vocabulary_size=2000, min_sent_characters=0):
+def load_data(filename="data/reddit-comments-2015-08.csv", vocabulary_size=2000, max_sent_characters=10000, min_sent_characters=0):
 
     word_to_index = []
     index_to_word = []
@@ -29,7 +29,7 @@ def load_data(filename="data/reddit-comments-2015-08.csv", vocabulary_size=2000,
         # Split full comments into sentences
         sentences = itertools.chain(*[nltk.sent_tokenize(x[0].decode("utf-8").lower()) for x in reader])
         # Filter sentences
-        sentences = [s for s in sentences if len(s) >= min_sent_characters]
+        sentences = [s for s in sentences if len(s) <= max_sent_characters]
         sentences = [s for s in sentences if "http" not in s]
         # Append SENTENCE_START and SENTENCE_END
         sentences = ["%s %s %s" % (SENTENCE_START_TOKEN, x, SENTENCE_END_TOKEN) for x in sentences]
