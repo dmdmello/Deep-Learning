@@ -33,7 +33,7 @@ emb_dim = EMBEDDING_DIM
 emb_matrix_path = 'embedding_matrix_gensim_300D.npy'
 
 Vocabulary_size = word_dim
-x_train, word_to_index, index_to_word = load_data(INPUT_DATA_FILE, Vocabulary_size)
+x_train, word_to_index, index_to_word = load_data(INPUT_DATA_FILE, Vocabulary_size, 2000)
 
 sys.stdout.flush()
 
