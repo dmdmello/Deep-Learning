@@ -75,11 +75,16 @@ Objetivo Atual (treinar RNN em TF){
 			Batchpading Theano:
 				Realizar o batchpadding no theano e aprender sobre tensorvariables, sharedvariables, eval(), function() e o que mais for necessario 
 
+				colocar a rede para treinar, já está funcionando o esquema de indices aleatorios que indexam x_train e alimentam um batch aleatorio a entrada tensor type do theano. Agora é só colocar a rede para funcionar em uma base de dados real e rezar pra funcionar.
 
+				Ajeitar matriz U e quebrala em 2, 1 para cada camada. Ajeitar as dimensões. Também adaptar o exemplo para receber o conjunto de teste. Boa sorte
+
+
+				Reproduzir testes razo de desempenho com 1000 interações (ou mais) no GPU01, e descobrir porque diabos o tensorflow 1.3 está 10 x mais rápido que o theano 0.10, porém estourando 95 C enquanto o theano fica em 83C...
 			
 
 			Batchpading Tensorflow: 
-				Não consigo "printar" o vvalor de um batch com elementos de extensão variavel. Por que? O tensorflow ficar rodando e nada...Resolver esse problema.
+				Não consigo "printar" o valor de um batch com elementos de extensão variavel. Por que? O tensorflow ficar rodando e nada...Resolver esse problema.
 				-> Problema devido ao mal uso de filas e threads
 
 				O principal já foi feito. Já estou dominando o esquema de filas como input de variaveis. Porém, de forma ineficiente. Demora muito pra colocar todos os exemplos em uma única fila. Tenho que tentar utilizar o formato do tensorflow com TFRecord. Eis meu próximo objetivo. 
@@ -95,7 +100,20 @@ Objetivo Atual (treinar RNN em TF){
 			entendimento completo de como "printar" dados de tensor e variable no TF
 
 	}
+
+		keras{
+
+			Algo estranho ocorreu no treinamento com 500k: loss vai pra 1e-7 e acc vai pra 0%. Além disso é necessário colocar o embedding ainda. Vamos entao treinar a rede e printar o resultado de (acc, loss) a cada 100 iterações ou algo assim e ver o que está acontecendo.
+
+
+		}
 	
+		Benchmark{
+
+			Analisar a possiblidade de se utilizar o PTB (penn treebank) para avaliar a qualidade das redes
+
+		}
+
 	Concluído{
 		leitura da documentação da classe optimizer e minimizer
 		entendimento do conceito de lista de variáveis
