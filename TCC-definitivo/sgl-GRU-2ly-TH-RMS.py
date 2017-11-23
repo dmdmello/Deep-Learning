@@ -307,8 +307,8 @@ for i in range(epoch):
         
         if (j % int(num_iterations_train/2) == 0):
             print"---------------------RESULTS----------------------"
-            (acc_train, loss_train) = performance_k(int(0.1*num_iterations_train))
-            (acc_test, loss_test) = performance_k(int(0.4*num_iterations_test), False)
+            (acc_train, loss_train) = performance_k(int(0.02*num_iterations_train))
+            (acc_test, loss_test) = performance_k(int(0.02*num_iterations_test), False)
 
             #performance_train_hist.append((acc_train, loss_train))
             #performance_test_hist.append((acc_test, loss_test))

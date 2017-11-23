@@ -17,9 +17,9 @@ INPUT_DATA_FILE = os.environ.get("INPUT_DATA_FILE", "reddit_comments500.csv")
 LEARNING_RATE = float(os.environ.get("LEARNING_RATE", "0.0004"))
 VOCABULARY_SIZE = int(os.environ.get("VOCABULARY_SIZE", "20000"))
 EMBEDDING_DIM = int(os.environ.get("EMBEDDING_DIM", "300"))
-HIDDEN_DIM1 = int(os.environ.get("HIDDEN_DIM1", "300"))
-HIDDEN_DIM2 = int(os.environ.get("HIDDEN_DIM2", "130"))
-BATCH_SIZE = int(os.environ.get("BATCH_SIZE", "8"))
+HIDDEN_DIM1 = int(os.environ.get("HIDDEN_DIM1", "1500"))
+HIDDEN_DIM2 = int(os.environ.get("HIDDEN_DIM2", "600"))
+BATCH_SIZE = int(os.environ.get("BATCH_SIZE", "25"))
 
 
 
@@ -33,7 +33,7 @@ emb_dim = EMBEDDING_DIM
 emb_matrix_path = 'embedding_matrix_gensim_300D.npy'
 
 Vocabulary_size = word_dim
-x_train, word_to_index, index_to_word = load_data(INPUT_DATA_FILE, Vocabulary_size, 2000)
+x_train, word_to_index, index_to_word = load_data(INPUT_DATA_FILE, Vocabulary_size, 100000)
 
 sys.stdout.flush()
 
@@ -264,7 +264,7 @@ ce_error(x_train[indx])
 '''
 sys.stdout.flush()
 flag_break = False
-epoch = 14
+epoch = 20
 epoch_counter = 0
 performance_test_hist = []
 performance_train_hist = []
@@ -328,10 +328,10 @@ for i in range(epoch):
         if (j % int(num_iterations_train/2) == 0):
             (acc_train, loss_train) = performance_k(int(0.1*num_iterations_train))
             (acc_test, loss_test) = performance_k(int(0.4*num_iterations_test), False)
-
+	    '''	
             performance_train_hist.append((acc_train, loss_train))
             performance_test_hist.append((acc_test, loss_test))
-
+	    '''
             print"---------------------RESULTS----------------------"
             print"Train accuracy and losses for %d iterations:" % (int(0.1*num_iterations_train))
             print(acc_train, loss_train)

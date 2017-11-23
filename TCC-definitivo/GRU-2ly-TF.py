@@ -14,13 +14,20 @@ tf.reset_default_graph()
 LEARNING_RATE = float(os.environ.get("LEARNING_RATE", "0.0004"))
 VOCABULARY_SIZE = int(os.environ.get("VOCABULARY_SIZE", "20000"))
 EMBEDDING_DIM = int(os.environ.get("EMBEDDING_DIM", "300"))
-HIDDEN_DIM1 = int(os.environ.get("HIDDEN_DIM1", "800"))
-HIDDEN_DIM2 = int(os.environ.get("HIDDEN_DIM2", "500"))
+HIDDEN_DIM1 = int(os.environ.get("HIDDEN_DIM1", "1500"))
+HIDDEN_DIM2 = int(os.environ.get("HIDDEN_DIM2", "600"))
 BATCH_SIZE = int(os.environ.get("BATCH_SIZE", "25"))
 
 # Load data to numpy format (optional)
 #x_train, word_to_index, index_to_word = load_data("reddit_comments500.csv", VOCABULARY_SIZE)
 
+print "Neural Network Specs:" 
+print "Hidden Dim 1: %d" % HIDDEN_DIM1
+print "Hidden Dim 2: %d" % HIDDEN_DIM2
+print "Batch Size : %d" % BATCH_SIZE 
+print "Embedding Dim: %d" % EMBEDDING_DIM 
+print "Voc. Size: %d" % VOCABULARY_SIZE
+print "Learning Rate: %d" % LEARNING_RATE
 
 #------------------------------TRAINING SET READER-----------------------------
 filename_queue_train = tf.train.string_input_producer([path_TFRecord_train]) 
