@@ -30,6 +30,16 @@ word_dim = VOCABULARY_SIZE
 emb_dim = EMBEDDING_DIM
 
 
+print "Neural Network Specs:" 
+print "Hidden Dim 1: %d" % HIDDEN_DIM1
+print "Hidden Dim 2: %d" % HIDDEN_DIM2
+print "Batch Size : %d" % BATCH_SIZE 
+print "Embedding Dim: %d" % EMBEDDING_DIM 
+print "Voc. Size: %d" % VOCABULARY_SIZE
+print "Learning Rate: %f" % LEARNING_RATE
+
+
+
 emb_matrix_path = 'embedding_matrix_gensim_300D.npy'
 
 Vocabulary_size = word_dim
