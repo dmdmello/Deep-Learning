@@ -14,12 +14,12 @@ from collections import deque
 INPUT_DATA_FILE = os.environ.get("INPUT_DATA_FILE", "reddit_comments500.csv")
 
 
-LEARNING_RATE = float(os.environ.get("LEARNING_RATE", "0.0004"))
+LEARNING_RATE = float(os.environ.get("LEARNING_RATE", "0.0002"))
 VOCABULARY_SIZE = int(os.environ.get("VOCABULARY_SIZE", "20000"))
 EMBEDDING_DIM = int(os.environ.get("EMBEDDING_DIM", "300"))
-HIDDEN_DIM1 = int(os.environ.get("HIDDEN_DIM1", "1500"))
-HIDDEN_DIM2 = int(os.environ.get("HIDDEN_DIM2", "600"))
-BATCH_SIZE = int(os.environ.get("BATCH_SIZE", "25"))
+HIDDEN_DIM1 = int(os.environ.get("HIDDEN_DIM1", "800"))
+HIDDEN_DIM2 = int(os.environ.get("HIDDEN_DIM2", "800"))
+BATCH_SIZE = int(os.environ.get("BATCH_SIZE", "50"))
 
 
 
@@ -335,17 +335,17 @@ for i in range(epoch):
     t1 = time.time()
     for j in range(0, int(num_iterations_train)):
         
-        if (j % int(num_iterations_train/2) == 0):
-            (acc_train, loss_train) = performance_k(int(0.1*num_iterations_train))
-            (acc_test, loss_test) = performance_k(int(0.4*num_iterations_test), False)
-	    '''	
+        if (j % int(num_iterations_train/4) == 0):
+            (acc_train, loss_train) = performance_k(int(0.03*num_iterations_train))
+            (acc_test, loss_test) = performance_k(int(0.2*num_iterations_test), False)
+	    
             performance_train_hist.append((acc_train, loss_train))
             performance_test_hist.append((acc_test, loss_test))
-	    '''
+	    
             print"---------------------RESULTS----------------------"
-            print"Train accuracy and losses for %d iterations:" % (int(0.1*num_iterations_train))
+            print"Train accuracy and losses for %d iterations:" % (int(0.03*num_iterations_train))
             print(acc_train, loss_train)
-            print"Test accuracy and losses for %d iterations:" % (int(0.4*num_iterations_test))
+            print"Test accuracy and losses for %d iterations:" % (int(0.2*num_iterations_test))
             print(acc_test, loss_test)
             sys.stdout.flush()
 
@@ -373,7 +373,7 @@ for i in range(epoch):
     print "Time beetween epochs: %f milliseconds" % ((t2 - t1) * 1000.)    
     sys.stdout.flush()
     epoch_counter = epoch_counter + 1
-    np.savez("perf_rec_GRU2ly-1hd%d-2hd%d-b%d-200k" % (hidden_dim1, hidden_dim2, batch_size), performance_train_hist, performance_test_hist)
+    np.savez("perf_rec_th-GRU2ly-1hd%d-2hd%d-b%d-500k" % (hidden_dim1, hidden_dim2, batch_size), performance_train_hist, performance_test_hist)
 
 '''
 
