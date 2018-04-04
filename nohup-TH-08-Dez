@@ -1,0 +1,346 @@
+Using cuDNN version 6021 on context None
+Mapped name None to device cuda: GeForce GTX TITAN X (0000:03:00.0)
+Neural Network Specs:
+Hidden Dim 1: 800
+Hidden Dim 2: 800
+Batch Size : 25
+Embedding Dim: 300
+Voc. Size: 20000
+Learning Rate: 0.000200
+Beta2: 0.999000
+Epsilon: 0.000000
+Reading CSV file...
+Parsed 502033 sentences.
+Found 188266 unique words tokens.
+Using vocabulary size 20000.
+The least frequent word in our vocabulary is '*don't*' and appeared 13 times.
+--------------------------------------------------
+Epoch -  0
+--------------------------------------------------
+Time beetween epochs: 92605.436087 milliseconds
+Time beetween epochs: 157327.740908 milliseconds
+---------------------RESULTS----------------------
+Train accuracy and losses for 480 iterations:
+(1.6611069440841675e-05, 9.901392810846902)
+Test accuracy and losses for 800 iterations:
+(3.0361562967318179e-05, 9.9014143853627541)
+Time beetween epochs: 92400.219202 milliseconds
+Time beetween epochs: 159310.611963 milliseconds
+---------------------RESULTS----------------------
+Train accuracy and losses for 480 iterations:
+(0.22064758675793805, 4.9204499685074987)
+Test accuracy and losses for 800 iterations:
+(0.21759111903607842, 4.9691550898344561)
+Time beetween epochs: 93515.844107 milliseconds
+Time beetween epochs: 159690.147877 milliseconds
+---------------------RESULTS----------------------
+Train accuracy and losses for 480 iterations:
+(0.23590227911869688, 4.737688760958763)
+Test accuracy and losses for 800 iterations:
+(0.23112359635531898, 4.8105294373660339)
+Time beetween epochs: 95897.968054 milliseconds
+Time beetween epochs: 152699.254036 milliseconds
+---------------------RESULTS----------------------
+Train accuracy and losses for 480 iterations:
+(0.24208891776700814, 4.6401298103319242)
+Test accuracy and losses for 800 iterations:
+(0.2395514234155417, 4.7333372864725849)
+Time beetween epochs: 10041138.188839 milliseconds
+--------------------------------------------------
+Epoch -  1
+--------------------------------------------------
+Time beetween epochs: 94040.858984 milliseconds
+Time beetween epochs: 157464.939833 milliseconds
+---------------------RESULTS----------------------
+Train accuracy and losses for 480 iterations:
+(0.24678486461440718, 4.5592329950087667)
+Test accuracy and losses for 800 iterations:
+(0.2439130030572414, 4.69991962278608)
+Time beetween epochs: 93751.985073 milliseconds
+Time beetween epochs: 157313.089132 milliseconds
+---------------------RESULTS----------------------
+Train accuracy and losses for 480 iterations:
+(0.25382660528024037, 4.4901455297655835)
+Test accuracy and losses for 800 iterations:
+(0.24638444229960443, 4.6683579407945439)
+Time beetween epochs: 90745.651960 milliseconds
+Time beetween epochs: 151585.317850 milliseconds
+---------------------RESULTS----------------------
+Train accuracy and losses for 480 iterations:
+(0.2578083988279104, 4.4231297987080289)
+Test accuracy and losses for 800 iterations:
+(0.2461532627046108, 4.653734470431754)
+Time beetween epochs: 90241.364002 milliseconds
+Time beetween epochs: 162822.060823 milliseconds
+---------------------RESULTS----------------------
+Train accuracy and losses for 480 iterations:
+(0.26075166898469126, 4.3763691758419236)
+Test accuracy and losses for 800 iterations:
+(0.25052343349903827, 4.6399203226165238)
+Time beetween epochs: 10019340.703964 milliseconds
+--------------------------------------------------
+Epoch -  2
+--------------------------------------------------
+Time beetween epochs: 95027.354956 milliseconds
+Time beetween epochs: 156190.317154 milliseconds
+---------------------RESULTS----------------------
+Train accuracy and losses for 480 iterations:
+(0.26231864318251608, 4.34098799506266)
+Test accuracy and losses for 800 iterations:
+(0.24980628028511997, 4.6495769403672504)
+Time beetween epochs: 90082.466125 milliseconds
+Time beetween epochs: 156647.732019 milliseconds
+---------------------RESULTS----------------------
+Train accuracy and losses for 480 iterations:
+(0.26656615783770876, 4.2948248381771874)
+Test accuracy and losses for 800 iterations:
+(0.25176554158329967, 4.6378506824451584)
+Time beetween epochs: 93609.920025 milliseconds
+Time beetween epochs: 157681.071043 milliseconds
+---------------------RESULTS----------------------
+Train accuracy and losses for 480 iterations:
+(0.26834748722612856, 4.2611877852222779)
+Test accuracy and losses for 800 iterations:
+(0.25064772270619873, 4.6311450515164818)
+Time beetween epochs: 95966.516972 milliseconds
+Time beetween epochs: 153683.466196 milliseconds
+---------------------RESULTS----------------------
+Train accuracy and losses for 480 iterations:
+(0.27086840917666755, 4.2186817818100462)
+Test accuracy and losses for 800 iterations:
+(0.25225403562188153, 4.6340318663899733)
+Time beetween epochs: 10074992.010117 milliseconds
+--------------------------------------------------
+Epoch -  3
+--------------------------------------------------
+Time beetween epochs: 93286.288023 milliseconds
+Time beetween epochs: 154457.405090 milliseconds
+---------------------RESULTS----------------------
+Train accuracy and losses for 480 iterations:
+(0.27570722463230291, 4.1690571932520006)
+Test accuracy and losses for 800 iterations:
+(0.25155627518892287, 4.6359742123626964)
+Time beetween epochs: 92654.418945 milliseconds
+Time beetween epochs: 154883.952856 milliseconds
+---------------------RESULTS----------------------
+Train accuracy and losses for 480 iterations:
+(0.27729426398873325, 4.1245151703030549)
+Test accuracy and losses for 800 iterations:
+(0.25305042348802087, 4.6297727376611633)
+Time beetween epochs: 93696.809053 milliseconds
+Time beetween epochs: 155959.676981 milliseconds
+---------------------RESULTS----------------------
+Train accuracy and losses for 480 iterations:
+(0.27951798898478353, 4.1032739274552759)
+Test accuracy and losses for 800 iterations:
+(0.25257597304880619, 4.6456659754294352)
+Time beetween epochs: 94594.239950 milliseconds
+Time beetween epochs: 157130.948067 milliseconds
+---------------------RESULTS----------------------
+Train accuracy and losses for 480 iterations:
+(0.28056090002258616, 4.0860550402749398)
+Test accuracy and losses for 800 iterations:
+(0.25328660957515237, 4.6473235128289296)
+Time beetween epochs: 9984093.634129 milliseconds
+--------------------------------------------------
+Epoch -  4
+--------------------------------------------------
+Time beetween epochs: 93248.693943 milliseconds
+Time beetween epochs: 159567.796946 milliseconds
+---------------------RESULTS----------------------
+Train accuracy and losses for 480 iterations:
+(0.2839411314576864, 4.0432771195083932)
+Test accuracy and losses for 800 iterations:
+(0.25178479045629498, 4.6689728742174204)
+Time beetween epochs: 91894.823074 milliseconds
+Time beetween epochs: 155577.699184 milliseconds
+---------------------RESULTS----------------------
+Train accuracy and losses for 480 iterations:
+(0.28263795239229994, 4.0434378640396309)
+Test accuracy and losses for 800 iterations:
+(0.25103799059987064, 4.6687678473909191)
+Time beetween epochs: 92848.057985 milliseconds
+Time beetween epochs: 157427.502155 milliseconds
+---------------------RESULTS----------------------
+Train accuracy and losses for 480 iterations:
+(0.28561792671680453, 4.0048202960820243)
+Test accuracy and losses for 800 iterations:
+(0.25087109237909322, 4.6889492271794708)
+Time beetween epochs: 93223.170042 milliseconds
+Time beetween epochs: 155901.370049 milliseconds
+---------------------RESULTS----------------------
+Train accuracy and losses for 480 iterations:
+(0.28540772559742134, 3.9824149058168947)
+Test accuracy and losses for 800 iterations:
+(0.25016247466206554, 4.690801379499554)
+Time beetween epochs: 10009061.163902 milliseconds
+--------------------------------------------------
+Epoch -  5
+--------------------------------------------------
+Time beetween epochs: 92558.732033 milliseconds
+Time beetween epochs: 157145.854950 milliseconds
+---------------------RESULTS----------------------
+Train accuracy and losses for 480 iterations:
+(0.29031701361139617, 3.9356220992930728)
+Test accuracy and losses for 800 iterations:
+(0.25376043945550919, 4.6958859183340964)
+Time beetween epochs: 90884.851933 milliseconds
+Time beetween epochs: 155788.105011 milliseconds
+---------------------RESULTS----------------------
+Train accuracy and losses for 480 iterations:
+(0.29413267498215034, 3.9087188623805722)
+Test accuracy and losses for 800 iterations:
+(0.25233874656260014, 4.7045309991471562)
+Time beetween epochs: 94371.063948 milliseconds
+Time beetween epochs: 155259.706020 milliseconds
+---------------------RESULTS----------------------
+Train accuracy and losses for 480 iterations:
+(0.29516160568843286, 3.8862608405608943)
+Test accuracy and losses for 800 iterations:
+(0.2507405995577574, 4.7127023292356149)
+Time beetween epochs: 93034.457922 milliseconds
+Time beetween epochs: 156149.924994 milliseconds
+---------------------RESULTS----------------------
+Train accuracy and losses for 480 iterations:
+(0.29590265440444152, 3.8688518355862525)
+Test accuracy and losses for 800 iterations:
+(0.25013928398489949, 4.7214864590034189)
+Time beetween epochs: 9997479.057074 milliseconds
+--------------------------------------------------
+Epoch -  6
+--------------------------------------------------
+Time beetween epochs: 94634.231091 milliseconds
+Time beetween epochs: 154891.672134 milliseconds
+---------------------RESULTS----------------------
+Train accuracy and losses for 480 iterations:
+(0.29920269759992757, 3.845070886508827)
+Test accuracy and losses for 800 iterations:
+(0.25025337897241118, 4.7375790926807468)
+Time beetween epochs: 96444.633961 milliseconds
+Time beetween epochs: 154382.112026 milliseconds
+---------------------RESULTS----------------------
+Train accuracy and losses for 480 iterations:
+(0.30075797289609907, 3.8330544165777498)
+Test accuracy and losses for 800 iterations:
+(0.25059830129146576, 4.7426209637058374)
+Time beetween epochs: 93898.972034 milliseconds
+Time beetween epochs: 156307.190895 milliseconds
+---------------------RESULTS----------------------
+Train accuracy and losses for 480 iterations:
+(0.30346572312215969, 3.7900792439786044)
+Test accuracy and losses for 800 iterations:
+(0.24853398576378827, 4.7655425348587315)
+Time beetween epochs: 93328.408003 milliseconds
+Time beetween epochs: 153579.793930 milliseconds
+---------------------RESULTS----------------------
+Train accuracy and losses for 480 iterations:
+(0.30361302333573503, 3.7822441605909631)
+Test accuracy and losses for 800 iterations:
+(0.24950468756258493, 4.783683798091352)
+Time beetween epochs: 10042598.995924 milliseconds
+--------------------------------------------------
+Epoch -  7
+--------------------------------------------------
+Time beetween epochs: 90894.437075 milliseconds
+Time beetween epochs: 160667.116880 milliseconds
+---------------------RESULTS----------------------
+Train accuracy and losses for 480 iterations:
+(0.30349122894306979, 3.7625743982571582)
+Test accuracy and losses for 800 iterations:
+(0.24788875468075278, 4.7897769641521322)
+Time beetween epochs: 92611.741066 milliseconds
+Time beetween epochs: 156997.369051 milliseconds
+---------------------RESULTS----------------------
+Train accuracy and losses for 480 iterations:
+(0.30745680729548142, 3.746401312092893)
+Test accuracy and losses for 800 iterations:
+(0.24687739655375485, 4.8046658518148808)
+Time beetween epochs: 92260.755062 milliseconds
+Time beetween epochs: 153029.973984 milliseconds
+---------------------RESULTS----------------------
+Train accuracy and losses for 480 iterations:
+(0.31212136025230086, 3.7131278402385091)
+Test accuracy and losses for 800 iterations:
+(0.24675982661545282, 4.8158540962180032)
+Time beetween epochs: 90435.801029 milliseconds
+Time beetween epochs: 155398.237944 milliseconds
+---------------------RESULTS----------------------
+Train accuracy and losses for 480 iterations:
+(0.31075388329724474, 3.7159713419472498)
+Test accuracy and losses for 800 iterations:
+(0.24622160434722895, 4.830101548068674)
+Time beetween epochs: 10032045.940876 milliseconds
+--------------------------------------------------
+Epoch -  8
+--------------------------------------------------
+Time beetween epochs: 93721.814156 milliseconds
+Time beetween epochs: 158603.306055 milliseconds
+---------------------RESULTS----------------------
+Train accuracy and losses for 480 iterations:
+(0.31150855657955012, 3.6903038041382841)
+Test accuracy and losses for 800 iterations:
+(0.24582611866295334, 4.8517698989780831)
+Time beetween epochs: 94633.090019 milliseconds
+Time beetween epochs: 152860.490084 milliseconds
+---------------------RESULTS----------------------
+Train accuracy and losses for 480 iterations:
+(0.31408568695187566, 3.6631024611583087)
+Test accuracy and losses for 800 iterations:
+(0.24619638875126837, 4.8440271851391792)
+Time beetween epochs: 92399.918079 milliseconds
+Time beetween epochs: 154944.062948 milliseconds
+---------------------RESULTS----------------------
+Train accuracy and losses for 480 iterations:
+(0.3166911650449038, 3.6501270826243526)
+Test accuracy and losses for 800 iterations:
+(0.24646309286355972, 4.8480478375059173)
+Time beetween epochs: 93609.754086 milliseconds
+Time beetween epochs: 154206.516981 milliseconds
+---------------------RESULTS----------------------
+Train accuracy and losses for 480 iterations:
+(0.31773244229455788, 3.6330480636787756)
+Test accuracy and losses for 800 iterations:
+(0.24487153463065625, 4.8710274260225876)
+Time beetween epochs: 10079189.349890 milliseconds
+--------------------------------------------------
+Epoch -  9
+--------------------------------------------------
+Time beetween epochs: 90895.784855 milliseconds
+Time beetween epochs: 156820.025921 milliseconds
+---------------------RESULTS----------------------
+Train accuracy and losses for 480 iterations:
+(0.31848190377155938, 3.6296259665290211)
+Test accuracy and losses for 800 iterations:
+(0.24347286723554129, 4.8945636770382155)
+Time beetween epochs: 92324.304104 milliseconds
+Time beetween epochs: 158318.794012 milliseconds
+---------------------RESULTS----------------------
+Train accuracy and losses for 480 iterations:
+(0.31867516363660497, 3.599257429598389)
+Test accuracy and losses for 800 iterations:
+(0.2446808118373156, 4.8897176948869046)
+Time beetween epochs: 94325.184107 milliseconds
+Time beetween epochs: 155649.225950 milliseconds
+---------------------RESULTS----------------------
+Train accuracy and losses for 480 iterations:
+(0.32284590167303884, 3.5835075640327871)
+Test accuracy and losses for 800 iterations:
+(0.24449659600853924, 4.9065397599317002)
+Time beetween epochs: 92859.705925 milliseconds
+Time beetween epochs: 158976.922989 milliseconds
+---------------------RESULTS----------------------
+Train accuracy and losses for 480 iterations:
+(0.3226163041467468, 3.5868056074528356)
+Test accuracy and losses for 800 iterations:
+(0.24307008415460585, 4.9252118550971673)
+Time beetween epochs: 9995515.305996 milliseconds
+--------------------------------------------------
+Epoch -  10
+--------------------------------------------------
+Time beetween epochs: 93980.105162 milliseconds
+Time beetween epochs: 158892.992973 milliseconds
+---------------------RESULTS----------------------
+Train accuracy and losses for 480 iterations:
+(0.32457757207254567, 3.5685703919524756)
+Test accuracy and losses for 800 iterations:
+(0.24505995646119116, 4.8995213949498497)

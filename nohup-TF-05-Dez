@@ -1,0 +1,619 @@
+Neural Network Specs:
+Hidden Dim 1: 800
+Hidden Dim 2: 800
+Batch Size : 80
+Embedding Dim: 300
+Voc. Size: 20000
+Learning Rate: 0.000200
+Beta2: 0.990000
+Epsilon: 0.000000
+--------------------------------------------------
+Epoch -  0
+--------------------------------------------------
+Erro inesperado
+---------------------RESULTS----------------------
+Train accuracy and losses for 500 iterations:
+(3.7070512771575359e-05, 15.102528603871663)
+Test accuracy and losses for 500 iterations:
+(0.0040385642051696813, 15.062113395690918)
+Exception
+Erro inesperado
+---------------------RESULTS----------------------
+Train accuracy and losses for 500 iterations:
+(0.20062733610471095, 5.5078383827209469)
+Test accuracy and losses for 500 iterations:
+(0.20207343554496771, 5.5167752819061278)
+Erro inesperado
+Erro inesperado
+---------------------RESULTS----------------------
+Train accuracy and losses for 500 iterations:
+(0.2112216528256734, 5.3372200711568194)
+Test accuracy and losses for 500 iterations:
+(0.2164605982303619, 5.3162036743164061)
+Exception
+---------------------RESULTS----------------------
+Train accuracy and losses for 500 iterations:
+(0.21802258412043252, 5.2269383462270103)
+Test accuracy and losses for 500 iterations:
+(0.21663963580131529, 5.262086091995239)
+Time beetween epochs: 2960877.098083 milliseconds
+--------------------------------------------------
+Epoch -  1
+--------------------------------------------------
+---------------------RESULTS----------------------
+Train accuracy and losses for 500 iterations:
+(0.22316265741984054, 5.1363492266337074)
+Test accuracy and losses for 500 iterations:
+(0.22049662089347843, 5.1780122432708744)
+Exception
+Erro inesperado
+---------------------RESULTS----------------------
+Train accuracy and losses for 500 iterations:
+(0.22632120609283446, 5.0757415453592936)
+Test accuracy and losses for 500 iterations:
+(0.22704324460029601, 5.0892356891632078)
+Exception
+Exception
+---------------------RESULTS----------------------
+Train accuracy and losses for 500 iterations:
+(0.23064392725626626, 4.9981692568461105)
+Test accuracy and losses for 500 iterations:
+(0.2266269226074219, 5.0653845024108888)
+Exception
+Exception
+Exception
+---------------------RESULTS----------------------
+Train accuracy and losses for 500 iterations:
+(0.23353621761004129, 4.9622283522288004)
+Test accuracy and losses for 500 iterations:
+(0.22981036686897283, 5.01622706413269)
+Exception
+Time beetween epochs: 2932940.943003 milliseconds
+--------------------------------------------------
+Epoch -  2
+--------------------------------------------------
+---------------------RESULTS----------------------
+Train accuracy and losses for 500 iterations:
+(0.23731671929359432, 4.9075907834370929)
+Test accuracy and losses for 500 iterations:
+(0.23108954524993897, 4.9953157253265381)
+Exception
+Exception
+---------------------RESULTS----------------------
+Train accuracy and losses for 500 iterations:
+(0.23692450881004334, 4.8823769982655847)
+Test accuracy and losses for 500 iterations:
+(0.23120914983749385, 4.9551003017425534)
+---------------------RESULTS----------------------
+Train accuracy and losses for 500 iterations:
+(0.23852292815844223, 4.9063268343607582)
+Test accuracy and losses for 500 iterations:
+(0.23629414391517645, 4.9297599258422853)
+Exception
+Erro inesperado
+---------------------RESULTS----------------------
+Train accuracy and losses for 500 iterations:
+(0.24816617369651794, 4.7846002515157062)
+Test accuracy and losses for 500 iterations:
+(0.23560756731033328, 4.9268059349060058)
+Exception
+Time beetween epochs: 2874381.880045 milliseconds
+--------------------------------------------------
+Epoch -  3
+--------------------------------------------------
+---------------------RESULTS----------------------
+Train accuracy and losses for 500 iterations:
+(0.24393301963806158, 4.8101584180196122)
+Test accuracy and losses for 500 iterations:
+(0.23817879915237428, 4.8958015441894531)
+Erro inesperado
+Erro inesperado
+---------------------RESULTS----------------------
+Train accuracy and losses for 500 iterations:
+(0.24498445550600689, 4.7881674957275386)
+Test accuracy and losses for 500 iterations:
+(0.24385568213462827, 4.8666806068420412)
+---------------------RESULTS----------------------
+Train accuracy and losses for 500 iterations:
+(0.24797746698061629, 4.7596289189656575)
+Test accuracy and losses for 500 iterations:
+(0.24001684069633489, 4.8714901657104495)
+Exception
+Exception
+Exception
+---------------------RESULTS----------------------
+Train accuracy and losses for 500 iterations:
+(0.24653096993764245, 4.7515837478637692)
+Test accuracy and losses for 500 iterations:
+(0.24108377814292903, 4.8598394031524661)
+Exception
+Time beetween epochs: 2894903.137922 milliseconds
+--------------------------------------------------
+Epoch -  4
+--------------------------------------------------
+Erro inesperado
+---------------------RESULTS----------------------
+Train accuracy and losses for 500 iterations:
+(0.25005597233772281, 4.7603998756408687)
+Test accuracy and losses for 500 iterations:
+(0.24365575671195983, 4.8326545295715331)
+Exception
+---------------------RESULTS----------------------
+Train accuracy and losses for 500 iterations:
+(0.25107850591341652, 4.7035853799184162)
+Test accuracy and losses for 500 iterations:
+(0.24284954071044917, 4.8375479259490968)
+Exception
+Erro inesperado
+Erro inesperado
+---------------------RESULTS----------------------
+Train accuracy and losses for 500 iterations:
+(0.25157361586888627, 4.6810052045186357)
+Test accuracy and losses for 500 iterations:
+(0.24618492960929872, 4.7964680557250974)
+Exception
+---------------------RESULTS----------------------
+Train accuracy and losses for 500 iterations:
+(0.25522087295850115, 4.6579407405853273)
+Test accuracy and losses for 500 iterations:
+(0.24308566021919253, 4.8383538074493408)
+Exception
+Exception
+Time beetween epochs: 2900179.043055 milliseconds
+--------------------------------------------------
+Epoch -  5
+--------------------------------------------------
+---------------------RESULTS----------------------
+Train accuracy and losses for 500 iterations:
+(0.25564395785331728, 4.6433822631835939)
+Test accuracy and losses for 500 iterations:
+(0.24433477759361266, 4.8208825683593748)
+---------------------RESULTS----------------------
+Train accuracy and losses for 500 iterations:
+(0.25679894169171646, 4.6268244171142578)
+Test accuracy and losses for 500 iterations:
+(0.24565552258491519, 4.7974524021148683)
+Erro inesperado
+Erro inesperado
+Erro inesperado
+---------------------RESULTS----------------------
+Train accuracy and losses for 500 iterations:
+(0.26282038052876788, 4.6093113962809245)
+Test accuracy and losses for 500 iterations:
+(0.25287360310554508, 4.7569142189025877)
+Erro inesperado
+Erro inesperado
+---------------------RESULTS----------------------
+Train accuracy and losses for 500 iterations:
+(0.26132551431655882, 4.5873371346791583)
+Test accuracy and losses for 500 iterations:
+(0.25018737220764165, 4.7621762027740475)
+Exception
+Time beetween epochs: 2906753.180027 milliseconds
+--------------------------------------------------
+Epoch -  6
+--------------------------------------------------
+---------------------RESULTS----------------------
+Train accuracy and losses for 500 iterations:
+(0.25788439234097804, 4.5974301449457808)
+Test accuracy and losses for 500 iterations:
+(0.24435480475425719, 4.8018713550567629)
+Exception
+---------------------RESULTS----------------------
+Train accuracy and losses for 500 iterations:
+(0.25963329752286279, 4.5888758818308508)
+Test accuracy and losses for 500 iterations:
+(0.24601769399642948, 4.7899005088806152)
+Exception
+Erro inesperado
+---------------------RESULTS----------------------
+Train accuracy and losses for 500 iterations:
+(0.26752601345380145, 4.530561278661092)
+Test accuracy and losses for 500 iterations:
+(0.24779184651374819, 4.7879920806884764)
+Exception
+Erro inesperado
+---------------------RESULTS----------------------
+Train accuracy and losses for 500 iterations:
+(0.26118874271710713, 4.5597625764211021)
+Test accuracy and losses for 500 iterations:
+(0.24851306319236754, 4.7715656433105469)
+Exception
+Time beetween epochs: 2872386.848927 milliseconds
+--------------------------------------------------
+Epoch -  7
+--------------------------------------------------
+---------------------RESULTS----------------------
+Train accuracy and losses for 500 iterations:
+(0.26200018167495731, 4.556165154774984)
+Test accuracy and losses for 500 iterations:
+(0.24760035681724546, 4.7793288784027101)
+Exception
+---------------------RESULTS----------------------
+Train accuracy and losses for 500 iterations:
+(0.26272987961769101, 4.5510166263580318)
+Test accuracy and losses for 500 iterations:
+(0.24672076153755185, 4.793396877288818)
+Exception
+Exception
+---------------------RESULTS----------------------
+Train accuracy and losses for 500 iterations:
+(0.26277551372845964, 4.535280202229818)
+Test accuracy and losses for 500 iterations:
+(0.24465955495834346, 4.8012681236267092)
+Exception
+Exception
+Exception
+---------------------RESULTS----------------------
+Train accuracy and losses for 500 iterations:
+(0.26710489948590599, 4.4993982823689782)
+Test accuracy and losses for 500 iterations:
+(0.24715721678733826, 4.7860682811737059)
+Exception
+Time beetween epochs: 2912631.473064 milliseconds
+--------------------------------------------------
+Epoch -  8
+--------------------------------------------------
+Erro inesperado
+---------------------RESULTS----------------------
+Train accuracy and losses for 500 iterations:
+(0.26565157691637675, 4.5084223779042558)
+Test accuracy and losses for 500 iterations:
+(0.25025556731224063, 4.7625655879974369)
+Exception
+Exception
+---------------------RESULTS----------------------
+Train accuracy and losses for 500 iterations:
+(0.2691428796450297, 4.4815542380015057)
+Test accuracy and losses for 500 iterations:
+(0.24542967915534974, 4.8041274662017823)
+Erro inesperado
+---------------------RESULTS----------------------
+Train accuracy and losses for 500 iterations:
+(0.27311005989710491, 4.4546305449803674)
+Test accuracy and losses for 500 iterations:
+(0.24817797803878783, 4.7930979499816893)
+Exception
+Exception
+Exception
+---------------------RESULTS----------------------
+Train accuracy and losses for 500 iterations:
+(0.27123786568641661, 4.4547811539967856)
+Test accuracy and losses for 500 iterations:
+(0.24670371580123907, 4.7888243141174316)
+Time beetween epochs: 2898446.918011 milliseconds
+--------------------------------------------------
+Epoch -  9
+--------------------------------------------------
+---------------------RESULTS----------------------
+Train accuracy and losses for 500 iterations:
+(0.26738665501276648, 4.4707091617584229)
+Test accuracy and losses for 500 iterations:
+(0.24843525910377506, 4.7790641822814939)
+Exception
+Erro inesperado
+---------------------RESULTS----------------------
+Train accuracy and losses for 500 iterations:
+(0.26886612256368003, 4.4653525670369465)
+Test accuracy and losses for 500 iterations:
+(0.24890959739685059, 4.7639231586456301)
+Exception
+---------------------RESULTS----------------------
+Train accuracy and losses for 500 iterations:
+(0.27191642562548324, 4.4295269552866614)
+Test accuracy and losses for 500 iterations:
+(0.24928587341308595, 4.7804462718963627)
+Exception
+Exception
+Erro inesperado
+---------------------RESULTS----------------------
+Train accuracy and losses for 500 iterations:
+(0.27144812027613319, 4.4361068248748783)
+Test accuracy and losses for 500 iterations:
+(0.25099371695518491, 4.7723340606689453)
+Time beetween epochs: 2888096.101046 milliseconds
+--------------------------------------------------
+Epoch -  10
+--------------------------------------------------
+---------------------RESULTS----------------------
+Train accuracy and losses for 500 iterations:
+(0.27327315727869672, 4.4223787562052408)
+Test accuracy and losses for 500 iterations:
+(0.2483430452346802, 4.7792760677337647)
+Erro inesperado
+Erro inesperado
+---------------------RESULTS----------------------
+Train accuracy and losses for 500 iterations:
+(0.27731559793154403, 4.3873409207661949)
+Test accuracy and losses for 500 iterations:
+(0.249033531665802, 4.7777081317901615)
+Exception
+Erro inesperado
+---------------------RESULTS----------------------
+Train accuracy and losses for 500 iterations:
+(0.27819763898849492, 4.3829617722829184)
+Test accuracy and losses for 500 iterations:
+(0.2458625392913818, 4.791133674621582)
+Exception
+---------------------RESULTS----------------------
+Train accuracy and losses for 500 iterations:
+(0.2757066388924917, 4.4012369314829511)
+Test accuracy and losses for 500 iterations:
+(0.24731940174102784, 4.7948209171295169)
+Exception
+Time beetween epochs: 2885983.075142 milliseconds
+--------------------------------------------------
+Epoch -  11
+--------------------------------------------------
+Erro inesperado
+---------------------RESULTS----------------------
+Train accuracy and losses for 500 iterations:
+(0.27307843565940859, 4.4027224222819008)
+Test accuracy and losses for 500 iterations:
+(0.24971043014526362, 4.7772394962310791)
+---------------------RESULTS----------------------
+Train accuracy and losses for 500 iterations:
+(0.27652274250984188, 4.3758566347757979)
+Test accuracy and losses for 500 iterations:
+(0.24746038675308224, 4.8058575267791745)
+Exception
+Exception
+---------------------RESULTS----------------------
+Train accuracy and losses for 500 iterations:
+(0.27737813194592797, 4.3681163088480632)
+Test accuracy and losses for 500 iterations:
+(0.24811061692237857, 4.8015976123809816)
+Exception
+---------------------RESULTS----------------------
+Train accuracy and losses for 500 iterations:
+(0.2779047830899557, 4.3707223224639895)
+Test accuracy and losses for 500 iterations:
+(0.24705922102928157, 4.8116956062316891)
+Exception
+Exception
+Time beetween epochs: 2894060.682058 milliseconds
+--------------------------------------------------
+Epoch -  12
+--------------------------------------------------
+Erro inesperado
+Erro inesperado
+---------------------RESULTS----------------------
+Train accuracy and losses for 500 iterations:
+(0.27962331970532739, 4.3467729965845745)
+Test accuracy and losses for 500 iterations:
+(0.24895987653732299, 4.7935539798736571)
+Exception
+---------------------RESULTS----------------------
+Train accuracy and losses for 500 iterations:
+(0.279441268046697, 4.3475152730941771)
+Test accuracy and losses for 500 iterations:
+(0.24486886978149414, 4.8259019412994384)
+Exception
+Erro inesperado
+Erro inesperado
+---------------------RESULTS----------------------
+Train accuracy and losses for 500 iterations:
+(0.28368312478065494, 4.3292766459782914)
+Test accuracy and losses for 500 iterations:
+(0.2497996735572815, 4.792301387786865)
+---------------------RESULTS----------------------
+Train accuracy and losses for 500 iterations:
+(0.28243079185485842, 4.3072337834040324)
+Test accuracy and losses for 500 iterations:
+(0.24485724949836729, 4.8193924732208249)
+Exception
+Time beetween epochs: 2907639.966965 milliseconds
+--------------------------------------------------
+Epoch -  13
+--------------------------------------------------
+Erro inesperado
+---------------------RESULTS----------------------
+Train accuracy and losses for 500 iterations:
+(0.28013123869895939, 4.3143478727340696)
+Test accuracy and losses for 500 iterations:
+(0.24789502072334291, 4.8092554454803471)
+Exception
+---------------------RESULTS----------------------
+Train accuracy and losses for 500 iterations:
+(0.28179071187973026, 4.3167590729395551)
+Test accuracy and losses for 500 iterations:
+(0.24622521615028381, 4.82765517616272)
+Exception
+---------------------RESULTS----------------------
+Train accuracy and losses for 500 iterations:
+(0.28291327436765035, 4.2984722725550331)
+Test accuracy and losses for 500 iterations:
+(0.24450812244415288, 4.8597154922485348)
+---------------------RESULTS----------------------
+Train accuracy and losses for 500 iterations:
+(0.28193194389343257, 4.304514195124308)
+Test accuracy and losses for 500 iterations:
+(0.24590153384208679, 4.8204315452575681)
+Exception
+Exception
+Time beetween epochs: 2878359.519958 milliseconds
+--------------------------------------------------
+Epoch -  14
+--------------------------------------------------
+Erro inesperado
+---------------------RESULTS----------------------
+Train accuracy and losses for 500 iterations:
+(0.28354450424512223, 4.3040701913833619)
+Test accuracy and losses for 500 iterations:
+(0.24727201628685003, 4.8306405620574955)
+---------------------RESULTS----------------------
+Train accuracy and losses for 500 iterations:
+(0.28425403555234274, 4.2888042434056599)
+Test accuracy and losses for 500 iterations:
+(0.24335326075553898, 4.8605818099975586)
+Exception
+---------------------RESULTS----------------------
+Train accuracy and losses for 500 iterations:
+(0.2850723457336426, 4.2749150609970092)
+Test accuracy and losses for 500 iterations:
+(0.24314154052734371, 4.8589107494354247)
+Exception
+---------------------RESULTS----------------------
+Train accuracy and losses for 500 iterations:
+(0.28478124141693117, 4.2743909311294557)
+Test accuracy and losses for 500 iterations:
+(0.24161541032791134, 4.868049657821655)
+Exception
+Exception
+Time beetween epochs: 2865623.711109 milliseconds
+--------------------------------------------------
+Epoch -  15
+--------------------------------------------------
+Erro inesperado
+Erro inesperado
+---------------------RESULTS----------------------
+Train accuracy and losses for 500 iterations:
+(0.28527994871139528, 4.2711629358927405)
+Test accuracy and losses for 500 iterations:
+(0.25014283800125126, 4.8313047981262205)
+Exception
+Erro inesperado
+Erro inesperado
+---------------------RESULTS----------------------
+Train accuracy and losses for 500 iterations:
+(0.28980242252349853, 4.2284178892771402)
+Test accuracy and losses for 500 iterations:
+(0.24614343881607059, 4.8552276897430424)
+Exception
+Exception
+Erro inesperado
+---------------------RESULTS----------------------
+Train accuracy and losses for 500 iterations:
+(0.28931550900141401, 4.248059868812561)
+Test accuracy and losses for 500 iterations:
+(0.24814694404602056, 4.8383827590942383)
+---------------------RESULTS----------------------
+Train accuracy and losses for 500 iterations:
+(0.29019336342811586, 4.2285249900817874)
+Test accuracy and losses for 500 iterations:
+(0.24489817214012144, 4.8603527259826658)
+Exception
+Exception
+Time beetween epochs: 2948118.833065 milliseconds
+--------------------------------------------------
+Epoch -  16
+--------------------------------------------------
+---------------------RESULTS----------------------
+Train accuracy and losses for 500 iterations:
+(0.28716438015302026, 4.2476123444239295)
+Test accuracy and losses for 500 iterations:
+(0.24050897693634032, 4.8885971088409423)
+Exception
+Exception
+---------------------RESULTS----------------------
+Train accuracy and losses for 500 iterations:
+(0.28887303233146666, 4.2292801443735755)
+Test accuracy and losses for 500 iterations:
+(0.24157987093925481, 4.8857924308776859)
+Exception
+Erro inesperado
+Erro inesperado
+---------------------RESULTS----------------------
+Train accuracy and losses for 500 iterations:
+(0.28786543965339662, 4.2237692467371621)
+Test accuracy and losses for 500 iterations:
+(0.2474269409179688, 4.8370967502593993)
+---------------------RESULTS----------------------
+Train accuracy and losses for 500 iterations:
+(0.29054600795110064, 4.2139679527282716)
+Test accuracy and losses for 500 iterations:
+(0.23998534703254704, 4.9115479621887204)
+Exception
+Time beetween epochs: 2891415.763140 milliseconds
+--------------------------------------------------
+Epoch -  17
+--------------------------------------------------
+---------------------RESULTS----------------------
+Train accuracy and losses for 500 iterations:
+(0.29217137495676682, 4.1989347076416017)
+Test accuracy and losses for 500 iterations:
+(0.24104282283782963, 4.8940619411468509)
+Erro inesperado
+Erro inesperado
+---------------------RESULTS----------------------
+Train accuracy and losses for 500 iterations:
+(0.29081461787223817, 4.2129668505986535)
+Test accuracy and losses for 500 iterations:
+(0.24713962864875794, 4.8616377468109127)
+Exception
+---------------------RESULTS----------------------
+Train accuracy and losses for 500 iterations:
+(0.29348233342170715, 4.1920332209269207)
+Test accuracy and losses for 500 iterations:
+(0.24082094717025759, 4.9165432929992674)
+---------------------RESULTS----------------------
+Train accuracy and losses for 500 iterations:
+(0.29166588664054871, 4.1966078758239744)
+Test accuracy and losses for 500 iterations:
+(0.24119672417640681, 4.9208410739898678)
+Exception
+Time beetween epochs: 2878894.406796 milliseconds
+--------------------------------------------------
+Epoch -  18
+--------------------------------------------------
+---------------------RESULTS----------------------
+Train accuracy and losses for 500 iterations:
+(0.29304726362228395, 4.1831965573628747)
+Test accuracy and losses for 500 iterations:
+(0.24189431357383728, 4.9103540897369387)
+Exception
+Exception
+Erro inesperado
+---------------------RESULTS----------------------
+Train accuracy and losses for 500 iterations:
+(0.29734924157460529, 4.1602324612935382)
+Test accuracy and losses for 500 iterations:
+(0.23927992510795593, 4.9288783168792722)
+Exception
+---------------------RESULTS----------------------
+Train accuracy and losses for 500 iterations:
+(0.29129459897677101, 4.1951501623789467)
+Test accuracy and losses for 500 iterations:
+(0.2413744380474091, 4.9113579578399662)
+---------------------RESULTS----------------------
+Train accuracy and losses for 500 iterations:
+(0.2948693668842316, 4.1703310410181684)
+Test accuracy and losses for 500 iterations:
+(0.23760042166709905, 4.9525026187896728)
+Exception
+Time beetween epochs: 2891103.140116 milliseconds
+--------------------------------------------------
+Epoch -  19
+--------------------------------------------------
+Erro inesperado
+---------------------RESULTS----------------------
+Train accuracy and losses for 500 iterations:
+(0.29634138981501257, 4.1446740007400509)
+Test accuracy and losses for 500 iterations:
+(0.24348454499244687, 4.9106321964263913)
+Erro inesperado
+---------------------RESULTS----------------------
+Train accuracy and losses for 500 iterations:
+(0.2928199168046316, 4.1799310827255249)
+Test accuracy and losses for 500 iterations:
+(0.24223206663131713, 4.9118672065734863)
+Exception
+---------------------RESULTS----------------------
+Train accuracy and losses for 500 iterations:
+(0.29692088762919111, 4.1510671631495155)
+Test accuracy and losses for 500 iterations:
+(0.23756851768493648, 4.9491124534606934)
+Exception
+Exception
+---------------------RESULTS----------------------
+Train accuracy and losses for 500 iterations:
+(0.29813272595405582, 4.1336577844619748)
+Test accuracy and losses for 500 iterations:
+(0.23738103032112123, 4.9630302715301511)
+Exception
+Exception
+Time beetween epochs: 2889944.439888 milliseconds
+Traceback (most recent call last):
+  File "TCC-definitivo/GRU-2ly-TF.py", line 318, in <module>
+    saver.save(sess, "tmp/GRU-hd%d-b%d-200k-%dEp-4.13Loss" % (num_hidden, batch_size , epoch_counter))
+NameError: name 'num_hidden' is not defined

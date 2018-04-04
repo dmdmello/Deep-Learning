@@ -1,0 +1,40 @@
+Using cuDNN version 6021 on context None
+Mapped name None to device cuda: GeForce GTX TITAN X (0000:03:00.0)
+Neural Network Specs:
+Hidden Dim 1: 800
+Hidden Dim 2: 800
+Batch Size : 25
+Embedding Dim: 300
+Voc. Size: 20000
+Learning Rate: 0.000200
+Beta2: 0.999000
+Epsilon: 0.000000
+Reading CSV file...
+Parsed 502033 sentences.
+Found 188266 unique words tokens.
+Using vocabulary size 20000.
+The least frequent word in our vocabulary is '*don't*' and appeared 13 times.
+--------------------------------------------------
+Epoch -  0
+--------------------------------------------------
+Time beetween epochs: 96551.022053 milliseconds
+Time beetween epochs: 169229.561090 milliseconds
+---------------------RESULTS----------------------
+Train accuracy and losses for 480 iterations:
+(2.58021056651625e-05, 9.9019887703587699)
+Test accuracy and losses for 800 iterations:
+(7.6741874218022588e-05, 9.9019282880278876)
+Time beetween epochs: 94570.382833 milliseconds
+Time beetween epochs: 159732.537985 milliseconds
+---------------------RESULTS----------------------
+Train accuracy and losses for 480 iterations:
+(0.2247834821542104, 4.9088131802338077)
+Test accuracy and losses for 800 iterations:
+(0.22174562476575377, 4.9501302201564235)
+Time beetween epochs: 96561.923981 milliseconds
+Time beetween epochs: 163994.967937 milliseconds
+---------------------RESULTS----------------------
+Train accuracy and losses for 480 iterations:
+(0.23745146940151851, 4.7428475697197854)
+Test accuracy and losses for 800 iterations:
+(0.23298479184508325, 4.8131914248511851)

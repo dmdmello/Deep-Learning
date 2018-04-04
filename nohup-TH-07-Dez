@@ -1,0 +1,456 @@
+Using cuDNN version 6021 on context None
+Mapped name None to device cuda: GeForce GTX TITAN X (0000:03:00.0)
+Neural Network Specs:
+Hidden Dim 1: 800
+Hidden Dim 2: 800
+Batch Size : 80
+Embedding Dim: 300
+Voc. Size: 20000
+Learning Rate: 0.000200
+Beta2: 0.999000
+Epsilon: 0.000000
+Reading CSV file...
+Parsed 502033 sentences.
+Found 188266 unique words tokens.
+Using vocabulary size 20000.
+The least frequent word in our vocabulary is '*don't*' and appeared 13 times.
+--------------------------------------------------
+Epoch -  0
+--------------------------------------------------
+Time beetween epochs: 49608.120918 milliseconds
+Time beetween epochs: 90452.507973 milliseconds
+---------------------RESULTS----------------------
+Train accuracy and losses for 150 iterations:
+(9.6199115117379108e-05, 9.9073277415857604)
+Test accuracy and losses for 250 iterations:
+(8.8910341262793402e-05, 9.9071429956158674)
+Erro inesperado
+Time beetween epochs: 57374.892950 milliseconds
+Time beetween epochs: 91702.398062 milliseconds
+---------------------RESULTS----------------------
+Train accuracy and losses for 150 iterations:
+(0.20510009686152142, 5.1747453390183304)
+Test accuracy and losses for 250 iterations:
+(0.19782594895362859, 5.2393696124872644)
+Erro inesperado
+Time beetween epochs: 54769.251823 milliseconds
+Erro inesperado
+Erro inesperado
+Time beetween epochs: 96043.927908 milliseconds
+---------------------RESULTS----------------------
+Train accuracy and losses for 150 iterations:
+(0.22507473190625504, 4.8891869593827622)
+Test accuracy and losses for 250 iterations:
+(0.22643809652328495, 4.912908156218907)
+Time beetween epochs: 58962.568998 milliseconds
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Time beetween epochs: 93853.535891 milliseconds
+---------------------RESULTS----------------------
+Train accuracy and losses for 150 iterations:
+(0.23079665422439577, 4.7953986890165936)
+Test accuracy and losses for 250 iterations:
+(0.23916666722297664, 4.7847439712702693)
+Time beetween epochs: 7972341.943026 milliseconds
+--------------------------------------------------
+Epoch -  1
+--------------------------------------------------
+Time beetween epochs: 55252.089024 milliseconds
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Time beetween epochs: 87335.666895 milliseconds
+---------------------RESULTS----------------------
+Train accuracy and losses for 150 iterations:
+(0.23748912453651427, 4.7000481253226445)
+Test accuracy and losses for 250 iterations:
+(0.24539425206184384, 4.7135325187534693)
+Time beetween epochs: 54799.837112 milliseconds
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Time beetween epochs: 97467.239141 milliseconds
+---------------------RESULTS----------------------
+Train accuracy and losses for 150 iterations:
+(0.2422807542483012, 4.6328440941578286)
+Test accuracy and losses for 250 iterations:
+(0.24464923143386841, 4.6882632211648687)
+Erro inesperado
+Erro inesperado
+Time beetween epochs: 53117.026091 milliseconds
+Time beetween epochs: 96613.864899 milliseconds
+---------------------RESULTS----------------------
+Train accuracy and losses for 150 iterations:
+(0.25675216913223264, 4.5196603127105792)
+Test accuracy and losses for 250 iterations:
+(0.24129291605949399, 4.6912903936414407)
+Exception
+Erro inesperado
+Time beetween epochs: 55066.802025 milliseconds
+Erro inesperado
+Time beetween epochs: 92176.052094 milliseconds
+---------------------RESULTS----------------------
+Train accuracy and losses for 150 iterations:
+(0.25391713897387191, 4.5019416412999878)
+Test accuracy and losses for 250 iterations:
+(0.24664122676849365, 4.6546155603022079)
+Exception
+Time beetween epochs: 7796297.837973 milliseconds
+--------------------------------------------------
+Epoch -  2
+--------------------------------------------------
+Time beetween epochs: 56255.684137 milliseconds
+Erro inesperado
+Time beetween epochs: 94292.268991 milliseconds
+---------------------RESULTS----------------------
+Train accuracy and losses for 150 iterations:
+(0.25345318555831908, 4.4915289875446085)
+Test accuracy and losses for 250 iterations:
+(0.24983343768119814, 4.6290950000674096)
+Exception
+Exception
+Time beetween epochs: 54797.807217 milliseconds
+Erro inesperado
+Time beetween epochs: 93778.988838 milliseconds
+---------------------RESULTS----------------------
+Train accuracy and losses for 150 iterations:
+(0.25630010962486272, 4.4488406743366928)
+Test accuracy and losses for 250 iterations:
+(0.24971820712089543, 4.6156724104427953)
+Erro inesperado
+Time beetween epochs: 56225.956202 milliseconds
+Erro inesperado
+Time beetween epochs: 94133.074999 milliseconds
+---------------------RESULTS----------------------
+Train accuracy and losses for 150 iterations:
+(0.26400204777717595, 4.3879316925398593)
+Test accuracy and losses for 250 iterations:
+(0.25020163798332218, 4.6278816350317751)
+Erro inesperado
+Time beetween epochs: 54643.246174 milliseconds
+Erro inesperado
+Time beetween epochs: 93612.251997 milliseconds
+---------------------RESULTS----------------------
+Train accuracy and losses for 150 iterations:
+(0.2651361946264903, 4.3447881975007085)
+Test accuracy and losses for 250 iterations:
+(0.25014988827705387, 4.6112033448642071)
+Time beetween epochs: 6292373.811007 milliseconds
+--------------------------------------------------
+Epoch -  3
+--------------------------------------------------
+Time beetween epochs: 57416.676998 milliseconds
+Erro inesperado
+Time beetween epochs: 94477.458000 milliseconds
+---------------------RESULTS----------------------
+Train accuracy and losses for 150 iterations:
+(0.26274986982345583, 4.3461231150936976)
+Test accuracy and losses for 250 iterations:
+(0.25352375864982601, 4.5963572000522008)
+Time beetween epochs: 53180.434942 milliseconds
+Erro inesperado
+Time beetween epochs: 91161.622047 milliseconds
+---------------------RESULTS----------------------
+Train accuracy and losses for 150 iterations:
+(0.26533360560735064, 4.3261105584176578)
+Test accuracy and losses for 250 iterations:
+(0.25393863654136661, 4.5919921293563233)
+Time beetween epochs: 55741.031885 milliseconds
+Erro inesperado
+Erro inesperado
+Time beetween epochs: 92252.321005 milliseconds
+---------------------RESULTS----------------------
+Train accuracy and losses for 150 iterations:
+(0.26559992114702857, 4.2923108524106697)
+Test accuracy and losses for 250 iterations:
+(0.25763422894477839, 4.5721497100575386)
+Erro inesperado
+Time beetween epochs: 54650.505066 milliseconds
+Erro inesperado
+Erro inesperado
+Time beetween epochs: 96658.555031 milliseconds
+---------------------RESULTS----------------------
+Train accuracy and losses for 150 iterations:
+(0.27312125762303674, 4.2348408519638223)
+Test accuracy and losses for 250 iterations:
+(0.2581784825325012, 4.5695383531580518)
+Time beetween epochs: 6495391.946077 milliseconds
+--------------------------------------------------
+Epoch -  4
+--------------------------------------------------
+Time beetween epochs: 56249.418020 milliseconds
+Erro inesperado
+Time beetween epochs: 93384.666920 milliseconds
+---------------------RESULTS----------------------
+Train accuracy and losses for 150 iterations:
+(0.26944224278132123, 4.2466705591716805)
+Test accuracy and losses for 250 iterations:
+(0.25676235723495489, 4.568503717225612)
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Time beetween epochs: 57519.241810 milliseconds
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Time beetween epochs: 95103.572845 milliseconds
+---------------------RESULTS----------------------
+Train accuracy and losses for 150 iterations:
+(0.28659127116203309, 4.1260119620855793)
+Test accuracy and losses for 250 iterations:
+(0.27349427175521845, 4.4706806275779742)
+Erro inesperado
+Time beetween epochs: 56375.675917 milliseconds
+Erro inesperado
+Erro inesperado
+Time beetween epochs: 93157.329082 milliseconds
+---------------------RESULTS----------------------
+Train accuracy and losses for 150 iterations:
+(0.27904948155085241, 4.1513026612474757)
+Test accuracy and losses for 250 iterations:
+(0.25986955094337461, 4.569665265860559)
+Time beetween epochs: 57056.256056 milliseconds
+Time beetween epochs: 91753.865004 milliseconds
+---------------------RESULTS----------------------
+Train accuracy and losses for 150 iterations:
+(0.27597723563512166, 4.1606136295142733)
+Test accuracy and losses for 250 iterations:
+(0.25589577460289004, 4.5879757363743421)
+Time beetween epochs: 6420687.294006 milliseconds
+--------------------------------------------------
+Epoch -  5
+--------------------------------------------------
+Erro inesperado
+Time beetween epochs: 54292.631865 milliseconds
+Erro inesperado
+Erro inesperado
+Time beetween epochs: 95101.625919 milliseconds
+---------------------RESULTS----------------------
+Train accuracy and losses for 150 iterations:
+(0.28171428004900612, 4.1110527420203464)
+Test accuracy and losses for 250 iterations:
+(0.25942881917953486, 4.5683971189507524)
+Exception
+Time beetween epochs: 57449.983120 milliseconds
+Erro inesperado
+Time beetween epochs: 92731.009007 milliseconds
+---------------------RESULTS----------------------
+Train accuracy and losses for 150 iterations:
+(0.27650115370750428, 4.1280992235038392)
+Test accuracy and losses for 250 iterations:
+(0.25567618751525878, 4.6080994685286658)
+Exception
+Time beetween epochs: 54156.692028 milliseconds
+Erro inesperado
+Time beetween epochs: 91532.211065 milliseconds
+---------------------RESULTS----------------------
+Train accuracy and losses for 150 iterations:
+(0.28053347547849017, 4.0902524285717599)
+Test accuracy and losses for 250 iterations:
+(0.25731687784194945, 4.5934733581250464)
+Time beetween epochs: 56488.266945 milliseconds
+Erro inesperado
+Time beetween epochs: 94909.779072 milliseconds
+---------------------RESULTS----------------------
+Train accuracy and losses for 150 iterations:
+(0.27935618718465172, 4.0854189216704127)
+Test accuracy and losses for 250 iterations:
+(0.25661419153213505, 4.5962898880957459)
+Time beetween epochs: 6408058.421850 milliseconds
+--------------------------------------------------
+Epoch -  6
+--------------------------------------------------
+Erro inesperado
+Time beetween epochs: 55187.267065 milliseconds
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Time beetween epochs: 94720.296144 milliseconds
+---------------------RESULTS----------------------
+Train accuracy and losses for 150 iterations:
+(0.28756458719571432, 4.0169753904945065)
+Test accuracy and losses for 250 iterations:
+(0.26190464234352107, 4.5660436305503094)
+Erro inesperado
+Time beetween epochs: 57492.139816 milliseconds
+Erro inesperado
+Erro inesperado
+Time beetween epochs: 94578.211069 milliseconds
+---------------------RESULTS----------------------
+Train accuracy and losses for 150 iterations:
+(0.28686344822247822, 4.003579166143246)
+Test accuracy and losses for 250 iterations:
+(0.2587321600914001, 4.5977071195260928)
+Erro inesperado
+Time beetween epochs: 56215.955019 milliseconds
+Erro inesperado
+Time beetween epochs: 95322.757959 milliseconds
+---------------------RESULTS----------------------
+Train accuracy and losses for 150 iterations:
+(0.29207193891207373, 3.9733368794760349)
+Test accuracy and losses for 250 iterations:
+(0.25601691389083858, 4.615872138330209)
+Exception
+Erro inesperado
+Time beetween epochs: 55174.453974 milliseconds
+Erro inesperado
+Time beetween epochs: 91829.423904 milliseconds
+---------------------RESULTS----------------------
+Train accuracy and losses for 150 iterations:
+(0.29287427266438804, 3.9677005506142975)
+Test accuracy and losses for 250 iterations:
+(0.25498413801193243, 4.6318193965879928)
+Time beetween epochs: 6898681.607008 milliseconds
+--------------------------------------------------
+Epoch -  7
+--------------------------------------------------
+Time beetween epochs: 54791.858912 milliseconds
+Erro inesperado
+Time beetween epochs: 96038.810968 milliseconds
+---------------------RESULTS----------------------
+Train accuracy and losses for 150 iterations:
+(0.28721724112828573, 3.9726529290307826)
+Test accuracy and losses for 250 iterations:
+(0.25588141036033629, 4.6315372960346579)
+Erro inesperado
+Time beetween epochs: 55047.149897 milliseconds
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Time beetween epochs: 97003.669024 milliseconds
+---------------------RESULTS----------------------
+Train accuracy and losses for 150 iterations:
+(0.29555721163749693, 3.920977809771248)
+Test accuracy and losses for 250 iterations:
+(0.26169730949401859, 4.6040360885267173)
+Exception
+Erro inesperado
+Time beetween epochs: 52914.014816 milliseconds
+Erro inesperado
+Time beetween epochs: 95963.532925 milliseconds
+---------------------RESULTS----------------------
+Train accuracy and losses for 150 iterations:
+(0.29553810914357503, 3.9153370705662081)
+Test accuracy and losses for 250 iterations:
+(0.25389536499977117, 4.6549378100568362)
+Time beetween epochs: 55179.099083 milliseconds
+Erro inesperado
+Erro inesperado
+Time beetween epochs: 94275.550127 milliseconds
+---------------------RESULTS----------------------
+Train accuracy and losses for 150 iterations:
+(0.29333165566126507, 3.91653356696846)
+Test accuracy and losses for 250 iterations:
+(0.25966950345039364, 4.6225611383618714)
+Time beetween epochs: 7627460.381985 milliseconds
+--------------------------------------------------
+Epoch -  8
+--------------------------------------------------
+Time beetween epochs: 57117.486954 milliseconds
+Time beetween epochs: 96130.558968 milliseconds
+---------------------RESULTS----------------------
+Train accuracy and losses for 150 iterations:
+(0.29730330387751258, 3.8719010342161528)
+Test accuracy and losses for 250 iterations:
+(0.25090258526802067, 4.6803662137740156)
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Time beetween epochs: 54966.112852 milliseconds
+Erro inesperado
+Time beetween epochs: 92949.488163 milliseconds
+---------------------RESULTS----------------------
+Train accuracy and losses for 150 iterations:
+(0.30613518993059796, 3.8338499438185623)
+Test accuracy and losses for 250 iterations:
+(0.25456536793708806, 4.6630523204502898)
+Time beetween epochs: 54923.773050 milliseconds
+Erro inesperado
+Time beetween epochs: 92550.156116 milliseconds
+---------------------RESULTS----------------------
+Train accuracy and losses for 150 iterations:
+(0.29614196101824442, 3.8571217602888623)
+Test accuracy and losses for 250 iterations:
+(0.25552338957786558, 4.6488104149412841)
+Erro inesperado
+Time beetween epochs: 56520.885944 milliseconds
+Erro inesperado
+Time beetween epochs: 92057.852983 milliseconds
+---------------------RESULTS----------------------
+Train accuracy and losses for 150 iterations:
+(0.30195221980412801, 3.8213416437155487)
+Test accuracy and losses for 250 iterations:
+(0.2521654894351959, 4.6847794663200997)
+Exception
+Time beetween epochs: 7628196.864128 milliseconds
+--------------------------------------------------
+Epoch -  9
+--------------------------------------------------
+Erro inesperado
+Erro inesperado
+Time beetween epochs: 55234.043121 milliseconds
+Time beetween epochs: 94672.228098 milliseconds
+---------------------RESULTS----------------------
+Train accuracy and losses for 150 iterations:
+(0.31034521301587426, 3.7789791079287034)
+Test accuracy and losses for 250 iterations:
+(0.25088512110710148, 4.7019624545567495)
+Time beetween epochs: 52934.175968 milliseconds
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Time beetween epochs: 96880.963087 milliseconds
+---------------------RESULTS----------------------
+Train accuracy and losses for 150 iterations:
+(0.30327977776527404, 3.8047720683478308)
+Test accuracy and losses for 250 iterations:
+(0.2579074335098267, 4.6644729012203285)
+Erro inesperado
+Time beetween epochs: 52565.387964 milliseconds
+Erro inesperado
+Time beetween epochs: 92507.555008 milliseconds
+---------------------RESULTS----------------------
+Train accuracy and losses for 150 iterations:
+(0.30815869053204858, 3.7669967946354004)
+Test accuracy and losses for 250 iterations:
+(0.25314166951179506, 4.6992318499340282)
+Exception
+Time beetween epochs: 56856.459856 milliseconds
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Time beetween epochs: 93247.678995 milliseconds
+---------------------RESULTS----------------------
+Train accuracy and losses for 150 iterations:
+(0.30568803429603575, 3.783367304899071)
+Test accuracy and losses for 250 iterations:
+(0.26096158909797673, 4.6577152472629209)
+Time beetween epochs: 8382810.902834 milliseconds
+--------------------------------------------------
+Epoch -  10
+--------------------------------------------------
+Time beetween epochs: 52292.866945 milliseconds
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Time beetween epochs: 92458.887100 milliseconds
+---------------------RESULTS----------------------
+Train accuracy and losses for 150 iterations:
+(0.30781241377194724, 3.7534192111814884)
+Test accuracy and losses for 250 iterations:
+(0.25950399398803714, 4.6605816551667418)
+Time beetween epochs: 55784.960985 milliseconds
+Erro inesperado
+Time beetween epochs: 93424.767971 milliseconds
+---------------------RESULTS----------------------
+Train accuracy and losses for 150 iterations:
+(0.30655052940050764, 3.7505282159138309)
+Test accuracy and losses for 250 iterations:
+(0.25095499444007874, 4.716857117870414)

@@ -1,0 +1,78 @@
+Using cuDNN version 6021 on context None
+Mapped name None to device cuda: GeForce GTX TITAN X (0000:03:00.0)
+Neural Network Specs:
+Hiddem Dim 1: 300
+Hiddem Dim 2: 300
+Batch Size: Single
+Embedding Dim : 300
+Voc. Size: 20000
+Learning Rate: 0
+Reading CSV file...
+Parsed 502132 sentences.
+Found 190453 unique words tokens.
+Using vocabulary size 20000.
+The least frequent word in our vocabulary is '^rules' and appeared 13 times.
+--------------------------------------------------
+Epoch -  0
+--------------------------------------------------
+---------------------RESULTS----------------------
+Time beetween epochs: 151604.331970 milliseconds
+Time beetween epochs: 38511.939049 milliseconds
+Train accuracy and losses for 40000 iterations:
+(array([  2.94047669e-05]), array([ 9.90582839]))
+Test accuracy and losses for 40000 iterations:
+(array([  4.31560874e-05]), array([ 9.90517743]))
+---------------------RESULTS----------------------
+Time beetween epochs: 154157.370806 milliseconds
+Time beetween epochs: 38850.667000 milliseconds
+Train accuracy and losses for 40000 iterations:
+(array([ 0.15822194]), array([ 7.5703721]))
+Test accuracy and losses for 40000 iterations:
+(array([ 0.15563906]), array([ 7.60100373]))
+Time beetween epochs: 14901859.466076 milliseconds
+--------------------------------------------------
+Epoch -  1
+--------------------------------------------------
+---------------------RESULTS----------------------
+Time beetween epochs: 154000.000000 milliseconds
+Time beetween epochs: 38524.797916 milliseconds
+Train accuracy and losses for 40000 iterations:
+(array([ 0.16073358]), array([ 7.61748454]))
+Test accuracy and losses for 40000 iterations:
+(array([ 0.16035855]), array([ 7.60751328]))
+---------------------RESULTS----------------------
+Time beetween epochs: 153640.417099 milliseconds
+Time beetween epochs: 39244.875908 milliseconds
+Train accuracy and losses for 40000 iterations:
+(array([ 0.16305389]), array([ 7.64953412]))
+Test accuracy and losses for 40000 iterations:
+(array([ 0.1611416]), array([ 7.68241917]))
+Time beetween epochs: 14917698.787928 milliseconds
+--------------------------------------------------
+Epoch -  2
+--------------------------------------------------
+---------------------RESULTS----------------------
+Time beetween epochs: 153205.279112 milliseconds
+Time beetween epochs: 38622.382879 milliseconds
+Train accuracy and losses for 40000 iterations:
+(array([ 0.16094181]), array([ 7.55990053]))
+Test accuracy and losses for 40000 iterations:
+(array([ 0.16022919]), array([ 7.53736449]))
+---------------------RESULTS----------------------
+Time beetween epochs: 153675.744057 milliseconds
+Time beetween epochs: 38612.554073 milliseconds
+Train accuracy and losses for 40000 iterations:
+(array([ 0.16024194]), array([ 7.65911179]))
+Test accuracy and losses for 40000 iterations:
+(array([ 0.15696473]), array([ 7.67918225]))
+Time beetween epochs: 14970515.418768 milliseconds
+--------------------------------------------------
+Epoch -  3
+--------------------------------------------------
+---------------------RESULTS----------------------
+Time beetween epochs: 152153.563976 milliseconds
+Time beetween epochs: 38252.346992 milliseconds
+Train accuracy and losses for 40000 iterations:
+(array([ 0.]), array([ nan]))
+Test accuracy and losses for 40000 iterations:
+(array([ 0.]), array([ nan]))

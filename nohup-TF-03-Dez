@@ -1,0 +1,689 @@
+Neural Network Specs:
+Hidden Dim 1: 800
+Hidden Dim 2: 800
+Batch Size : 100
+Embedding Dim: 300
+Voc. Size: 20000
+Learning Rate: 0
+--------------------------------------------------
+Epoch -  0
+--------------------------------------------------
+---------------------RESULTS----------------------
+Train accuracy and losses for 400 iterations:
+(2.2511184215590063e-05, 15.393747599919637)
+Test accuracy and losses for 400 iterations:
+(2.4129450321153101e-05, 15.412238144874573)
+Exception
+Exception
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+---------------------RESULTS----------------------
+Train accuracy and losses for 400 iterations:
+(0.25474180430173876, 5.2025553107261659)
+Test accuracy and losses for 400 iterations:
+(0.24816961288452144, 5.2259331369400028)
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+---------------------RESULTS----------------------
+Train accuracy and losses for 400 iterations:
+(0.29372413357098892, 4.7653701702753706)
+Test accuracy and losses for 400 iterations:
+(0.26829348832368849, 4.9441496086120607)
+Exception
+Exception
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+---------------------RESULTS----------------------
+Train accuracy and losses for 400 iterations:
+(0.25973849544922512, 4.9782409270604449)
+Test accuracy and losses for 400 iterations:
+(0.25733756035566335, 5.013975069522858)
+Exception
+Exception
+Time beetween epochs: 2883480.360985 milliseconds
+--------------------------------------------------
+Epoch -  1
+--------------------------------------------------
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+---------------------RESULTS----------------------
+Train accuracy and losses for 400 iterations:
+(0.31578680823246641, 4.5416803121566769)
+Test accuracy and losses for 400 iterations:
+(0.26292123705148696, 4.9053425574302674)
+Exception
+Exception
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+---------------------RESULTS----------------------
+Train accuracy and losses for 400 iterations:
+(0.38639148076375329, 4.0462885379791258)
+Test accuracy and losses for 400 iterations:
+(0.35652682244777678, 4.2592980027198788)
+Exception
+Exception
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+---------------------RESULTS----------------------
+Train accuracy and losses for 400 iterations:
+(0.34746181418498356, 4.2563819169998167)
+Test accuracy and losses for 400 iterations:
+(0.36408561199903489, 4.1699454927444455)
+Exception
+Exception
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+---------------------RESULTS----------------------
+Train accuracy and losses for 400 iterations:
+(0.36336544652779901, 4.1642984588940939)
+Test accuracy and losses for 400 iterations:
+(0.31449499726295471, 4.5045187020301816)
+Time beetween epochs: 2836568.307877 milliseconds
+--------------------------------------------------
+Epoch -  2
+--------------------------------------------------
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+---------------------RESULTS----------------------
+Train accuracy and losses for 400 iterations:
+(0.42283295343319571, 3.7484873652458193)
+Test accuracy and losses for 400 iterations:
+(0.42121169358491894, 3.7840471696853637)
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+---------------------RESULTS----------------------
+Train accuracy and losses for 400 iterations:
+(0.43931173682212832, 3.622752618789673)
+Test accuracy and losses for 400 iterations:
+(0.44682357251644134, 3.5982785987854005)
+Exception
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+---------------------RESULTS----------------------
+Train accuracy and losses for 400 iterations:
+(0.42239905794461563, 3.7085483471552529)
+Test accuracy and losses for 400 iterations:
+(0.42876922339200974, 3.7046367430686953)
+Exception
+Exception
+Exception
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+Erro inesperado
+---------------------RESULTS----------------------
+Train accuracy and losses for 400 iterations:
+(0.43489599972963333, 3.6288139740626018)
+Test accuracy and losses for 400 iterations:
+(0.43273317486047747, 3.6751928281784059)
+Exception
+Exception
+Time beetween epochs: 2808745.532990 milliseconds
