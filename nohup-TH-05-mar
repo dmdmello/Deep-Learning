@@ -1,0 +1,32 @@
+Using cuDNN version 6021 on context None
+Mapped name None to device cuda: GeForce GTX TITAN X (0000:03:00.0)
+Neural Network Specs:
+Hidden Dim 1: 1000
+Hidden Dim 2: 500
+Batch Size : 25
+Embedding Dim: 300
+Voc. Size: 20000
+Learning Rate: 0.000200
+Beta2: 0.999000
+Epsilon: 0.000000
+Reading CSV file...
+Traceback (most recent call last):
+  File "TCC-definitivo/GRU-2ly-TH.py", line 48, in <module>
+    x_train, word_to_index, index_to_word = load_data(INPUT_DATA_FILE, Vocabulary_size, 1000)
+  File "/home/daniel2/Deep-Learning/TCC-definitivo/load_text.py", line 30, in load_data
+    sentences = itertools.chain(*[nltk.sent_tokenize(x[0].decode("utf-8").lower()) for x in reader])
+  File "/home/daniel2/anaconda2/envs/conda-env/lib/python2.7/site-packages/nltk/tokenize/__init__.py", line 97, in sent_tokenize
+    return tokenizer.tokenize(text)
+  File "/home/daniel2/anaconda2/envs/conda-env/lib/python2.7/site-packages/nltk/tokenize/punkt.py", line 1235, in tokenize
+    return list(self.sentences_from_text(text, realign_boundaries))
+  File "/home/daniel2/anaconda2/envs/conda-env/lib/python2.7/site-packages/nltk/tokenize/punkt.py", line 1283, in sentences_from_text
+    return [text[s:e] for s, e in self.span_tokenize(text, realign_boundaries)]
+  File "/home/daniel2/anaconda2/envs/conda-env/lib/python2.7/site-packages/nltk/tokenize/punkt.py", line 1274, in span_tokenize
+    return [(sl.start, sl.stop) for sl in slices]
+  File "/home/daniel2/anaconda2/envs/conda-env/lib/python2.7/site-packages/nltk/tokenize/punkt.py", line 1314, in _realign_boundaries
+    for sl1, sl2 in _pair_iter(slices):
+  File "/home/daniel2/anaconda2/envs/conda-env/lib/python2.7/site-packages/nltk/tokenize/punkt.py", line 312, in _pair_iter
+    prev = next(it)
+  File "/home/daniel2/anaconda2/envs/conda-env/lib/python2.7/site-packages/nltk/tokenize/punkt.py", line 1287, in _slices_from_text
+    for match in self._lang_vars.period_context_re().finditer(text):
+KeyboardInterrupt

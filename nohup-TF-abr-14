@@ -1,0 +1,493 @@
+Neural Network Specs:
+Hidden Dim 1: 1000
+Hidden Dim 2: 500
+Batch Size : 25
+Embedding Dim: 300
+Voc. Size: 20000
+Learning Rate: 0.000200
+Beta2: 0.990000
+Epsilon: 0.000000
+--------------------------------------------------
+Epoch -  0
+--------------------------------------------------
+---------------------RESULTS----------------------
+Train accuracy and losses for 1600 iterations:
+(3.3212577303265434e-05, 14.373085206747055)
+Test accuracy and losses for 1600 iterations:
+(2.3847594857184795e-05, 14.459558960199356)
+---------------------RESULTS----------------------
+Train accuracy and losses for 1600 iterations:
+(0.20599297968049846, 5.5678719262282055)
+Test accuracy and losses for 1600 iterations:
+(0.20328653469681734, 5.5814586484432223)
+---------------------RESULTS----------------------
+Train accuracy and losses for 1600 iterations:
+(0.21446034424006943, 5.2581575493017834)
+Test accuracy and losses for 1600 iterations:
+(0.21323608234524727, 5.2817928940057755)
+---------------------RESULTS----------------------
+Train accuracy and losses for 1600 iterations:
+(0.2256524839748939, 5.1176420787970223)
+Test accuracy and losses for 1600 iterations:
+(0.22412731714546685, 5.1602088221907616)
+Time beetween epochs: 4200862.018824 milliseconds
+--------------------------------------------------
+Epoch -  1
+--------------------------------------------------
+---------------------RESULTS----------------------
+Train accuracy and losses for 1600 iterations:
+(0.23058002069592476, 5.0462899049123129)
+Test accuracy and losses for 1600 iterations:
+(0.22561029002070432, 5.1071871149539945)
+---------------------RESULTS----------------------
+Train accuracy and losses for 1600 iterations:
+(0.23285066522657871, 4.982872185111046)
+Test accuracy and losses for 1600 iterations:
+(0.23011509820818898, 5.0460162693262101)
+---------------------RESULTS----------------------
+Train accuracy and losses for 1600 iterations:
+(0.23857915786405404, 4.932603638370832)
+Test accuracy and losses for 1600 iterations:
+(0.2338385482877493, 4.9894163709878923)
+---------------------RESULTS----------------------
+Train accuracy and losses for 1600 iterations:
+(0.24052873924374585, 4.8909134030342098)
+Test accuracy and losses for 1600 iterations:
+(0.23541339181363585, 4.9677802288532256)
+Time beetween epochs: 4082187.726021 milliseconds
+--------------------------------------------------
+Epoch -  2
+--------------------------------------------------
+---------------------RESULTS----------------------
+Train accuracy and losses for 1600 iterations:
+(0.24521029902001223, 4.8498660484949747)
+Test accuracy and losses for 1600 iterations:
+(0.23783582814037796, 4.947261997461319)
+---------------------RESULTS----------------------
+Train accuracy and losses for 1600 iterations:
+(0.24629864580929284, 4.8251379291216532)
+Test accuracy and losses for 1600 iterations:
+(0.23658660158514977, 4.9377967160940166)
+---------------------RESULTS----------------------
+Train accuracy and losses for 1600 iterations:
+(0.24728708652158582, 4.8127440656224882)
+Test accuracy and losses for 1600 iterations:
+(0.24225759074091913, 4.9009744888544082)
+---------------------RESULTS----------------------
+Train accuracy and losses for 1600 iterations:
+(0.24929355494678018, 4.7940366913874941)
+Test accuracy and losses for 1600 iterations:
+(0.24123429909348493, 4.9056144070625303)
+Time beetween epochs: 4081092.653990 milliseconds
+--------------------------------------------------
+Epoch -  3
+--------------------------------------------------
+---------------------RESULTS----------------------
+Train accuracy and losses for 1600 iterations:
+(0.2508756455034018, 4.769426169991493)
+Test accuracy and losses for 1600 iterations:
+(0.24250758811831474, 4.8952194634079937)
+---------------------RESULTS----------------------
+Train accuracy and losses for 1600 iterations:
+(0.25460206083953385, 4.7368363529443744)
+Test accuracy and losses for 1600 iterations:
+(0.24199493452906606, 4.8909368485212328)
+---------------------RESULTS----------------------
+Train accuracy and losses for 1600 iterations:
+(0.25373296433438852, 4.7205437888701756)
+Test accuracy and losses for 1600 iterations:
+(0.24263668790459636, 4.8826533704996109)
+---------------------RESULTS----------------------
+Train accuracy and losses for 1600 iterations:
+(0.25713410687943294, 4.7062696054577824)
+Test accuracy and losses for 1600 iterations:
+(0.24578626323491337, 4.8686986294388772)
+Time beetween epochs: 4067802.649021 milliseconds
+--------------------------------------------------
+Epoch -  4
+--------------------------------------------------
+---------------------RESULTS----------------------
+Train accuracy and losses for 1600 iterations:
+(0.25627213952442007, 4.6827844118078552)
+Test accuracy and losses for 1600 iterations:
+(0.24308445282280444, 4.8555007696151735)
+---------------------RESULTS----------------------
+Train accuracy and losses for 1600 iterations:
+(0.26226513000826046, 4.6584158112605412)
+Test accuracy and losses for 1600 iterations:
+(0.24601947173476224, 4.8575718110799793)
+---------------------RESULTS----------------------
+Train accuracy and losses for 1600 iterations:
+(0.26024031502505141, 4.6657571370402975)
+Test accuracy and losses for 1600 iterations:
+(0.2456119681149721, 4.8576055431365965)
+---------------------RESULTS----------------------
+Train accuracy and losses for 1600 iterations:
+(0.26085540304581323, 4.6413343250751495)
+Test accuracy and losses for 1600 iterations:
+(0.24410962633788591, 4.8608763641118999)
+Time beetween epochs: 4076213.696957 milliseconds
+--------------------------------------------------
+Epoch -  5
+--------------------------------------------------
+---------------------RESULTS----------------------
+Train accuracy and losses for 1600 iterations:
+(0.2645109636088212, 4.6019713868697485)
+Test accuracy and losses for 1600 iterations:
+(0.24562657870352267, 4.867519085109234)
+---------------------RESULTS----------------------
+Train accuracy and losses for 1600 iterations:
+(0.26587381474673744, 4.6039456352591515)
+Test accuracy and losses for 1600 iterations:
+(0.24429789602756502, 4.8703541803359984)
+---------------------RESULTS----------------------
+Train accuracy and losses for 1600 iterations:
+(0.26763775621851282, 4.5835822646816569)
+Test accuracy and losses for 1600 iterations:
+(0.24466966070234775, 4.8683595183491706)
+---------------------RESULTS----------------------
+Train accuracy and losses for 1600 iterations:
+(0.26762847534070411, 4.5796967575947445)
+Test accuracy and losses for 1600 iterations:
+(0.24547516919672485, 4.8519753912091259)
+Time beetween epochs: 4071342.565060 milliseconds
+--------------------------------------------------
+Epoch -  6
+--------------------------------------------------
+---------------------RESULTS----------------------
+Train accuracy and losses for 1600 iterations:
+(0.26536829918622973, 4.5925802205999693)
+Test accuracy and losses for 1600 iterations:
+(0.24366916790604587, 4.874695354402065)
+---------------------RESULTS----------------------
+Train accuracy and losses for 1600 iterations:
+(0.2701561807344357, 4.5554374357064562)
+Test accuracy and losses for 1600 iterations:
+(0.24394625715911389, 4.8652860549092294)
+---------------------RESULTS----------------------
+Train accuracy and losses for 1600 iterations:
+(0.26651042277614279, 4.5740195676684383)
+Test accuracy and losses for 1600 iterations:
+(0.24532437525689599, 4.8686053711175923)
+---------------------RESULTS----------------------
+Train accuracy and losses for 1600 iterations:
+(0.26756888950864477, 4.5690546890099846)
+Test accuracy and losses for 1600 iterations:
+(0.24524174824357037, 4.8707833030819891)
+Time beetween epochs: 4068048.352957 milliseconds
+--------------------------------------------------
+Epoch -  7
+--------------------------------------------------
+---------------------RESULTS----------------------
+Train accuracy and losses for 1600 iterations:
+(0.2724684175103903, 4.5433248574535048)
+Test accuracy and losses for 1600 iterations:
+(0.24574831120669838, 4.8776471248269084)
+---------------------RESULTS----------------------
+Train accuracy and losses for 1600 iterations:
+(0.27157928074399629, 4.5226190383235609)
+Test accuracy and losses for 1600 iterations:
+(0.24334670484066012, 4.8869605773687361)
+---------------------RESULTS----------------------
+Train accuracy and losses for 1600 iterations:
+(0.27327744190891579, 4.5199023147424064)
+Test accuracy and losses for 1600 iterations:
+(0.24447919487953185, 4.8981535840034489)
+---------------------RESULTS----------------------
+Train accuracy and losses for 1600 iterations:
+(0.27709871952732401, 4.4976933047175409)
+Test accuracy and losses for 1600 iterations:
+(0.24631193555891517, 4.8757157856225968)
+Time beetween epochs: 4069186.428070 milliseconds
+--------------------------------------------------
+Epoch -  8
+--------------------------------------------------
+---------------------RESULTS----------------------
+Train accuracy and losses for 1600 iterations:
+(0.27421314890185988, 4.5168888544042902)
+Test accuracy and losses for 1600 iterations:
+(0.24367139704525476, 4.8840702182054523)
+---------------------RESULTS----------------------
+Train accuracy and losses for 1600 iterations:
+(0.27811900495241082, 4.4900866990288097)
+Test accuracy and losses for 1600 iterations:
+(0.24282242812216281, 4.9069741904735569)
+---------------------RESULTS----------------------
+Train accuracy and losses for 1600 iterations:
+(0.27630113971730075, 4.4848275358478231)
+Test accuracy and losses for 1600 iterations:
+(0.24256959326565264, 4.9309399223327635)
+---------------------RESULTS----------------------
+Train accuracy and losses for 1600 iterations:
+(0.2789979166040818, 4.4813291966915134)
+Test accuracy and losses for 1600 iterations:
+(0.24234069056808949, 4.9375628876686095)
+Time beetween epochs: 4064798.657179 milliseconds
+--------------------------------------------------
+Epoch -  9
+--------------------------------------------------
+---------------------RESULTS----------------------
+Train accuracy and losses for 1600 iterations:
+(0.27891508626441164, 4.4663431962331135)
+Test accuracy and losses for 1600 iterations:
+(0.24245312958955767, 4.9315645068883898)
+---------------------RESULTS----------------------
+Train accuracy and losses for 1600 iterations:
+(0.28166861335436499, 4.4589508056640623)
+Test accuracy and losses for 1600 iterations:
+(0.24504825480282311, 4.9128407505154605)
+---------------------RESULTS----------------------
+Train accuracy and losses for 1600 iterations:
+(0.27918222968777018, 4.4721997375289595)
+Test accuracy and losses for 1600 iterations:
+(0.24112061098217963, 4.9581289842724798)
+---------------------RESULTS----------------------
+Train accuracy and losses for 1600 iterations:
+(0.281793691838781, 4.4718139032522837)
+Test accuracy and losses for 1600 iterations:
+(0.24124709740281103, 4.9597908741235734)
+Time beetween epochs: 4064566.771030 milliseconds
+--------------------------------------------------
+Epoch -  10
+--------------------------------------------------
+---------------------RESULTS----------------------
+Train accuracy and losses for 1600 iterations:
+(0.28011759327103691, 4.4910044675072038)
+Test accuracy and losses for 1600 iterations:
+(0.24083726309239861, 4.9871373593807222)
+---------------------RESULTS----------------------
+Train accuracy and losses for 1600 iterations:
+(0.28375551539162791, 4.4514755547046665)
+Test accuracy and losses for 1600 iterations:
+(0.24048452347517013, 4.9791045647859571)
+---------------------RESULTS----------------------
+Train accuracy and losses for 1600 iterations:
+(0.28418580976625285, 4.4530762975414593)
+Test accuracy and losses for 1600 iterations:
+(0.24301117755472657, 4.9724839329719543)
+---------------------RESULTS----------------------
+Train accuracy and losses for 1600 iterations:
+(0.28454017713665958, 4.4679140314459804)
+Test accuracy and losses for 1600 iterations:
+(0.2394264310598373, 5.0051305016875265)
+Time beetween epochs: 4061108.886957 milliseconds
+--------------------------------------------------
+Epoch -  11
+--------------------------------------------------
+---------------------RESULTS----------------------
+Train accuracy and losses for 1600 iterations:
+(0.28395296999563768, 4.4576957176129026)
+Test accuracy and losses for 1600 iterations:
+(0.23658509597182276, 5.0170720076560977)
+---------------------RESULTS----------------------
+Train accuracy and losses for 1600 iterations:
+(0.28564066452284653, 4.4553932294249536)
+Test accuracy and losses for 1600 iterations:
+(0.2402069848775864, 5.0188312202692034)
+---------------------RESULTS----------------------
+Train accuracy and losses for 1600 iterations:
+(0.28616884487370653, 4.442914013067881)
+Test accuracy and losses for 1600 iterations:
+(0.24079348079860208, 5.0218388140201569)
+---------------------RESULTS----------------------
+Train accuracy and losses for 1600 iterations:
+(0.28724605065460007, 4.4359078814586006)
+Test accuracy and losses for 1600 iterations:
+(0.23990169756114488, 5.0215154337882995)
+Time beetween epochs: 4060472.861052 milliseconds
+--------------------------------------------------
+Epoch -  12
+--------------------------------------------------
+---------------------RESULTS----------------------
+Train accuracy and losses for 1600 iterations:
+(0.28724659718573098, 4.4391372516751293)
+Test accuracy and losses for 1600 iterations:
+(0.23871415436267851, 5.0389071583747862)
+---------------------RESULTS----------------------
+Train accuracy and losses for 1600 iterations:
+(0.28912786580622196, 4.4336496457457546)
+Test accuracy and losses for 1600 iterations:
+(0.2403798642009497, 5.0518031683564182)
+---------------------RESULTS----------------------
+Train accuracy and losses for 1600 iterations:
+(0.29076799054940539, 4.4155415261785187)
+Test accuracy and losses for 1600 iterations:
+(0.23879983849823472, 5.070795975625515)
+---------------------RESULTS----------------------
+Train accuracy and losses for 1600 iterations:
+(0.28826964174707725, 4.4560305948058767)
+Test accuracy and losses for 1600 iterations:
+(0.23477915503084656, 5.0939381954073903)
+Time beetween epochs: 4055665.857792 milliseconds
+--------------------------------------------------
+Epoch -  13
+--------------------------------------------------
+---------------------RESULTS----------------------
+Train accuracy and losses for 1600 iterations:
+(0.28917083963751788, 4.4491955598195396)
+Test accuracy and losses for 1600 iterations:
+(0.23724094852805133, 5.1068127894401547)
+---------------------RESULTS----------------------
+Train accuracy and losses for 1600 iterations:
+(0.29262054922680059, 4.4241610065102579)
+Test accuracy and losses for 1600 iterations:
+(0.23738928325474262, 5.0970383793115612)
+---------------------RESULTS----------------------
+Train accuracy and losses for 1600 iterations:
+(0.29093141915897525, 4.4354388813177748)
+Test accuracy and losses for 1600 iterations:
+(0.23704493395984172, 5.1043207609653471)
+---------------------RESULTS----------------------
+Train accuracy and losses for 1600 iterations:
+(0.29554634025941295, 4.409087220331033)
+Test accuracy and losses for 1600 iterations:
+(0.23789255663752551, 5.1104956680536269)
+Time beetween epochs: 4060070.610046 milliseconds
+--------------------------------------------------
+Epoch -  14
+--------------------------------------------------
+---------------------RESULTS----------------------
+Train accuracy and losses for 1600 iterations:
+(0.29599220342934129, 4.4011621266603473)
+Test accuracy and losses for 1600 iterations:
+(0.23619254447519777, 5.1268509179353714)
+---------------------RESULTS----------------------
+Train accuracy and losses for 1600 iterations:
+(0.294282216578722, 4.4177812839547794)
+Test accuracy and losses for 1600 iterations:
+(0.23677435055375096, 5.1142248868942257)
+---------------------RESULTS----------------------
+Train accuracy and losses for 1600 iterations:
+(0.29324928006778161, 4.4204667558272677)
+Test accuracy and losses for 1600 iterations:
+(0.23826801657676699, 5.1264221006631852)
+---------------------RESULTS----------------------
+Train accuracy and losses for 1600 iterations:
+(0.29511403801540537, 4.4136275172233583)
+Test accuracy and losses for 1600 iterations:
+(0.23718791432678699, 5.1300136482715608)
+Time beetween epochs: 4059970.312119 milliseconds
+--------------------------------------------------
+Epoch -  15
+--------------------------------------------------
+---------------------RESULTS----------------------
+Train accuracy and losses for 1600 iterations:
+(0.29386506887773678, 4.4296196396152174)
+Test accuracy and losses for 1600 iterations:
+(0.23557808279991155, 5.142458572387695)
+---------------------RESULTS----------------------
+Train accuracy and losses for 1600 iterations:
+(0.29529587936898072, 4.4092687904834751)
+Test accuracy and losses for 1600 iterations:
+(0.23556257911026479, 5.1388966619968413)
+---------------------RESULTS----------------------
+Train accuracy and losses for 1600 iterations:
+(0.29595294172565145, 4.4181920200586315)
+Test accuracy and losses for 1600 iterations:
+(0.23302894420921805, 5.1651588875055312)
+---------------------RESULTS----------------------
+Train accuracy and losses for 1600 iterations:
+(0.29816717052211361, 4.4052991201480234)
+Test accuracy and losses for 1600 iterations:
+(0.23424518138170247, 5.1590535300970082)
+Time beetween epochs: 4049951.524973 milliseconds
+--------------------------------------------------
+Epoch -  16
+--------------------------------------------------
+---------------------RESULTS----------------------
+Train accuracy and losses for 1600 iterations:
+(0.29778637687365217, 4.3918215076128639)
+Test accuracy and losses for 1600 iterations:
+(0.23457641325891021, 5.1711614167690279)
+---------------------RESULTS----------------------
+Train accuracy and losses for 1600 iterations:
+(0.29732739453514412, 4.4105494454503056)
+Test accuracy and losses for 1600 iterations:
+(0.23313632123172279, 5.1684779632091526)
+---------------------RESULTS----------------------
+Train accuracy and losses for 1600 iterations:
+(0.2995515495538712, 4.3739897092183435)
+Test accuracy and losses for 1600 iterations:
+(0.2348518703132868, 5.1681820735335346)
+---------------------RESULTS----------------------
+Train accuracy and losses for 1600 iterations:
+(0.29806963962813215, 4.4066563785076145)
+Test accuracy and losses for 1600 iterations:
+(0.23286930046975618, 5.1669250792264938)
+Time beetween epochs: 4065970.727921 milliseconds
+--------------------------------------------------
+Epoch -  17
+--------------------------------------------------
+---------------------RESULTS----------------------
+Train accuracy and losses for 1600 iterations:
+(0.3003295083840688, 4.3869347825646399)
+Test accuracy and losses for 1600 iterations:
+(0.23278737932443616, 5.1847378355264659)
+---------------------RESULTS----------------------
+Train accuracy and losses for 1600 iterations:
+(0.29907444839676223, 4.3888616184393561)
+Test accuracy and losses for 1600 iterations:
+(0.23336003579199316, 5.1902460378408435)
+---------------------RESULTS----------------------
+Train accuracy and losses for 1600 iterations:
+(0.29930161771674946, 4.404076297581196)
+Test accuracy and losses for 1600 iterations:
+(0.23321244910359384, 5.184621698856354)
+---------------------RESULTS----------------------
+Train accuracy and losses for 1600 iterations:
+(0.30444740342597165, 4.3468059249222275)
+Test accuracy and losses for 1600 iterations:
+(0.23227779403328896, 5.1824211388826367)
+Time beetween epochs: 4061557.703018 milliseconds
+--------------------------------------------------
+Epoch -  18
+--------------------------------------------------
+---------------------RESULTS----------------------
+Train accuracy and losses for 1600 iterations:
+(0.30208248098691304, 4.3582397465904554)
+Test accuracy and losses for 1600 iterations:
+(0.23117448389530182, 5.1969891786575317)
+---------------------RESULTS----------------------
+Train accuracy and losses for 1600 iterations:
+(0.30023333442707856, 4.3705113728841143)
+Test accuracy and losses for 1600 iterations:
+(0.23008772701025004, 5.2135742968320846)
+---------------------RESULTS----------------------
+Train accuracy and losses for 1600 iterations:
+(0.30211152844130995, 4.3497222994764648)
+Test accuracy and losses for 1600 iterations:
+(0.23361326448619368, 5.1925757348537447)
+---------------------RESULTS----------------------
+Train accuracy and losses for 1600 iterations:
+(0.30452697960038977, 4.3404027377565706)
+Test accuracy and losses for 1600 iterations:
+(0.23344987474381929, 5.1944188016653063)
+Time beetween epochs: 4047806.951046 milliseconds
+--------------------------------------------------
+Epoch -  19
+--------------------------------------------------
+---------------------RESULTS----------------------
+Train accuracy and losses for 1600 iterations:
+(0.30417888934413595, 4.3337805092334749)
+Test accuracy and losses for 1600 iterations:
+(0.230524188503623, 5.2283263438940049)
+---------------------RESULTS----------------------
+Train accuracy and losses for 1600 iterations:
+(0.3010074167201916, 4.3597881853580471)
+Test accuracy and losses for 1600 iterations:
+(0.23149512678384776, 5.224655314087868)
+---------------------RESULTS----------------------
+Train accuracy and losses for 1600 iterations:
+(0.30437401514500384, 4.3514294440547623)
+Test accuracy and losses for 1600 iterations:
+(0.23112650834023951, 5.2199048572778706)
+---------------------RESULTS----------------------
+Train accuracy and losses for 1600 iterations:
+(0.30324639938771725, 4.3366465926170346)
+Test accuracy and losses for 1600 iterations:
+(0.23324144452810291, 5.1896557193994521)
+Time beetween epochs: 4071723.843098 milliseconds
+Traceback (most recent call last):
+  File "TCC-definitivo/GRU-2ly-TF.py", line 318, in <module>
+    saver.save(sess, "tmp/GRU-hd%d-b%d-200k-%dEp-4.13Loss" % (num_hidden, batch_size , epoch_counter))
+NameError: name 'num_hidden' is not defined
